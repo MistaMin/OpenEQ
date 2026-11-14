@@ -1,0 +1,20 @@
+[
+  {
+    "index": 101,
+    "name": "Band 31 Shown",
+    "minVsMaxDb": -240.0,
+    "refVsMinDb": -8.773988826851918
+  },
+  {
+    "index": 114,
+    "name": "Band 23 Shown",
+    "minVsMaxDb": -240.0,
+    "refVsMinDb": -8.773988826851918
+  },
+  {
+    "index": 131,
+    "name": "Band 15 Shown",
+    "minVsMaxDb": -240.0,
+    "refVsMinDb": -8.773988826851918
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "suite": "reaper_qa.suite running in OpenGrid9 (headless fallback; REAPER was in use)",
+  "date": "2026-11-09",
+  "parameters": 1313,
+  "partitions": [
+    {
+      "name": "bands-1-11",
+      "parameters": 440,
+      "act": 334,
+      "conditional": 73,
+      "excused": 33,
+      "dead": 0
+    },
+    {
+      "name": "bands-12-22",
+      "parameters": 440,
+      "act": 332,
+      "conditional": 75,
+      "excused": 33,
+      "dead": 0
+    },
+    {
+      "name": "bands-23-27",
+      "parameters": 200,
+      "act": 153,
+      "conditional": 32,
+      "excused": 15,
+      "dead": 0
+    },
+    {
+      "name": "bands-28-32-and-globals",
+      "parameters": 233,
+      "act": 178,
+      "conditional": 38,
+      "excused": 17,
+      "dead": 0
+    }
+  ],
+  "totals": {
+    "act": 1215,
+    "conditional": 218,
+    "excused": 98,
+    "dead": 0
+  },
+  "checks": {
+    "loads": "PASS",
+    "finite_output": "PASS",
+    "not_silent": "PASS",
+    "deterministic_render": "PASS",
+    "every_parameter_changes_the_sound": "PASS",
+    "editor_checks": "SKIPPED (headless)"
+  },
+  "state": {
+    "patterned_check": "one-step differences on stepped controls; host bridge sets denormalised values and caches the pre-snap display",
+    "grid_aligned_roundtrip": {
+      "parameters": 1313,
+      "differences": 0
+    }
+  },
+  "raw_evidence": "/Volumes/Developer/OpenEQ-QA/2026-11-09-opengrid-suite/"
+}

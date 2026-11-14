@@ -1,0 +1,9730 @@
+[
+ {
+  "id": "b0_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_active",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandListStrip.h",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_type",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b1_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b2_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b3_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b4_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b5_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b6_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b7_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b8_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b9_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b10_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b11_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b12_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b13_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b14_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b15_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b16_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b17_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b18_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b19_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b20_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b21_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b22_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b23_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b24_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b25_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b26_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b27_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b28_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b29_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b30_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b31_freq",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "b0_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_gain",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_q",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b1_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b2_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b3_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b4_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b5_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b6_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b7_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b8_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b9_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b10_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b11_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b12_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b13_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b14_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b15_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b16_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b17_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b18_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b19_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b20_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b21_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b22_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b23_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b24_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b25_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b26_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b27_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b28_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b29_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b30_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b31_slope",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b0_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_stereo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_solo",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/BandMenu.h",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b1_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b2_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b3_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b4_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b5_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b6_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b7_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b8_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b9_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b10_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b11_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b12_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b13_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b14_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b15_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b16_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b17_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b18_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b19_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b20_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b21_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b22_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b23_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b24_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b25_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b26_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b27_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b28_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b29_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b30_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b31_dynRange",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b0_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynAtk",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynRel",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_shown",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandListStrip.h",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b1_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b2_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b3_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b4_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b5_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b6_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b7_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b8_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b9_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b10_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b11_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b12_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b13_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b14_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b15_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b16_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b17_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b18_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b19_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b20_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b21_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b22_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b23_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b24_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b25_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b26_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b27_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b28_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b29_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b30_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b31_dynAct",
+  "status": "legacy compatibility parameter; no dedicated control",
+  "evidence": []
+ },
+ {
+  "id": "b0_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynKnee",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynBlend",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynAhead",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynAuto",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynDetLink",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynDetFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynDetQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynBelowOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynBelowRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynBelowRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynAboveOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynAboveRange",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynAboveRatio",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynRelFree",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynRelFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynRelQ",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_dynRelSrc",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b1_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b2_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b3_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b4_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b5_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b6_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b7_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b8_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b9_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b10_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b11_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b12_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b13_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b14_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b15_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b16_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b17_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b18_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b19_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b20_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b21_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b22_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b23_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b24_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b25_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b26_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b27_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b28_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b29_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b30_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b31_pan",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp"
+  ]
+ },
+ {
+  "id": "b0_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b1_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b2_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b3_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b4_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b5_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b6_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b7_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b8_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b9_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b10_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b11_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b12_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b13_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b14_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b15_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b16_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b17_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b18_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b19_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b20_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b21_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b22_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b23_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b24_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b25_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b26_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b27_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b28_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b29_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b30_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b31_slopeN",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp"
+  ]
+ },
+ {
+  "id": "b0_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b1_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b2_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b3_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b4_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b5_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b6_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b7_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b8_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b9_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b10_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b11_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b12_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b13_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b14_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b15_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b16_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b17_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b18_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b19_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b20_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b21_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b22_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b23_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b24_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b25_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b26_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b27_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b28_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b29_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b30_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b31_splitOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b0_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b1_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b2_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b3_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b4_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b5_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b6_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b7_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b8_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b9_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b10_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b11_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b12_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b13_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b14_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b15_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b16_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b17_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b18_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b19_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b20_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b21_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b22_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b23_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b24_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b25_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b26_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b27_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b28_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b29_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b30_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b31_phase",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b0_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b1_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b2_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b3_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b4_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b5_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b6_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b7_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b8_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b9_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b10_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b11_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b12_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b13_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b14_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b15_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b16_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b17_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b18_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b19_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b20_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b21_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b22_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b23_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b24_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b25_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b26_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b27_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b28_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b29_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b30_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b31_splitTrans",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b0_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b1_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b2_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b3_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b4_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b5_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b6_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b7_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b8_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b9_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b10_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b11_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b12_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b13_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b14_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b15_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b16_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b17_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b18_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b19_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b20_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b21_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b22_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b23_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b24_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b25_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b26_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b27_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b28_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b29_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b30_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "b31_splitTail",
+  "status": "binding found",
+  "evidence": [
+   "Source/BandControlPanel.cpp",
+   "Source/EQCurveComponent.cpp",
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "processingMode",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "linearPhaseQuality",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "outputGain",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "stereoWidth",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "bypass",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "polarity",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "autoGain",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "drive",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "spectralAmount",
+  "status": "binding found",
+  "evidence": [
+   "Source/SpectralPanel.h"
+  ]
+ },
+ {
+  "id": "spectralThresh",
+  "status": "binding found",
+  "evidence": [
+   "Source/SpectralPanel.h"
+  ]
+ },
+ {
+  "id": "spectralFreq",
+  "status": "binding found",
+  "evidence": [
+   "Source/SpectralPanel.h"
+  ]
+ },
+ {
+  "id": "spectralOct",
+  "status": "binding found",
+  "evidence": [
+   "Source/SpectralPanel.h"
+  ]
+ },
+ {
+  "id": "gainScale",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "sideGain",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "outputPan",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/OutputColumn.h"
+  ]
+ },
+ {
+  "id": "ultraPrecision",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "mixCrossover",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "oversample2x",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp: oversampleButton -> setOversampling2x"
+  ]
+ },
+ {
+  "id": "lookaheadOn",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "lookaheadMs",
+  "status": "binding found",
+  "evidence": [
+   "Source/DynamicsPanel.cpp"
+  ]
+ },
+ {
+  "id": "splitSource",
+  "status": "binding found",
+  "evidence": [
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "splitSeparation",
+  "status": "binding found",
+  "evidence": [
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "splitDecay",
+  "status": "binding found",
+  "evidence": [
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "splitSmoothingMs",
+  "status": "binding found",
+  "evidence": [
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "splitSolo",
+  "status": "binding found",
+  "evidence": [
+   "Source/SplitGlobalPanel.h"
+  ]
+ },
+ {
+  "id": "windowShape",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "windowParameter",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "renderQuality",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "renderOversample",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "impulsePadding",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "digitalPlus",
+  "status": "binding found",
+  "evidence": [
+   "Source/PluginEditor.cpp"
+  ]
+ },
+ {
+  "id": "inputGain",
+  "status": "binding found",
+  "evidence": [
+   "Source/UI/InputColumn.h"
+  ]
+ }
+]

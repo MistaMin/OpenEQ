@@ -1,0 +1,198 @@
+{
+  "measurements": [
+    {
+      "block": 32,
+      "rate": 44100.0,
+      "steadyPeak": 0.499996840953827,
+      "blockRms": 0.373394966125488,
+      "expectedBlockRms": 0.373394959272826,
+      "release20dBSeconds": 0.027573696145125,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 64,
+      "rate": 44100.0,
+      "steadyPeak": 0.499920696020126,
+      "blockRms": 0.347667574882507,
+      "expectedBlockRms": 0.347667567954448,
+      "release20dBSeconds": 0.055147392290249,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 512,
+      "rate": 44100.0,
+      "steadyPeak": 0.499996840953827,
+      "blockRms": 0.354259669780731,
+      "expectedBlockRms": 0.354259658725875,
+      "release20dBSeconds": 0.441179138321995,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 1024,
+      "rate": 44100.0,
+      "steadyPeak": 0.499996840953827,
+      "blockRms": 0.352357685565948,
+      "expectedBlockRms": 0.352357675876376,
+      "release20dBSeconds": 0.882358276643991,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 32,
+      "rate": 48000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.339237093925476,
+      "expectedBlockRms": 0.339237089165339,
+      "release20dBSeconds": 0.025333333333333,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 64,
+      "rate": 48000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.36453914642334,
+      "expectedBlockRms": 0.364539138248746,
+      "release20dBSeconds": 0.050666666666667,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true,
+      "clipPixelBefore": "ffff2222",
+      "clipPixelAfterLedClick": "ffff2222",
+      "clipPixelAfterHeaderClick": "ff3a1111",
+      "clipPixelAfterNextTimer": "ffff2222"
+    },
+    {
+      "block": 512,
+      "rate": 48000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.352156072854996,
+      "expectedBlockRms": 0.352156073277852,
+      "release20dBSeconds": 0.405333333333333,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 1024,
+      "rate": 48000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.352415949106216,
+      "expectedBlockRms": 0.352415955108769,
+      "release20dBSeconds": 0.810666666666667,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 32,
+      "rate": 96000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.392092227935791,
+      "expectedBlockRms": 0.392092229287824,
+      "release20dBSeconds": 0.012666666666667,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 64,
+      "rate": 96000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.336988925933838,
+      "expectedBlockRms": 0.336988913426862,
+      "release20dBSeconds": 0.025333333333333,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 512,
+      "rate": 96000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.356084287166595,
+      "expectedBlockRms": 0.356084286048748,
+      "release20dBSeconds": 0.202666666666667,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    },
+    {
+      "block": 1024,
+      "rate": 96000.0,
+      "steadyPeak": 0.5,
+      "blockRms": 0.352281123399734,
+      "expectedBlockRms": 0.352281122146989,
+      "release20dBSeconds": 0.405333333333333,
+      "clipLatchedBeforeSilence": true,
+      "clipLatchedAfterSilence": true
+    }
+  ],
+  "displayExamples": [
+    {
+      "control": "Q",
+      "display": "0.03"
+    },
+    {
+      "control": "Q",
+      "display": "1.00"
+    },
+    {
+      "control": "Q",
+      "display": "40.00"
+    },
+    {
+      "control": "Attack",
+      "display": "0.1 ms"
+    },
+    {
+      "control": "Attack",
+      "display": "15.0 ms"
+    },
+    {
+      "control": "Attack",
+      "display": "500 ms"
+    },
+    {
+      "control": "Ratio percent",
+      "display": "1:1"
+    },
+    {
+      "control": "Ratio percent",
+      "display": "2.7:1"
+    },
+    {
+      "control": "Ratio percent",
+      "display": "inf:1"
+    },
+    {
+      "control": "Ratio percent",
+      "display": "2.0:1"
+    },
+    {
+      "control": "Threshold",
+      "display": "-60.0"
+    },
+    {
+      "control": "Threshold",
+      "display": "-17.5"
+    },
+    {
+      "control": "Threshold",
+      "display": "0.0"
+    }
+  ],
+  "currentSchemaStateBefore": {
+    "b0_dynOn": 1.0,
+    "b0_dynBelowOn": 0.0,
+    "b0_dynAboveOn": 0.0,
+    "b0_dynBelowRange": 6.000000476837158,
+    "b0_dynBelowRatio": 50.0,
+    "b0_dynAboveRatio": 75.0
+  },
+  "currentSchemaStateAfter": {
+    "b0_dynOn": 1.0,
+    "b0_dynBelowOn": 1.0,
+    "b0_dynAboveOn": 0.0,
+    "b0_dynBelowRange": -12.0,
+    "b0_dynBelowRatio": 100.0,
+    "b0_dynAboveRatio": 75.0
+  }
+}

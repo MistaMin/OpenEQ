@@ -1,0 +1,26 @@
+{
+  "baselineCommit": "21ff8a706527d3c52ce2a824e6160db75450cba7",
+  "version": "0.3.0-beta",
+  "platform": "macOS-15.7.5-arm64-arm-64bit-Mach-O",
+  "hashes": {
+    "builtVST3": "ffafbe6a84ca4140659a309bdb2b2c6c7fc252537d5dd44fd56a917c9ff38665",
+    "installedVST3": "ffafbe6a84ca4140659a309bdb2b2c6c7fc252537d5dd44fd56a917c9ff38665",
+    "builtAU": "f586eb95d27c90c9f5ad408bc180cc47f59ab85f13a5fe55bc9623b21202255e",
+    "installedAU": "f586eb95d27c90c9f5ad408bc180cc47f59ab85f13a5fe55bc9623b21202255e"
+  },
+  "factoryClasses": [
+    {
+      "category": "Audio Module Class",
+      "cid": "ABCDEF019182FAEB4F7065714F707131"
+    },
+    {
+      "category": "Component Controller Class",
+      "cid": "ABCDEF011234ABCD4F7065714F707131"
+    },
+    {
+      "category": "Plugin Compatibility Class",
+      "cid": "ABCDEF01C0DEF00D4F7065714F707131"
+    }
+  ],
+  "userInstallMatchesBuild": true
+}

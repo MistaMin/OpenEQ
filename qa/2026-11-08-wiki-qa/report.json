@@ -1,0 +1,201 @@
+{
+  "result": "FAIL",
+  "version": "0.3.0-beta",
+  "baselineCommit": "21ff8a7",
+  "workingChange": "Debug test-runner stack only; no product bug fixes",
+  "rawEvidence": "/Volumes/Developer/OpenEQ-QA/2026-11-08-21ff8a7",
+  "scopeGroups": 17,
+  "statusCounts": {
+    "PASS": 8,
+    "FAIL": 7,
+    "UNVERIFIED": 2
+  },
+  "checks": [
+    {
+      "id": "Q1",
+      "check": "Parameter registry / host identity",
+      "status": "PASS",
+      "detail": "1,311 stable source IDs match VST3 hashes; 1,315 VST3 and 1,314 AU REAPER parameters include wrapper/host controls."
+    },
+    {
+      "id": "Q2",
+      "check": "GUI binding coverage",
+      "status": "FAIL",
+      "detail": "1,210 bindings found; five confirmed missing controls; 96 legacy compatibility IDs lack dedicated controls."
+    },
+    {
+      "id": "Q3",
+      "check": "Release regressions",
+      "status": "PASS",
+      "detail": "41 sections, 72.97 s."
+    },
+    {
+      "id": "Q4",
+      "check": "Debug regressions",
+      "status": "PASS",
+      "detail": "Initial 32 MiB stack overflow; 93.25 s PASS with Debug-only 64 MiB test stack."
+    },
+    {
+      "id": "Q5",
+      "check": "AU auval",
+      "status": "PASS",
+      "detail": "AU VALIDATION SUCCEEDED."
+    },
+    {
+      "id": "Q6",
+      "check": "VST3 pluginval strict 10",
+      "status": "PASS",
+      "detail": "SUCCESS; validator GUI tests explicitly skipped."
+    },
+    {
+      "id": "Q7",
+      "check": "AU pluginval strict 10",
+      "status": "PASS",
+      "detail": "SUCCESS with 180 s watchdog; initial 30 s embedded-auval timeout retained."
+    },
+    {
+      "id": "Q8",
+      "check": "REAPER VST3 complete functional sweep",
+      "status": "UNVERIFIED",
+      "detail": "All 1,315 primary rows ran; conditional retries interrupted by hidden-window guard. Generic audio/visual references have confirmed false positives."
+    },
+    {
+      "id": "Q9",
+      "check": "REAPER AU state / lifecycle",
+      "status": "FAIL",
+      "detail": "All 1,314 primary rows and conditional retries ran. State recall changed dynamics values; focused AU reproducer confirms three changed values. Focused five-cycle editor lifecycle passed hidden."
+    },
+    {
+      "id": "Q10",
+      "check": "Whole-run hidden host isolation",
+      "status": "UNVERIFIED",
+      "detail": "Initial/editor checks passed; one-hour hiding helper expired during long sweeps. Only test instances were stopped. Focused VST3 lifecycle also stopped by hidden-window guard."
+    },
+    {
+      "id": "Q11",
+      "check": "OpenGrid host matrix",
+      "status": "FAIL",
+      "detail": "VST3: 1,312 min/max rows and patterned recall PASS. AU: 1,311 min/max rows PASS; patterned recall has 12 differences."
+    },
+    {
+      "id": "Q12",
+      "check": "GUI theme/size matrix",
+      "status": "FAIL",
+      "detail": "45 rendered frames inspected: 3 themes × 5 page/view states × 3 sizes. Light theme values/controls lose contrast; some theme transitions retain stale label colours. Native interaction/scale/overlay matrix remains incomplete."
+    },
+    {
+      "id": "Q13",
+      "check": "Numeric display policy",
+      "status": "FAIL",
+      "detail": "Q=40.00 has four digits; dynamics allow fractional dB steps; attack can display 0.1 ms. Existing user-requested ratio X.X:1 formatting is retained."
+    },
+    {
+      "id": "Q14",
+      "check": "I/O and meters",
+      "status": "FAIL",
+      "detail": "Output meters calibrate as block peak/RMS; input section absent. Clip reset fails. Peak release depends on block size."
+    },
+    {
+      "id": "Q15",
+      "check": "Built/installed identity and VST3 class ID",
+      "status": "PASS",
+      "detail": "SHA-256 matches for user-installed AU/VST3. Factory/scanner CID ABCDEF019182FAEB4F7065714F707131 is 32 hex digits."
+    },
+    {
+      "id": "Q16",
+      "check": "UI performance / opacity",
+      "status": "FAIL",
+      "detail": "The editor fills its entire background without declaring opaque. The transformed stage also requires an opacity/bounds audit. Matched native before/after CPU and capacity tests are unverified; no performance improvement is claimed."
+    },
+    {
+      "id": "Q17",
+      "check": "Wiki freshness and HTML rebuild",
+      "status": "PASS",
+      "detail": "Project facts updated; run tools/check.py and tools/build.py after final report generation."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "high",
+      "title": "Current-schema dynamics state is rewritten on AU recall",
+      "source": "Source/PluginProcessor.cpp:1677; Source/PluginProcessor.cpp:1715",
+      "evidence": "og9-au/parameter-matrix.json; reaper-focused-au/focused-report.json; meter-measurements.json",
+      "detail": "migrateLegacyDynamics uses panel enable values rather than checking whether modern panel parameters were present in the incoming state. A saved current state with dynamics on and both panels off is treated as legacy. In the focused AU test Below On changes 0→1, Below Range 6→−12 dB and Below Ratio 50→100. VST3 host round-trips passed in this run, so the actual host failure is qualified as AU; the format-independent processor harness reproduces the same migration error."
+    },
+    {
+      "id": "F2",
+      "severity": "medium",
+      "title": "Clip reset hit target and latch are broken",
+      "source": "Source/UI/OutputColumn.h:73; Source/PluginProcessor.cpp:2558",
+      "evidence": "meter-measurements.json; clip-before.png; clip-led-click.png; clip-header-click.png; clip-next-timer.png",
+      "detail": "The drawn LED begins below y=34, but mouseDown only resets when y<34. Clicking the LED leaves it red. Clicking the header clears only the local flag; the processor latch remains true and the next timer sets red again. Synthetic component interaction and source inspection agree."
+    },
+    {
+      "id": "F3",
+      "severity": "medium",
+      "title": "Light theme makes numeric readouts and controls unreadable",
+      "source": "Source/UI/Theme.h; Source/UI/CompactSlider.h; Source/UI/RotaryKnob.h; Source/UI/SectionPanel.h",
+      "evidence": "gui/theme1-tab1-view0-width1100.png; gui/theme1-tab1-view2-width1500.png; gui-matrix.json",
+      "detail": "Several readout plates and surfaces stay dark while text changes to the light theme's dark foreground. Some label colours are captured at construction and remain stale across a theme change. Screenshots simulate the same Theme::applyTheme/repaint path; they establish rendered contrast, not native menu operation."
+    },
+    {
+      "id": "F4",
+      "severity": "medium",
+      "title": "Five processing parameters have no GUI controls",
+      "source": "Source/Parameters.h; Source/PluginEditor.cpp; Source/UI/OutputColumn.h",
+      "evidence": "static-coverage.json; parameter-ledger.json; static_coverage.py",
+      "detail": "autoGain, spectralAmount, spectralThresh, spectralFreq, spectralOct are in the host registry and processor but have no UI bindings. Separately, 96 legacy slope/range/action parameters are retained without dedicated controls; they are listed rather than silently excused."
+    },
+    {
+      "id": "F5",
+      "severity": "medium",
+      "title": "Output peak release changes with host block size",
+      "source": "Source/PluginProcessor.cpp:2556",
+      "evidence": "meter-measurements.json; meter_probe.cpp",
+      "detail": "At 48 kHz, a 20 dB decay takes 25.33 ms at 32-sample blocks versus 810.67 ms at 1,024 samples. The backend multiplies by 0.94 once per block. GUI smoothing may impose a slower display floor, but it does not make the backend ballistics time-invariant. RMS matches the mathematical current-block RMS, with no fixed integration window."
+    },
+    {
+      "id": "F6",
+      "severity": "low",
+      "title": "Value and step policies are not consistently met",
+      "source": "Source/UI/ValueFormat.h; Source/Parameters.h",
+      "evidence": "meter-measurements.json displayExamples",
+      "detail": "Examples include Q 40.00, attack 0.1 ms, and a −17.5 dB threshold. These conflict with default wiki/QA policies. Fractional ratio formatting X.X:1 is an existing user request and must not be changed to satisfy a generic policy without considering that preference."
+    },
+    {
+      "id": "F7",
+      "severity": "medium",
+      "title": "The beta label is hidden in the plugin UI",
+      "source": "Source/PluginEditor.cpp: subtitleLabel.setBounds(0, 0, 0, 0)",
+      "evidence": "Source/Version.h; all gui/ frames",
+      "detail": "The version macro and README retain 0.3.0-beta, but the editor puts the version label at zero size. Repository beta marking is present; visible in-plugin beta marking is absent."
+    },
+    {
+      "id": "F8",
+      "severity": "low",
+      "title": "Input section missing under the canonical QA rule",
+      "source": "Source/UI/OutputColumn.h; Source/PluginEditor.cpp",
+      "evidence": "gui/ frames; parameter registry",
+      "detail": "The GUI has a complete output column but no dedicated input level/trim section. This fails the skill's input/output-section requirement; it is not a claim that the audio input bus is broken."
+    },
+    {
+      "id": "F9",
+      "severity": "low",
+      "title": "Full background painters do not declare opacity",
+      "source": "Source/PluginEditor.h: EditorStage; Source/PluginEditor.cpp: paint / paintStage",
+      "evidence": "Source inspection",
+      "detail": "The editor fills its full background but omits setOpaque(true). The transformed stage needs a separate bounds/opacity check; no measured CPU penalty is claimed. Rounded cards and translucent overlays must remain non-opaque."
+    }
+  ],
+  "build": {
+    "configuration": "Release plugin binaries, Release and Debug regressions",
+    "architecture": "arm64",
+    "minMacOS": "15.0",
+    "hostMacOS": "15.7.5",
+    "OpenGrid": "9.8.294",
+    "REAPER": "7.80",
+    "buildClass": "modern",
+    "legacyBuild": "not published; release packaging outside this run"
+  }
+}

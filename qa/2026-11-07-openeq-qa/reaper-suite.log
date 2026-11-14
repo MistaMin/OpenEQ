@@ -1,0 +1,416 @@
+PASS     loads VST3: OpenEQ (OpenEQ), 1313 parameters
+PASS     finite output peak -3.3 dBFS
+PASS     not silent rms -14.9 dBFS
+PASS     deterministic render repeat differs by -240.0 dB
+PASS     editor opens 1500x913, 0.0% animates by itself
+  Band 1 Active                    audio=DEAD     visual=NOT SHOWN
+  Band 1 Type                      audio=ok       visual=ok
+  Band 1 Frequency                 audio=DEAD     visual=ok
+  Band 1 Gain                      audio=ok       visual=ok
+  Band 1 Q                         audio=ok       visual=ok
+  Band 1 Slope                     audio=DEAD     visual=NOT SHOWN
+  Band 1 Stereo Mode               audio=DEAD     visual=ok
+  Band 1 Solo                      audio=DEAD     visual=ok
+  Band 1 Dynamic On                audio=ok       visual=ok
+  Band 1 Dyn Threshold             audio=DEAD     visual=ok
+  Band 1 Dyn Range                 audio=DEAD     visual=ok
+  Band 1 Dyn Attack                audio=DEAD     visual=ok
+  Band 1 Dyn Release               audio=DEAD     visual=ok
+  Band 1 Shown                     audio=DEAD     visual=ok
+  Band 1 Dyn Action                audio=DEAD     visual=ok
+  Band 1 Dyn Knee                  audio=DEAD     visual=ok
+  Band 1 Dyn Source                audio=DEAD     visual=ok
+  Band 1 Dyn Relative              audio=DEAD     visual=ok
+  Band 1 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 1 Dyn Transient             audio=DEAD     visual=ok
+  Band 1 Dyn Auto                  audio=DEAD     visual=ok
+  Band 1 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 1 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 1 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 1 Dyn Below On              audio=DEAD     visual=ok
+  Band 1 Dyn Below Range           audio=DEAD     visual=ok
+  Band 1 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 1 Dyn Above On              audio=DEAD     visual=ok
+  Band 1 Dyn Above Range           audio=DEAD     visual=ok
+  Band 1 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 1 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 1 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 1 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 1 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 1 Pan                       audio=DEAD     visual=ok
+  Band 1 Slope                     audio=DEAD     visual=ok
+  Band 1 Split On                  audio=DEAD     visual=ok
+  Band 1 Split Transient Gain      audio=DEAD     visual=ok
+  Band 1 Split Tail Gain           audio=DEAD     visual=ok
+  Band 1 Phase                     audio=DEAD     visual=ok
+  Band 2 Active                    audio=DEAD     visual=ok
+  Band 2 Type                      audio=ok       visual=ok
+  Band 2 Frequency                 audio=DEAD     visual=ok
+  Band 2 Gain                      audio=ok       visual=ok
+  Band 2 Q                         audio=ok       visual=ok
+  Band 2 Slope                     audio=DEAD     visual=ok
+  Band 2 Stereo Mode               audio=DEAD     visual=ok
+  Band 2 Solo                      audio=DEAD     visual=ok
+  Band 2 Dynamic On                audio=ok       visual=ok
+  Band 2 Dyn Threshold             audio=DEAD     visual=ok
+  Band 2 Dyn Range                 audio=DEAD     visual=ok
+  Band 2 Dyn Attack                audio=DEAD     visual=ok
+  Band 2 Dyn Release               audio=DEAD     visual=ok
+  Band 2 Shown                     audio=DEAD     visual=ok
+  Band 2 Dyn Action                audio=DEAD     visual=ok
+  Band 2 Dyn Knee                  audio=DEAD     visual=ok
+  Band 2 Dyn Source                audio=DEAD     visual=ok
+  Band 2 Dyn Relative              audio=DEAD     visual=ok
+  Band 2 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 2 Dyn Transient             audio=DEAD     visual=ok
+  Band 2 Dyn Auto                  audio=DEAD     visual=ok
+  Band 2 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 2 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 2 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 2 Dyn Below On              audio=DEAD     visual=ok
+  Band 2 Dyn Below Range           audio=DEAD     visual=ok
+  Band 2 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 2 Dyn Above On              audio=DEAD     visual=ok
+  Band 2 Dyn Above Range           audio=DEAD     visual=ok
+  Band 2 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 2 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 2 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 2 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 2 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 2 Pan                       audio=DEAD     visual=ok
+  Band 2 Slope                     audio=DEAD     visual=ok
+  Band 2 Split On                  audio=DEAD     visual=ok
+  Band 2 Split Transient Gain      audio=DEAD     visual=ok
+  Band 2 Split Tail Gain           audio=DEAD     visual=ok
+  Band 2 Phase                     audio=DEAD     visual=ok
+  Band 3 Active                    audio=DEAD     visual=ok
+  Band 3 Type                      audio=ok       visual=ok
+  Band 3 Frequency                 audio=DEAD     visual=ok
+  Band 3 Gain                      audio=ok       visual=ok
+  Band 3 Q                         audio=ok       visual=ok
+  Band 3 Slope                     audio=DEAD     visual=ok
+  Band 3 Stereo Mode               audio=DEAD     visual=ok
+  Band 3 Solo                      audio=DEAD     visual=ok
+  Band 3 Dynamic On                audio=ok       visual=ok
+  Band 3 Dyn Threshold             audio=DEAD     visual=ok
+  Band 3 Dyn Range                 audio=DEAD     visual=ok
+  Band 3 Dyn Attack                audio=DEAD     visual=ok
+  Band 3 Dyn Release               audio=DEAD     visual=ok
+  Band 3 Shown                     audio=DEAD     visual=ok
+  Band 3 Dyn Action                audio=DEAD     visual=ok
+  Band 3 Dyn Knee                  audio=DEAD     visual=ok
+  Band 3 Dyn Source                audio=DEAD     visual=ok
+  Band 3 Dyn Relative              audio=DEAD     visual=ok
+  Band 3 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 3 Dyn Transient             audio=DEAD     visual=ok
+  Band 3 Dyn Auto                  audio=DEAD     visual=ok
+  Band 3 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 3 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 3 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 3 Dyn Below On              audio=DEAD     visual=ok
+  Band 3 Dyn Below Range           audio=DEAD     visual=ok
+  Band 3 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 3 Dyn Above On              audio=DEAD     visual=ok
+  Band 3 Dyn Above Range           audio=DEAD     visual=ok
+  Band 3 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 3 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 3 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 3 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 3 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 3 Pan                       audio=DEAD     visual=ok
+  Band 3 Slope                     audio=DEAD     visual=ok
+  Band 3 Split On                  audio=DEAD     visual=ok
+  Band 3 Split Transient Gain      audio=DEAD     visual=ok
+  Band 3 Split Tail Gain           audio=DEAD     visual=ok
+  Band 3 Phase                     audio=DEAD     visual=ok
+  Band 4 Active                    audio=DEAD     visual=ok
+  Band 4 Type                      audio=DEAD     visual=ok
+  Band 4 Frequency                 audio=DEAD     visual=ok
+  Band 4 Gain                      audio=DEAD     visual=ok
+  Band 4 Q                         audio=DEAD     visual=ok
+  Band 4 Slope                     audio=DEAD     visual=ok
+  Band 4 Stereo Mode               audio=DEAD     visual=ok
+  Band 4 Solo                      audio=DEAD     visual=ok
+  Band 4 Dynamic On                audio=DEAD     visual=ok
+  Band 4 Dyn Threshold             audio=DEAD     visual=ok
+  Band 4 Dyn Range                 audio=DEAD     visual=ok
+  Band 4 Dyn Attack                audio=DEAD     visual=ok
+  Band 4 Dyn Release               audio=DEAD     visual=ok
+  Band 4 Shown                     audio=DEAD     visual=ok
+  Band 4 Dyn Action                audio=DEAD     visual=ok
+  Band 4 Dyn Knee                  audio=DEAD     visual=ok
+  Band 4 Dyn Source                audio=DEAD     visual=ok
+  Band 4 Dyn Relative              audio=DEAD     visual=ok
+  Band 4 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 4 Dyn Transient             audio=DEAD     visual=ok
+  Band 4 Dyn Auto                  audio=DEAD     visual=ok
+  Band 4 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 4 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 4 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 4 Dyn Below On              audio=DEAD     visual=ok
+  Band 4 Dyn Below Range           audio=DEAD     visual=ok
+  Band 4 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 4 Dyn Above On              audio=DEAD     visual=ok
+  Band 4 Dyn Above Range           audio=DEAD     visual=ok
+  Band 4 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 4 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 4 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 4 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 4 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 4 Pan                       audio=DEAD     visual=ok
+  Band 4 Slope                     audio=DEAD     visual=ok
+  Band 4 Split On                  audio=DEAD     visual=ok
+  Band 4 Split Transient Gain      audio=DEAD     visual=ok
+  Band 4 Split Tail Gain           audio=DEAD     visual=ok
+  Band 4 Phase                     audio=DEAD     visual=ok
+  Band 5 Active                    audio=DEAD     visual=ok
+  Band 5 Type                      audio=DEAD     visual=ok
+  Band 5 Frequency                 audio=DEAD     visual=ok
+  Band 5 Gain                      audio=DEAD     visual=ok
+  Band 5 Q                         audio=DEAD     visual=ok
+  Band 5 Slope                     audio=DEAD     visual=ok
+  Band 5 Stereo Mode               audio=DEAD     visual=ok
+  Band 5 Solo                      audio=DEAD     visual=ok
+  Band 5 Dynamic On                audio=DEAD     visual=ok
+  Band 5 Dyn Threshold             audio=DEAD     visual=ok
+  Band 5 Dyn Range                 audio=DEAD     visual=ok
+  Band 5 Dyn Attack                audio=DEAD     visual=ok
+  Band 5 Dyn Release               audio=DEAD     visual=ok
+  Band 5 Shown                     audio=DEAD     visual=ok
+  Band 5 Dyn Action                audio=DEAD     visual=ok
+  Band 5 Dyn Knee                  audio=DEAD     visual=ok
+  Band 5 Dyn Source                audio=DEAD     visual=ok
+  Band 5 Dyn Relative              audio=DEAD     visual=ok
+  Band 5 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 5 Dyn Transient             audio=DEAD     visual=ok
+  Band 5 Dyn Auto                  audio=DEAD     visual=ok
+  Band 5 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 5 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 5 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 5 Dyn Below On              audio=DEAD     visual=ok
+  Band 5 Dyn Below Range           audio=DEAD     visual=ok
+  Band 5 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 5 Dyn Above On              audio=DEAD     visual=ok
+  Band 5 Dyn Above Range           audio=DEAD     visual=ok
+  Band 5 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 5 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 5 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 5 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 5 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 5 Pan                       audio=DEAD     visual=ok
+  Band 5 Slope                     audio=DEAD     visual=ok
+  Band 5 Split On                  audio=DEAD     visual=ok
+  Band 5 Split Transient Gain      audio=DEAD     visual=ok
+  Band 5 Split Tail Gain           audio=DEAD     visual=ok
+  Band 5 Phase                     audio=DEAD     visual=ok
+  Band 6 Active                    audio=DEAD     visual=ok
+  Band 6 Type                      audio=DEAD     visual=ok
+  Band 6 Frequency                 audio=DEAD     visual=ok
+  Band 6 Gain                      audio=DEAD     visual=ok
+  Band 6 Q                         audio=DEAD     visual=ok
+  Band 6 Slope                     audio=DEAD     visual=ok
+  Band 6 Stereo Mode               audio=DEAD     visual=ok
+  Band 6 Solo                      audio=DEAD     visual=ok
+  Band 6 Dynamic On                audio=DEAD     visual=ok
+  Band 6 Dyn Threshold             audio=DEAD     visual=ok
+  Band 6 Dyn Range                 audio=DEAD     visual=ok
+  Band 6 Dyn Attack                audio=DEAD     visual=ok
+  Band 6 Dyn Release               audio=DEAD     visual=ok
+  Band 6 Shown                     audio=DEAD     visual=ok
+  Band 6 Dyn Action                audio=DEAD     visual=ok
+  Band 6 Dyn Knee                  audio=DEAD     visual=ok
+  Band 6 Dyn Source                audio=DEAD     visual=ok
+  Band 6 Dyn Relative              audio=DEAD     visual=ok
+  Band 6 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 6 Dyn Transient             audio=DEAD     visual=ok
+  Band 6 Dyn Auto                  audio=DEAD     visual=ok
+  Band 6 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 6 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 6 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 6 Dyn Below On              audio=DEAD     visual=ok
+  Band 6 Dyn Below Range           audio=DEAD     visual=ok
+  Band 6 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 6 Dyn Above On              audio=DEAD     visual=ok
+  Band 6 Dyn Above Range           audio=DEAD     visual=ok
+  Band 6 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 6 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 6 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 6 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 6 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 6 Pan                       audio=DEAD     visual=ok
+  Band 6 Slope                     audio=DEAD     visual=ok
+  Band 6 Split On                  audio=DEAD     visual=ok
+  Band 6 Split Transient Gain      audio=DEAD     visual=ok
+  Band 6 Split Tail Gain           audio=DEAD     visual=ok
+  Band 6 Phase                     audio=DEAD     visual=ok
+  Band 7 Active                    audio=DEAD     visual=ok
+  Band 7 Type                      audio=DEAD     visual=ok
+  Band 7 Frequency                 audio=DEAD     visual=ok
+  Band 7 Gain                      audio=DEAD     visual=ok
+  Band 7 Q                         audio=DEAD     visual=ok
+  Band 7 Slope                     audio=DEAD     visual=ok
+  Band 7 Stereo Mode               audio=DEAD     visual=ok
+  Band 7 Solo                      audio=DEAD     visual=ok
+  Band 7 Dynamic On                audio=DEAD     visual=ok
+  Band 7 Dyn Threshold             audio=DEAD     visual=ok
+  Band 7 Dyn Range                 audio=DEAD     visual=ok
+  Band 7 Dyn Attack                audio=DEAD     visual=ok
+  Band 7 Dyn Release               audio=DEAD     visual=ok
+  Band 7 Shown                     audio=DEAD     visual=ok
+  Band 7 Dyn Action                audio=DEAD     visual=ok
+  Band 7 Dyn Knee                  audio=DEAD     visual=ok
+  Band 7 Dyn Source                audio=DEAD     visual=ok
+  Band 7 Dyn Relative              audio=DEAD     visual=ok
+  Band 7 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 7 Dyn Transient             audio=DEAD     visual=ok
+  Band 7 Dyn Auto                  audio=DEAD     visual=ok
+  Band 7 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 7 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 7 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 7 Dyn Below On              audio=DEAD     visual=ok
+  Band 7 Dyn Below Range           audio=DEAD     visual=ok
+  Band 7 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 7 Dyn Above On              audio=DEAD     visual=ok
+  Band 7 Dyn Above Range           audio=DEAD     visual=ok
+  Band 7 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 7 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 7 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 7 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 7 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 7 Pan                       audio=DEAD     visual=ok
+  Band 7 Slope                     audio=DEAD     visual=ok
+  Band 7 Split On                  audio=DEAD     visual=ok
+  Band 7 Split Transient Gain      audio=DEAD     visual=ok
+  Band 7 Split Tail Gain           audio=DEAD     visual=ok
+  Band 7 Phase                     audio=DEAD     visual=ok
+  Band 8 Active                    audio=DEAD     visual=ok
+  Band 8 Type                      audio=DEAD     visual=ok
+  Band 8 Frequency                 audio=DEAD     visual=ok
+  Band 8 Gain                      audio=DEAD     visual=ok
+  Band 8 Q                         audio=DEAD     visual=ok
+  Band 8 Slope                     audio=DEAD     visual=ok
+  Band 8 Stereo Mode               audio=DEAD     visual=ok
+  Band 8 Solo                      audio=DEAD     visual=ok
+  Band 8 Dynamic On                audio=DEAD     visual=ok
+  Band 8 Dyn Threshold             audio=DEAD     visual=ok
+  Band 8 Dyn Range                 audio=DEAD     visual=ok
+  Band 8 Dyn Attack                audio=DEAD     visual=ok
+  Band 8 Dyn Release               audio=DEAD     visual=ok
+  Band 8 Shown                     audio=DEAD     visual=ok
+  Band 8 Dyn Action                audio=DEAD     visual=ok
+  Band 8 Dyn Knee                  audio=DEAD     visual=ok
+  Band 8 Dyn Source                audio=DEAD     visual=ok
+  Band 8 Dyn Relative              audio=DEAD     visual=ok
+  Band 8 Dyn Lookahead             audio=DEAD     visual=ok
+  Band 8 Dyn Transient             audio=DEAD     visual=ok
+  Band 8 Dyn Auto                  audio=DEAD     visual=ok
+  Band 8 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 8 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 8 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 8 Dyn Below On              audio=DEAD     visual=ok
+  Band 8 Dyn Below Range           audio=DEAD     visual=ok
+  Band 8 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 8 Dyn Above On              audio=DEAD     visual=ok
+  Band 8 Dyn Above Range           audio=DEAD     visual=ok
+  Band 8 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 8 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 8 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 8 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 8 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 8 Pan                       audio=DEAD     visual=ok
+  Band 8 Slope                     audio=DEAD     visual=ok
+  Band 8 Split On                  audio=DEAD     visual=ok
+  Band 8 Split Transient Gain      audio=DEAD     visual=ok
+  Band 8 Split Tail Gain           audio=DEAD     visual=ok
+  Band 8 Phase                     audio=DEAD     visual=ok
+  Band 9 Active                    audio=DEAD     visual=ok
+  Band 9 Type                      audio=DEAD     visual=ok
+  Band 9 Frequency                 audio=DEAD     visual=ok
+  Band 9 Gain                      audio=DEAD     visual=ok
+  Band 9 Q                         audio=DEAD     visual=ok
+  Band 9 Slope                     audio=DEAD     visual=ok
+  Band 9 Stereo Mode               audio=DEAD     visual=ok
+  Band 9 Solo                      audio=DEAD     visual=ok
+  Band 9 Dynamic On                audio=DEAD     visual=ok
+  Band 9 Dyn Threshold             audio=DEAD     visual=ok
+  Band 9 Dyn Range                 audio=DEAD     visual=ok
+  Band 9 Dyn Attack                audio=DEAD     visual=ok
+  Band 9 Dyn Release               audio=DEAD     visual=ok
+  Band 9 Shown                     audio=DEAD     visual=ok
+  Band 9 Dyn Action                audio=DEAD     visual=ok
+  Band 9 Dyn Knee                  audio=ok       visual=ok
+  Band 9 Dyn Source                audio=ok       visual=ok
+  Band 9 Dyn Relative              audio=ok       visual=ok
+  Band 9 Dyn Lookahead             audio=ok       visual=ok
+  Band 9 Dyn Transient             audio=ok       visual=ok
+  Band 9 Dyn Auto                  audio=ok       visual=ok
+  Band 9 Dyn Detector Link         audio=DEAD     visual=ok
+  Band 9 Dyn Detector Frequency    audio=DEAD     visual=ok
+  Band 9 Dyn Detector Q            audio=DEAD     visual=ok
+  Band 9 Dyn Below On              audio=DEAD     visual=ok
+  Band 9 Dyn Below Range           audio=DEAD     visual=ok
+  Band 9 Dyn Below Ratio           audio=DEAD     visual=ok
+  Band 9 Dyn Above On              audio=DEAD     visual=ok
+  Band 9 Dyn Above Range           audio=DEAD     visual=ok
+  Band 9 Dyn Above Ratio           audio=DEAD     visual=ok
+  Band 9 Dyn Relative Free         audio=DEAD     visual=ok
+  Band 9 Dyn Relative Frequency    audio=DEAD     visual=ok
+  Band 9 Dyn Relative Q            audio=DEAD     visual=ok
+  Band 9 Dyn Relative Source       audio=DEAD     visual=ok
+  Band 9 Pan                       audio=DEAD     visual=ok
+  Band 9 Slope                     audio=DEAD     visual=ok
+  Band 9 Split On                  audio=DEAD     visual=ok
+  Band 9 Split Transient Gain      audio=DEAD     visual=ok
+  Band 9 Split Tail Gain           audio=ok       visual=ok
+  Band 9 Phase                     audio=ok       visual=ok
+  Band 10 Active                   audio=ok       visual=ok
+  Band 10 Type                     audio=ok       visual=ok
+  Band 10 Frequency                audio=ok       visual=ok
+  Band 10 Gain                     audio=ok       visual=ok
+  Band 10 Q                        audio=ok       visual=ok
+  Band 10 Slope                    audio=ok       visual=ok
+  Band 10 Stereo Mode              audio=ok       visual=ok
+  Band 10 Solo                     audio=ok       visual=ok
+  Band 10 Dynamic On               audio=ok       visual=ok
+  Band 10 Dyn Threshold            audio=ok       visual=ok
+  Band 10 Dyn Range                audio=ok       visual=ok
+  Band 10 Dyn Attack               audio=ok       visual=ok
+  Band 10 Dyn Release              audio=ok       visual=ok
+  Band 10 Shown                    audio=ok       visual=ok
+  Band 10 Dyn Action               audio=ok       visual=ok
+  Band 10 Dyn Knee                 audio=ok       visual=ok
+  Band 10 Dyn Source               audio=ok       visual=ok
+  Band 10 Dyn Relative             audio=ok       visual=ok
+  Band 10 Dyn Lookahead            audio=ok       visual=ok
+  Band 10 Dyn Transient            audio=ok       visual=ok
+  Band 10 Dyn Auto                 audio=ok       visual=ok
+  Band 10 Dyn Detector Link        audio=ok       visual=ok
+  Band 10 Dyn Detector Frequency   audio=ok       visual=ok
+  Band 10 Dyn Detector Q           audio=ok       visual=ok
+  Band 10 Dyn Below On             audio=ok       visual=ok
+  Band 10 Dyn Below Range          audio=ok       visual=ok
+  Band 10 Dyn Below Ratio          audio=ok       visual=ok
+  Band 10 Dyn Above On             audio=ok       visual=ok
+  Band 10 Dyn Above Range          audio=ok       visual=ok
+  Band 10 Dyn Above Ratio          audio=ok       visual=ok
+  Band 10 Dyn Relative Free        audio=ok       visual=ok
+  Band 10 Dyn Relative Frequency   audio=ok       visual=ok
+  Band 10 Dyn Relative Q           audio=ok       visual=ok
+  Band 10 Dyn Relative Source      audio=ok       visual=ok
+  Band 10 Pan                      audio=ok       visual=ok
+  Band 10 Slope                    audio=ok       visual=ok
+  Band 10 Split On                 audio=ok       visual=ok
+  Band 10 Split Transient Gain     audio=ok       visual=ok
+  Band 10 Split Tail Gain          audio=ok       visual=ok
+  Band 10 Phase                    audio=ok       visual=ok
+  Band 11 Active                   audio=ok       visual=ok
+  Band 11 Type                     audio=ok       visual=ok
+  Band 11 Frequency                audio=ok       visual=ok
+  Band 11 Gain                     audio=ok       visual=ok
+  Band 11 Q                        audio=ok       visual=ok
+  Band 11 Slope                    audio=ok       visual=ok
+  Band 11 Stereo Mode              audio=ok       visual=ok
+  Band 11 Solo                     audio=ok       visual=ok
+  Band 11 Dynamic On               audio=ok       visual=ok
+  Band 11 Dyn Threshold            audio=ok       visual=ok
+  Band 11 Dyn Range                audio=ok       visual=ok

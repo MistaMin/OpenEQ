@@ -1,0 +1,11 @@
+MEASUREMENTS
+  transient_onset_0 0.34404218 onset_100 0.095144575 tail_0 0.088951172 tail_100 0.088951172
+  auto_off_rms 0.08871934 gain -12 threshold -24 auto_on_rms 0.35319618 gain 0 threshold -3.0558662
+  auto_burst_rms 0.20108163
+  detector_audition_1k_rms 0.17706037 detector_audition_100_rms 0.017773293
+  detector_linked_rms 0.08871934 env -6.5310426 gain -12 detuned_rms 0.35319618 env -52.32056 retarget_rms 0.32823321 env -6.5310426 gain -12
+  detector_listen_own_1k_rms 0.17706037 own_100_rms 0.017773293
+  dynamics_readout E -6.2  T -30.0  G -12.0
+  dynamic_graph_ink 12125
+PASS: transient weight, automatic timing, and detector frequency
+PASS: audio foundation batch

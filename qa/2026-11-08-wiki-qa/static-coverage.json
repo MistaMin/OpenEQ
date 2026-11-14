@@ -1,0 +1,32 @@
+{
+  "registryCount": 1311,
+  "hostCount": 1315,
+  "counts": {
+    "binding found; runtime visibility requires page/band review": 1210,
+    "legacy compatibility parameter; no dedicated control": 96,
+    "MISSING candidate": 5,
+    "host provided": 4
+  },
+  "missing": [
+    {
+      "id": "autoGain",
+      "name": "Auto Gain"
+    },
+    {
+      "id": "spectralAmount",
+      "name": "Spectral Amount"
+    },
+    {
+      "id": "spectralThresh",
+      "name": "Spectral Threshold"
+    },
+    {
+      "id": "spectralFreq",
+      "name": "Spectral Frequency"
+    },
+    {
+      "id": "spectralOct",
+      "name": "Spectral Width"
+    }
+  ]
+}

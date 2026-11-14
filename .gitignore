@@ -1,0 +1,13 @@
+build/
+*.DS_Store
+__pycache__/
+*.pyc
+HANDOFF.md
+GROK_HANDOFF.md
+RECOVERY_REPORT.md
+GOD_EQ_HANDOFF_DOCUMENTS.zip
+qa/**/reaper/
+
+
+# Local measurement data and notes; not part of the source distribution.
+research/
