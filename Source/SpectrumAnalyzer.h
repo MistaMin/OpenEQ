@@ -61,7 +61,18 @@ public:
 private:
     void timerCallback() override;
     static float speedBlend() noexcept;
-    void computeSpectrum (AnalyzerRing& ringL, AnalyzerRing& ringR, std::array<float, AnalyzerRing::size / 2>& magnitudesOut);
+    /** The last spectrum computed from a pair of rings. It is reused while neither ring has published since and
+        the monitor mode is the same, because the transform of the same samples gives the same result. */
+    struct SpectrumCache
+    {
+        bool valid = false;
+        juce::uint32 generationL = 0, generationR = 0;
+        int monitorMode = 0;
+        std::array<float, AnalyzerRing::size / 2> magnitudes {};
+    };
+    std::array<SpectrumCache, 5> spectrumCache {};
+    void computeSpectrum (AnalyzerRing& ringL, AnalyzerRing& ringR, std::array<float, AnalyzerRing::size / 2>& magnitudesOut,
+                          SpectrumCache& cache);
     juce::Path buildPath (const std::array<float, AnalyzerRing::size / 2>& magnitudes, float width, float height);
 
     OpenEQAudioProcessor& processor;

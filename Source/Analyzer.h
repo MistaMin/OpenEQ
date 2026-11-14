@@ -16,20 +16,35 @@ public:
         if (data == nullptr || numSamples <= 0)
             return;
 
-        for (int i = 0; i < numSamples; ++i)
+        // Only the newest `size` samples can survive in the ring; older ones would be overwritten.
+        if (numSamples > size)
         {
-            privateRing[(size_t) writeIndex] = data[i];
-            writeIndex = (writeIndex + 1) % size;
+            writeIndex = (writeIndex + (numSamples - size) % size) % size;
+            data += numSamples - size;
+            numSamples = size;
         }
+
+        // Block copies, at most two per pass: the ring wraps at most once.
+        const int first = juce::jmin (numSamples, size - writeIndex);
+        std::memcpy (privateRing.data() + writeIndex, data, sizeof (float) * (size_t) first);
+        std::memcpy (privateRing.data(), data + first, sizeof (float) * (size_t) (numSamples - first));
+        writeIndex = (writeIndex + numSamples) % size;
 
         if (! publishLock.tryEnter())
             return;
 
-        for (int i = 0; i < size; ++i)
-            published[(size_t) i] = privateRing[(size_t) ((writeIndex + i) % size)];
+        // Oldest sample first: the tail of the ring from the write position, then its head.
+        const int tail = size - writeIndex;
+        std::memcpy (published.data(), privateRing.data() + writeIndex, sizeof (float) * (size_t) tail);
+        std::memcpy (published.data() + tail, privateRing.data(), sizeof (float) * (size_t) writeIndex);
+        generation.fetch_add (1, std::memory_order_release);
 
         publishLock.exit();
     }
+
+    /** Counts publications. Read it before copyLatest: the copy is then at least as new as the count says,
+        so a reader that sees the same count as last time already has this snapshot. */
+    juce::uint32 getGeneration() const noexcept { return generation.load (std::memory_order_acquire); }
 
     void copyLatest (std::array<float, size>& dest) const
     {
@@ -42,4 +57,5 @@ private:
     std::array<float, size> privateRing {};
     std::array<float, size> published {};
     int writeIndex = 0;
+    std::atomic<juce::uint32> generation { 0 };
 };

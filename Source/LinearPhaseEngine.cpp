@@ -605,8 +605,35 @@ void LinearPhaseEngine::convolvePath (const float* input, float* output, int num
         audioTime[(size_t) i] = { i < numSamples ? input[i] : 0.0f, 0.0f };
 
     fft.perform (audioTime.data(), audioFreq.data(), false);
-    for (int i = 0; i < fftLength; ++i)
-        audioFreq[(size_t) i] *= spectrum[i];
+    {
+        // The complex product as std::complex computes it: four products, then one subtraction and one addition.
+        // Written out it vectorises. std::complex only does something different when both parts come out NaN,
+        // so in that case the whole product is redone with the operator itself.
+        auto* bins = reinterpret_cast<float*> (audioFreq.data());
+        const auto* kernelBins = reinterpret_cast<const float*> (spectrum);
+        bool bothNaN = false;
+        for (int i = 0; i < fftLength; ++i)
+        {
+            const float a = bins[2 * i], b = bins[2 * i + 1];
+            const float c = kernelBins[2 * i], d = kernelBins[2 * i + 1];
+            const float ac = a * c;
+            const float bd = b * d;
+            const float ad = a * d;
+            const float bc = b * c;
+            const float x = ac - bd;
+            const float y = ad + bc;
+            bothNaN |= (x != x) && (y != y);
+            bins[2 * i] = x;
+            bins[2 * i + 1] = y;
+        }
+        if (bothNaN)
+        {
+            // Rare: start again from the transform and let std::complex handle the infinities.
+            fft.perform (audioTime.data(), audioFreq.data(), false);
+            for (int i = 0; i < fftLength; ++i)
+                audioFreq[(size_t) i] *= spectrum[i];
+        }
+    }
     fft.perform (audioFreq.data(), audioTime.data(), true);
 
     for (int i = 0; i < numSamples; ++i)
@@ -617,13 +644,21 @@ void LinearPhaseEngine::convolvePath (const float* input, float* output, int num
 
     // Keep kernelLength-1 future samples. Walk upward: this is an in-place left
     // shift, so overlap[i + numSamples] must still hold the previous hop.
+    // The two range tests of each sample are hoisted into the loop bounds; every sample still gets older + newer,
+    // with 0.0f standing in for a missing term exactly as before.
     const int tail = kernelLength - 1;
-    for (int i = 0; i < tail; ++i)
-    {
-        const float older = (i + numSamples < tail) ? overlapBuffer[i + numSamples] : 0.0f;
-        const float newer = (i + numSamples < fftLength) ? audioTime[(size_t) (i + numSamples)].real() : 0.0f;
-        overlapBuffer[i] = older + newer;
-    }
+    const int olderEnd = juce::jlimit (0, juce::jmax (0, tail), tail - numSamples);
+    const int newerEnd = juce::jlimit (0, juce::jmax (0, tail), fftLength - numSamples);
+    const int bothEnd = juce::jmin (olderEnd, newerEnd);
+    int i = 0;
+    for (; i < bothEnd; ++i)
+        overlapBuffer[i] = overlapBuffer[i + numSamples] + audioTime[(size_t) (i + numSamples)].real();
+    for (; i < olderEnd; ++i)
+        overlapBuffer[i] = overlapBuffer[i + numSamples] + 0.0f;
+    for (; i < newerEnd; ++i)
+        overlapBuffer[i] = 0.0f + audioTime[(size_t) (i + numSamples)].real();
+    for (; i < tail; ++i)
+        overlapBuffer[i] = 0.0f + 0.0f;
 }
 
 void LinearPhaseEngine::process (juce::dsp::AudioBlock<float>& block)

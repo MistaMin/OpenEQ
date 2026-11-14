@@ -74,6 +74,7 @@ public:
         frame.assign ((size_t) fftSize, {});
         scratch.assign ((size_t) fftSize, {});
         rawMask.assign ((size_t) bins, 0.0f);
+        mirrored.assign ((size_t) (bins + 2 * (frequencySpan / 2)), 0.0f);
         held.assign ((size_t) bins, 0.0f);
         mask.assign ((size_t) bins, 0.0f);
         reset();
@@ -145,10 +146,38 @@ public:
     }
 
 private:
-    static float medianOf (float* values, int count) noexcept
+    /** Medians by fixed comparator networks: each gives the same value std::nth_element picks (the element
+        of rank count / 2), without branches. The networks were derived from an odd-even merge sort, pruned to
+        the median output, and checked against every 0/1 input, which by the 0-1 principle covers every
+        input. They run on rows of `tile` bins at once, so the compiler can vectorise them. */
+    struct Comparator { int low, high; };
+    static constexpr Comparator medianOf9[] = {
+        { 0, 1 }, { 2, 3 }, { 0, 2 }, { 1, 3 }, { 1, 2 }, { 4, 5 }, { 6, 7 }, { 4, 6 }, { 5, 7 }, { 5, 6 },
+        { 0, 4 }, { 2, 6 }, { 2, 4 }, { 1, 5 }, { 3, 7 }, { 3, 5 }, { 3, 4 }, { 4, 8 }, { 3, 4 } };
+    static constexpr int medianOf9Slot = 4;
+    static constexpr Comparator medianOf13[] = {
+        { 0, 1 }, { 2, 3 }, { 0, 2 }, { 1, 3 }, { 1, 2 }, { 4, 5 }, { 6, 7 }, { 4, 6 }, { 5, 7 }, { 5, 6 },
+        { 0, 4 }, { 2, 6 }, { 2, 4 }, { 1, 5 }, { 3, 7 }, { 3, 5 }, { 1, 2 }, { 3, 4 }, { 5, 6 }, { 8, 9 },
+        { 10, 11 }, { 8, 10 }, { 9, 11 }, { 9, 10 }, { 8, 12 }, { 10, 12 }, { 9, 10 }, { 11, 12 }, { 4, 12 },
+        { 4, 8 }, { 2, 10 }, { 6, 10 }, { 6, 8 }, { 1, 9 }, { 5, 9 }, { 3, 11 }, { 3, 5 }, { 5, 6 } };
+    static constexpr int medianOf13Slot = 6;
+    static_assert (timeFrames == 9 && frequencySpan == 13, "the median networks are sized for these spans");
+    static constexpr int tile = 16;
+
+    template <size_t rowCount, size_t comparators>
+    static void sortRows (float (&rows)[rowCount][tile], const Comparator (&network)[comparators]) noexcept
     {
-        std::nth_element (values, values + count / 2, values + count);
-        return values[count / 2];
+        for (const auto& c : network)
+        {
+            float* low = rows[c.low];
+            float* high = rows[c.high];
+            for (int j = 0; j < tile; ++j)
+            {
+                const float a = low[j], b = high[j];
+                low[j] = std::min (a, b);
+                high[j] = std::max (a, b);
+            }
+        }
     }
 
     void synthesise (bool stereo, const Settings& settings) noexcept
@@ -177,27 +206,36 @@ private:
         const float biasSquared = bias * bias;
         const int half = frequencySpan / 2;
 
-        for (int bin = 0; bin < bins; ++bin)
+        // The centre frame with its mirror images at both ends of the spectrum, so every window over
+        // frequency is a contiguous run: window `bin` is mirrored[bin .. bin + frequencySpan - 1].
+        for (int i = -half; i < bins + half; ++i)
         {
-            std::array<float, timeFrames> overTime;
+            int index = i;
+            if (index < 0) index = -index;
+            if (index >= bins) index = 2 * (bins - 1) - index;
+            mirrored[(size_t) (i + half)] = centreMagnitude[(size_t) index];
+        }
+
+        for (int start = 0; start < bins; start += tile)
+        {
+            const int count = juce::jmin (tile, bins - start);
+            float overTime[timeFrames][tile] = {};
+            float overFrequency[frequencySpan][tile] = {};
             for (int f = 0; f < timeFrames; ++f)
-                overTime[(size_t) f] = magnitudes[(size_t) f][(size_t) bin];
-            const float tonal = medianOf (overTime.data(), timeFrames);
-
-            std::array<float, frequencySpan> overFrequency;
+                std::copy_n (magnitudes[(size_t) f].data() + start, count, overTime[f]);
             for (int k = 0; k < frequencySpan; ++k)
-            {
-                // Mirror at both ends of the spectrum.
-                int index = bin - half + k;
-                if (index < 0) index = -index;
-                if (index >= bins) index = 2 * (bins - 1) - index;
-                overFrequency[(size_t) k] = centreMagnitude[(size_t) index];
-            }
-            const float transient = medianOf (overFrequency.data(), frequencySpan);
+                std::copy_n (mirrored.data() + start + k, count, overFrequency[k]);
+            sortRows (overTime, medianOf9);
+            sortRows (overFrequency, medianOf13);
 
-            const float transientPower = transient * transient;
-            const float tonalPower = tonal * tonal * biasSquared;
-            rawMask[(size_t) bin] = transientPower / (transientPower + tonalPower + 1.0e-20f);
+            for (int j = 0; j < count; ++j)
+            {
+                const float tonal = overTime[medianOf9Slot][j];
+                const float transient = overFrequency[medianOf13Slot][j];
+                const float transientPower = transient * transient;
+                const float tonalPower = tonal * tonal * biasSquared;
+                rawMask[(size_t) (start + j)] = transientPower / (transientPower + tonalPower + 1.0e-20f);
+            }
         }
 
         // Decay holds a bin in the transient stream after its onset. Smoothing slows every change.
@@ -291,5 +329,5 @@ private:
     std::array<std::array<std::vector<juce::dsp::Complex<float>>, timeFrames>, 2> spectra;
     std::array<std::vector<float>, timeFrames> magnitudes;
     std::vector<juce::dsp::Complex<float>> frame, scratch;
-    std::vector<float> rawMask, held, mask;
+    std::vector<float> rawMask, held, mask, mirrored;
 };

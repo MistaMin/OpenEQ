@@ -51,6 +51,8 @@ public:
                 stage.reset();
         for (auto& lane : ddState)
             lane.fill (DDState {});
+        for (auto& lane : biquadState)
+            lane.fill ({ 0.0, 0.0 });
     }
 
     /** Snaps coefficients to this design. Used by tests and by the processor when values change.
@@ -179,15 +181,86 @@ public:
             for (int i = 0; i < count; ++i)
                 work[(size_t) i] = (double) samples[i];
 
-            double* channel = work.data();
-            juce::dsp::AudioBlock<double> block (&channel, 1, (size_t) count);
-            juce::dsp::ProcessContextReplacing<double> context (block);
-
             for (int s = 0; s < activeStageCount; ++s)
-                stages[(size_t) laneIndex][(size_t) s].process (context);
+                runStage (stages[0][(size_t) s].coefficients->getRawCoefficients(),
+                          biquadState[(size_t) laneIndex][(size_t) s], work.data(), count);
 
             for (int i = 0; i < count; ++i)
                 samples[i] = (float) work[(size_t) i];
+        }
+    }
+
+    /** Processes two different lanes in place in one pass (left/right, or mid/side). Each lane gets exactly
+        the arithmetic processChannel would give it; running them side by side only lets the two
+        recursions overlap. */
+    void processChannelPair (float* dataA, float* dataB, int numSamples, int laneA, int laneB)
+    {
+        if (dataA == nullptr || dataB == nullptr || numSamples <= 0 || ! coefficientsReady)
+            return;
+
+        const int indexA = juce::jlimit (0, numLanes - 1, laneA);
+        const int indexB = juce::jlimit (0, numLanes - 1, laneB);
+        if (ultra || indexA == indexB)
+        {
+            processChannel (dataA, numSamples, indexA);
+            processChannel (dataB, numSamples, indexB);
+            return;
+        }
+
+        auto& workA = scratch[(size_t) indexA];
+        auto& workB = scratch[(size_t) indexB];
+
+        for (int offset = 0; offset < numSamples; offset += maxChunk)
+        {
+            const int count = juce::jmin (maxChunk, numSamples - offset);
+            float* samplesA = dataA + offset;
+            float* samplesB = dataB + offset;
+            for (int i = 0; i < count; ++i)
+            {
+                workA[(size_t) i] = (double) samplesA[i];
+                workB[(size_t) i] = (double) samplesB[i];
+            }
+
+            for (int s = 0; s < activeStageCount; ++s)
+                runStagePair (stages[0][(size_t) s].coefficients->getRawCoefficients(),
+                              biquadState[(size_t) indexA][(size_t) s], biquadState[(size_t) indexB][(size_t) s],
+                              workA.data(), workB.data(), count);
+
+            for (int i = 0; i < count; ++i)
+            {
+                samplesA[i] = (float) workA[(size_t) i];
+                samplesB[i] = (float) workB[(size_t) i];
+            }
+        }
+    }
+
+    /** True when processChannelPair on lanes 0 and 1 would run the plain double-precision cascade, which is
+        what processCascadePair reproduces. */
+    bool canCascade() const noexcept { return coefficientsReady && ! ultra; }
+
+    /** Runs several bands in series on lanes 0 and 1, with exactly the result of calling
+        processChannelPair (dataA, dataB, numSamples, 0, 1) on each band in turn: every stage does the same
+        arithmetic on the same inputs, a band's output is rounded to float before the next band reads it,
+        and the denormal snap falls at the same block ends. The work is laid out as a wavefront (stage e
+        works on sample t - e at step t), so the stages' recursions overlap instead of running one
+        after another. Every band must satisfy canCascade(). */
+    static void processCascadePair (EQBand* const* chain, int bandCount, float* dataA, float* dataB, int numSamples) noexcept
+    {
+        constexpr int capacity = 32; // stages per wavefront; any one band has at most maxStages (16)
+        static_assert (capacity >= maxStages, "a single band must fit one wavefront");
+
+        int first = 0;
+        while (first < bandCount)
+        {
+            // Take as many whole bands as fit.
+            int last = first, stageTotal = 0;
+            while (last < bandCount && stageTotal + chain[last]->activeStageCount <= capacity)
+                stageTotal += chain[last++]->activeStageCount;
+            if (stageTotal > 0)
+                for (int offset = 0; offset < numSamples; offset += maxChunk)
+                    runWavefront (chain + first, last - first, stageTotal, dataA + offset, dataB + offset,
+                                  juce::jmin (maxChunk, numSamples - offset));
+            first = last;
         }
     }
 
@@ -226,6 +299,129 @@ public:
     StereoMode getStereoMode() const noexcept { return stereoMode; }
 
 private:
+    using BiquadState = std::array<double, 2>;
+
+    /** One transposed direct form II biquad over a block, in place. The arithmetic, its order, and the
+        end-of-block denormal snap are those of juce::dsp::IIR::Filter for a second-order section, so
+        the output is the same bit for bit. c holds b0, b1, b2, a1, a2 with a0 = 1. */
+    static void runStage (const double* c, BiquadState& z, double* x, int count) noexcept
+    {
+        const double b0 = c[0], b1 = c[1], b2 = c[2], a1 = c[3], a2 = c[4];
+        double lv1 = z[0], lv2 = z[1];
+        for (int i = 0; i < count; ++i)
+        {
+            const double input = x[i];
+            const double output = (input * b0) + lv1;
+            x[i] = output;
+            lv1 = (input * b1) - (output * a1) + lv2;
+            lv2 = (input * b2) - (output * a2);
+        }
+        juce::dsp::util::snapToZero (lv1); z[0] = lv1;
+        juce::dsp::util::snapToZero (lv2); z[1] = lv2;
+    }
+
+    /** runStage on two lanes that share coefficients, interleaved so the two recursions run in parallel. */
+    static void runStagePair (const double* c, BiquadState& zA, BiquadState& zB, double* xA, double* xB, int count) noexcept
+    {
+        const double b0 = c[0], b1 = c[1], b2 = c[2], a1 = c[3], a2 = c[4];
+        double lv1A = zA[0], lv2A = zA[1];
+        double lv1B = zB[0], lv2B = zB[1];
+        for (int i = 0; i < count; ++i)
+        {
+            const double inputA = xA[i];
+            const double inputB = xB[i];
+            const double outputA = (inputA * b0) + lv1A;
+            const double outputB = (inputB * b0) + lv1B;
+            xA[i] = outputA;
+            xB[i] = outputB;
+            lv1A = (inputA * b1) - (outputA * a1) + lv2A;
+            lv1B = (inputB * b1) - (outputB * a1) + lv2B;
+            lv2A = (inputA * b2) - (outputA * a2);
+            lv2B = (inputB * b2) - (outputB * a2);
+        }
+        juce::dsp::util::snapToZero (lv1A); zA[0] = lv1A;
+        juce::dsp::util::snapToZero (lv2A); zA[1] = lv2A;
+        juce::dsp::util::snapToZero (lv1B); zB[0] = lv1B;
+        juce::dsp::util::snapToZero (lv2B); zB[1] = lv2B;
+    }
+
+    /** processCascadePair for at most 32 stages and at most maxChunk samples. Stage e handles sample t - e
+        at step t; going through the stages from the last to the first, carry[e - 1] still holds what stage
+        e - 1 produced one step earlier, which is the same sample. */
+    static void runWavefront (EQBand* const* chain, int bandCount, int stageCount, float* dataA, float* dataB, int numSamples) noexcept
+    {
+        constexpr int capacity = 32;
+        double b0[capacity], b1[capacity], b2[capacity], a1[capacity], a2[capacity];
+        double lv1A[capacity], lv2A[capacity], lv1B[capacity], lv2B[capacity];
+        double carryA[capacity], carryB[capacity];
+        bool roundAfter[capacity];
+
+        int e = 0;
+        for (int b = 0; b < bandCount; ++b)
+        {
+            auto& band = *chain[b];
+            for (int s = 0; s < band.activeStageCount; ++s, ++e)
+            {
+                const double* c = band.stages[0][(size_t) s].coefficients->getRawCoefficients();
+                b0[e] = c[0]; b1[e] = c[1]; b2[e] = c[2]; a1[e] = c[3]; a2[e] = c[4];
+                lv1A[e] = band.biquadState[0][(size_t) s][0]; lv2A[e] = band.biquadState[0][(size_t) s][1];
+                lv1B[e] = band.biquadState[1][(size_t) s][0]; lv2B[e] = band.biquadState[1][(size_t) s][1];
+                carryA[e] = carryB[e] = 0.0;
+                // A band hands the next one a float sample, as processChannelPair stores it.
+                roundAfter[e] = s == band.activeStageCount - 1;
+            }
+        }
+        jassert (e == stageCount);
+        const int lastStage = stageCount - 1;
+
+        for (int t = 0; t < numSamples + lastStage; ++t)
+        {
+            const int high = juce::jmin (lastStage, t);
+            const int low = juce::jmax (0, t - (numSamples - 1));
+            for (int k = high; k >= low; --k)
+            {
+                const int n = t - k;
+                const double inputA = k == 0 ? (double) dataA[n] : carryA[k - 1];
+                const double inputB = k == 0 ? (double) dataB[n] : carryB[k - 1];
+                const double outputA = (inputA * b0[k]) + lv1A[k];
+                const double outputB = (inputB * b0[k]) + lv1B[k];
+                lv1A[k] = (inputA * b1[k]) - (outputA * a1[k]) + lv2A[k];
+                lv1B[k] = (inputB * b1[k]) - (outputB * a1[k]) + lv2B[k];
+                lv2A[k] = (inputA * b2[k]) - (outputA * a2[k]);
+                lv2B[k] = (inputB * b2[k]) - (outputB * a2[k]);
+                if (roundAfter[k])
+                {
+                    const float roundedA = (float) outputA, roundedB = (float) outputB;
+                    if (k == lastStage)
+                    {
+                        dataA[n] = roundedA;
+                        dataB[n] = roundedB;
+                    }
+                    carryA[k] = (double) roundedA;
+                    carryB[k] = (double) roundedB;
+                }
+                else
+                {
+                    carryA[k] = outputA;
+                    carryB[k] = outputB;
+                }
+            }
+        }
+
+        e = 0;
+        for (int b = 0; b < bandCount; ++b)
+        {
+            auto& band = *chain[b];
+            for (int s = 0; s < band.activeStageCount; ++s, ++e)
+            {
+                juce::dsp::util::snapToZero (lv1A[e]); juce::dsp::util::snapToZero (lv2A[e]);
+                juce::dsp::util::snapToZero (lv1B[e]); juce::dsp::util::snapToZero (lv2B[e]);
+                band.biquadState[0][(size_t) s] = { lv1A[e], lv2A[e] };
+                band.biquadState[1][(size_t) s] = { lv1B[e], lv2B[e] };
+            }
+        }
+    }
+
     /** Double-double value: hi + lo, with |lo| at most half an ulp of hi. */
     struct DD
     {
@@ -304,6 +500,9 @@ private:
     double sampleRate = 44100.0;
 
     int digitalPlusSteps = 0;
+    // The filters hold the installed coefficients (lane 0 owns them, the other lanes share the pointer).
+    // The recursion state lives in biquadState, so a pair of lanes can be processed in one pass.
     std::array<std::array<juce::dsp::IIR::Filter<double>, maxStages>, numLanes> stages;
+    std::array<std::array<BiquadState, maxStages>, numLanes> biquadState {};
     std::array<std::array<double, maxChunk>, numLanes> scratch {};
 };

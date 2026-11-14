@@ -75,8 +75,17 @@ float SpectrumAnalyzer::dbToY (float db, float height)
     return height * (1.0f - (clamped - bottom) / (maxDb - bottom));
 }
 
-void SpectrumAnalyzer::computeSpectrum (AnalyzerRing& ringL, AnalyzerRing& ringR, std::array<float, AnalyzerRing::size / 2>& magnitudesOut)
+void SpectrumAnalyzer::computeSpectrum (AnalyzerRing& ringL, AnalyzerRing& ringR, std::array<float, AnalyzerRing::size / 2>& magnitudesOut,
+                                        SpectrumCache& cache)
 {
+    const auto generationL = ringL.getGeneration();
+    const auto generationR = ringR.getGeneration();
+    if (cache.valid && cache.generationL == generationL && cache.generationR == generationR && cache.monitorMode == monitorMode)
+    {
+        magnitudesOut = cache.magnitudes;
+        return;
+    }
+
     // Build the L/R/M/S display channel the same way reference monitor does:
     // standalone L/R from the two rings, M = (L+R)/2, S = (L-R)/2.
     switch (monitorMode)
@@ -133,6 +142,12 @@ void SpectrumAnalyzer::computeSpectrum (AnalyzerRing& ringL, AnalyzerRing& ringR
         for (int i = 0; i < AnalyzerRing::size / 2; ++i)
             magnitudesOut[(size_t) i] = juce::Decibels::gainToDecibels (leftMagnitudes[(size_t) i], minDb);
     }
+
+    cache.valid = true;
+    cache.generationL = generationL;
+    cache.generationR = generationR;
+    cache.monitorMode = monitorMode;
+    cache.magnitudes = magnitudesOut;
 }
 
 juce::Path SpectrumAnalyzer::buildPath (const std::array<float, AnalyzerRing::size / 2>& magnitudes, float width, float height)
@@ -219,17 +234,17 @@ void SpectrumAnalyzer::timerCallback()
         // Speed sets how far each frame moves toward the new spectrum.
         const float amount = speedBlend();
         std::array<float, AnalyzerRing::size / 2> fresh {};
-        computeSpectrum (processor.preL, processor.preR, fresh);
+        computeSpectrum (processor.preL, processor.preR, fresh, spectrumCache[0]);
         blendInto (preMagnitudes, fresh, amount);
-        computeSpectrum (processor.postL, processor.postR, fresh);
+        computeSpectrum (processor.postL, processor.postR, fresh, spectrumCache[1]);
         blendInto (postMagnitudes, fresh, amount);
-        computeSpectrum (processor.sideL, processor.sideR, fresh);
+        computeSpectrum (processor.sideL, processor.sideR, fresh, spectrumCache[2]);
         blendInto (sideMagnitudes, fresh, amount);
         if (processor.isSplitSpectrumActive())
         {
-            computeSpectrum (processor.splitTransL, processor.splitTransR, fresh);
+            computeSpectrum (processor.splitTransL, processor.splitTransR, fresh, spectrumCache[3]);
             blendInto (transientMagnitudes, fresh, amount);
-            computeSpectrum (processor.splitTonalL, processor.splitTonalR, fresh);
+            computeSpectrum (processor.splitTonalL, processor.splitTonalR, fresh, spectrumCache[4]);
             blendInto (tonalMagnitudes, fresh, amount);
         }
 

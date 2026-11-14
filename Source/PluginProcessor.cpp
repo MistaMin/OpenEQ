@@ -248,62 +248,64 @@ BandParameterState OpenEQAudioProcessor::readBandParameter (int index) const noe
 
 void OpenEQAudioProcessor::readAllBandParameters (std::array<BandParameterState, numBands>& dest) const noexcept
 {
+    // Every parameter is its own atomic and none orders another, so relaxed loads (plain loads on ARM) are
+    // enough; this runs once per block over every band.
     // Global gain scale multiplies every band's dB gain (reference "Scale"). It is applied here so the
     // audio path, the graph, and the linear-phase kernel all see the same effective gain.
     // reference scale runs from -200% to 200%; a negative scale inverts every band's gain.
-    const float scale = gainScale != nullptr ? gainScale->load() / 100.0f : 1.0f;
-    const bool globalLookahead = lookaheadOn != nullptr && lookaheadOn->load() > 0.5f;
-    const float globalLookaheadMs = lookaheadMs != nullptr ? lookaheadMs->load() : 0.0f;
+    const float scale = gainScale != nullptr ? gainScale->load (std::memory_order_relaxed) / 100.0f : 1.0f;
+    const bool globalLookahead = lookaheadOn != nullptr && lookaheadOn->load (std::memory_order_relaxed) > 0.5f;
+    const float globalLookaheadMs = lookaheadMs != nullptr ? lookaheadMs->load (std::memory_order_relaxed) : 0.0f;
 
     for (int i = 0; i < numBands; ++i)
     {
         const auto& cached = cachedBands[(size_t) i];
         auto& band = dest[(size_t) i];
-        band.active = cached.active->load() > 0.5f;
-        band.solo = cached.solo->load() > 0.5f;
-        band.dynamic = cached.dynamic->load() > 0.5f;
-        band.type = (FilterType) juce::jlimit (0, filterTypeCount - 1, (int) cached.type->load());
-        band.stereoMode = (StereoMode) juce::jlimit (0, 5, (int) cached.stereo->load());
-        band.pan = juce::jlimit (-1.0f, 1.0f, cached.pan->load() / 100.0f);
-        band.splitOn = cached.splitOn->load() > 0.5f;
-        band.splitTransDb = cached.splitTrans->load();
-        band.splitTailDb = cached.splitTail->load();
-        band.phase = juce::jlimit (-1.0f, 1.0f, cached.phase->load());
-        band.frequency = cached.frequency->load();
-        band.gainDb = cached.gain->load() * scale;
-        band.q = cached.q->load();
+        band.active = cached.active->load (std::memory_order_relaxed) > 0.5f;
+        band.solo = cached.solo->load (std::memory_order_relaxed) > 0.5f;
+        band.dynamic = cached.dynamic->load (std::memory_order_relaxed) > 0.5f;
+        band.type = (FilterType) juce::jlimit (0, filterTypeCount - 1, (int) cached.type->load (std::memory_order_relaxed));
+        band.stereoMode = (StereoMode) juce::jlimit (0, 5, (int) cached.stereo->load (std::memory_order_relaxed));
+        band.pan = juce::jlimit (-1.0f, 1.0f, cached.pan->load (std::memory_order_relaxed) / 100.0f);
+        band.splitOn = cached.splitOn->load (std::memory_order_relaxed) > 0.5f;
+        band.splitTransDb = cached.splitTrans->load (std::memory_order_relaxed);
+        band.splitTailDb = cached.splitTail->load (std::memory_order_relaxed);
+        band.phase = juce::jlimit (-1.0f, 1.0f, cached.phase->load (std::memory_order_relaxed));
+        band.frequency = cached.frequency->load (std::memory_order_relaxed);
+        band.gainDb = cached.gain->load (std::memory_order_relaxed) * scale;
+        band.q = cached.q->load (std::memory_order_relaxed);
         // Generic types carry reference continuous slope (encoded in slopeDb); the others keep plain dB per octave.
         if (ResponseModel::isBrickwall (band.type))
             band.slopeDb = ResponseModel::brickwallSlopeDb;
         else if (ResponseModel::usesContinuousSlope (band.type))
-            band.slopeDb = ResponseModel::encodeSlopeNorm (cached.slopeNorm->load());
+            band.slopeDb = ResponseModel::encodeSlopeNorm (cached.slopeNorm->load (std::memory_order_relaxed));
         else
-            band.slopeDb = Params::slopeIndexToDb ((int) cached.slope->load());
-        band.dynThresholdDb = cached.dynThreshold->load();
-        band.dynRangeDb = cached.dynRange->load();
-        band.dynAttackMs = cached.dynAttack->load();
-        band.dynReleaseMs = cached.dynRelease->load();
-        band.shown = cached.shown->load() > 0.5f;
-        band.dynAction = juce::jlimit (0, 1, (int) cached.dynAction->load());
-        band.dynKneeDb = cached.dynKnee->load();
-        band.dynSource = juce::jlimit (0, 5, (int) cached.dynSource->load());
-        band.dynRelative = cached.dynBlend->load();
-        band.dynLookaheadMs = globalLookahead ? globalLookaheadMs : cached.dynAhead->load();
-        band.dynTransient = cached.dynTransient->load();
-        band.dynAuto = cached.dynAuto->load() > 0.5f;
-        band.dynDetLink = cached.dynDetLink->load() > 0.5f;
-        band.dynDetFreq = cached.dynDetFreq->load();
-        band.dynDetQ = cached.dynDetQ->load();
-        band.dynBelowOn = cached.dynBelowOn->load() > 0.5f;
-        band.dynBelowRangeDb = cached.dynBelowRange->load();
-        band.dynBelowRatio = cached.dynBelowRatio->load() / 100.0f;
-        band.dynAboveOn = cached.dynAboveOn->load() > 0.5f;
-        band.dynAboveRangeDb = cached.dynAboveRange->load();
-        band.dynAboveRatio = cached.dynAboveRatio->load() / 100.0f;
-        band.dynRelFree = cached.dynRelFree->load() > 0.5f;
-        band.dynRelFreq = cached.dynRelFreq->load();
-        band.dynRelQ = cached.dynRelQ->load();
-        band.dynRelSource = juce::jlimit (0, 5, (int) cached.dynRelSource->load());
+            band.slopeDb = Params::slopeIndexToDb ((int) cached.slope->load (std::memory_order_relaxed));
+        band.dynThresholdDb = cached.dynThreshold->load (std::memory_order_relaxed);
+        band.dynRangeDb = cached.dynRange->load (std::memory_order_relaxed);
+        band.dynAttackMs = cached.dynAttack->load (std::memory_order_relaxed);
+        band.dynReleaseMs = cached.dynRelease->load (std::memory_order_relaxed);
+        band.shown = cached.shown->load (std::memory_order_relaxed) > 0.5f;
+        band.dynAction = juce::jlimit (0, 1, (int) cached.dynAction->load (std::memory_order_relaxed));
+        band.dynKneeDb = cached.dynKnee->load (std::memory_order_relaxed);
+        band.dynSource = juce::jlimit (0, 5, (int) cached.dynSource->load (std::memory_order_relaxed));
+        band.dynRelative = cached.dynBlend->load (std::memory_order_relaxed);
+        band.dynLookaheadMs = globalLookahead ? globalLookaheadMs : cached.dynAhead->load (std::memory_order_relaxed);
+        band.dynTransient = cached.dynTransient->load (std::memory_order_relaxed);
+        band.dynAuto = cached.dynAuto->load (std::memory_order_relaxed) > 0.5f;
+        band.dynDetLink = cached.dynDetLink->load (std::memory_order_relaxed) > 0.5f;
+        band.dynDetFreq = cached.dynDetFreq->load (std::memory_order_relaxed);
+        band.dynDetQ = cached.dynDetQ->load (std::memory_order_relaxed);
+        band.dynBelowOn = cached.dynBelowOn->load (std::memory_order_relaxed) > 0.5f;
+        band.dynBelowRangeDb = cached.dynBelowRange->load (std::memory_order_relaxed);
+        band.dynBelowRatio = cached.dynBelowRatio->load (std::memory_order_relaxed) / 100.0f;
+        band.dynAboveOn = cached.dynAboveOn->load (std::memory_order_relaxed) > 0.5f;
+        band.dynAboveRangeDb = cached.dynAboveRange->load (std::memory_order_relaxed);
+        band.dynAboveRatio = cached.dynAboveRatio->load (std::memory_order_relaxed) / 100.0f;
+        band.dynRelFree = cached.dynRelFree->load (std::memory_order_relaxed) > 0.5f;
+        band.dynRelFreq = cached.dynRelFreq->load (std::memory_order_relaxed);
+        band.dynRelQ = cached.dynRelQ->load (std::memory_order_relaxed);
+        band.dynRelSource = juce::jlimit (0, 5, (int) cached.dynRelSource->load (std::memory_order_relaxed));
     }
 }
 
@@ -334,6 +336,21 @@ void OpenEQAudioProcessor::ensureScratch()
 
 namespace
 {
+    /** Replaces every NaN or infinity with zero and says whether there was one. Written as a select and an
+        unconditional store so the loop vectorises; the samples that come out are the same. */
+    bool zeroNonFinite (float* samples, int numSamples) noexcept
+    {
+        bool found = false;
+        for (int i = 0; i < numSamples; ++i)
+        {
+            const float sample = samples[i];
+            const bool finite = std::isfinite (sample);
+            found |= ! finite;
+            samples[i] = finite ? sample : 0.0f;
+        }
+        return found;
+    }
+
     /** Side Level is a dB trim on the side signal. The bottom of its range is silence. */
     float sideDbToLinear (float db) noexcept
     {
@@ -756,6 +773,36 @@ void OpenEQAudioProcessor::processLane (EQBand& band, float* data, int numSample
     }
 }
 
+void OpenEQAudioProcessor::processLanePair (EQBand& band, float* dataA, float* dataB, int numSamples,
+                                            float mixStartA, float mixEndA, float mixStartB, float mixEndB)
+{
+    // processLane on lane 0 (dataA) and lane 1 (dataB), with both filters run in one pass.
+    const bool unityA = mixStartA >= 1.0f - 1.0e-6f && mixEndA >= 1.0f - 1.0e-6f;
+    const bool unityB = mixStartB >= 1.0f - 1.0e-6f && mixEndB >= 1.0f - 1.0e-6f;
+    float* dryA = bandDry.getWritePointer (0);
+    float* dryB = bandDry.getWritePointer (1);
+    if (! unityA)
+        std::memcpy (dryA, dataA, sizeof (float) * (size_t) numSamples);
+    if (! unityB)
+        std::memcpy (dryB, dataB, sizeof (float) * (size_t) numSamples);
+
+    band.processChannelPair (dataA, dataB, numSamples, 0, 1);
+
+    auto blend = [numSamples] (float* data, const float* dry, float mixStart, float mixEnd)
+    {
+        for (int n = 0; n < numSamples; ++n)
+        {
+            const float t = (float) (n + 1) / (float) numSamples;
+            const float mix = mixStart + (mixEnd - mixStart) * t;
+            data[n] = dry[n] + mix * (data[n] - dry[n]);
+        }
+    };
+    if (! unityA)
+        blend (dataA, dryA, mixStartA, mixEndA);
+    if (! unityB)
+        blend (dataB, dryB, mixStartB, mixEndB);
+}
+
 void OpenEQAudioProcessor::processBands (juce::AudioBuffer<float>& buffer, int offset, int numSamples,
                                          const std::array<SliceMix, numBands>& mixes, bool linearPhase, int segmentPosition)
 {
@@ -802,6 +849,19 @@ void OpenEQAudioProcessor::runBandChain (std::array<EQBand, numBands>& chain, st
                                          float* left, float* right, int numSamples, int channels,
                                          const std::array<SliceMix, numBands>& mixes)
 {
+    // Consecutive fully wet stereo bands are collected and run together through EQBand::processCascadePair,
+    // which gives each of them exactly what processLanePair would, in less time. Any other band first
+    // flushes the collected ones, so the order of the bands is kept.
+    std::array<EQBand*, numBands> cascade {};
+    int cascadeCount = 0;
+    auto flushCascade = [&]
+    {
+        if (cascadeCount > 0)
+            EQBand::processCascadePair (cascade.data(), cascadeCount, left, right, numSamples);
+        cascadeCount = 0;
+    };
+    auto unity = [] (float start, float end) { return start >= 1.0f - 1.0e-6f && end >= 1.0f - 1.0e-6f; };
+
     for (int i = 0; i < numBands; ++i)
     {
         const float mixStart = mixes[(size_t) i].start;
@@ -817,6 +877,19 @@ void OpenEQAudioProcessor::runBandChain (std::array<EQBand, numBands>& chain, st
             band.resetState();
         wasDry[(size_t) i] = false;
 
+        if (channels >= 2 && band.getStereoMode() == StereoMode::Stereo && band.canCascade())
+        {
+            double wetLeft = 1.0, wetRight = 1.0;
+            ResponseModel::panWeights (band.getPan(), wetLeft, wetRight);
+            if (unity (mixStart * (float) wetLeft, mixEnd * (float) wetLeft)
+                && unity (mixStart * (float) wetRight, mixEnd * (float) wetRight))
+            {
+                cascade[(size_t) cascadeCount++] = &band;
+                continue;
+            }
+        }
+        flushCascade();
+
         if (channels < 2)
         {
             processLane (band, left, numSamples, 0, mixStart, mixEnd);
@@ -830,8 +903,9 @@ void OpenEQAudioProcessor::runBandChain (std::array<EQBand, numBands>& chain, st
                 // Pan scales the wet amount on each channel: a full pan to one side leaves the other channel dry.
                 double wetLeft = 1.0, wetRight = 1.0;
                 ResponseModel::panWeights (band.getPan(), wetLeft, wetRight);
-                processLane (band, left, numSamples, 0, mixStart * (float) wetLeft, mixEnd * (float) wetLeft);
-                processLane (band, right, numSamples, 1, mixStart * (float) wetRight, mixEnd * (float) wetRight);
+                processLanePair (band, left, right, numSamples,
+                                 mixStart * (float) wetLeft, mixEnd * (float) wetLeft,
+                                 mixStart * (float) wetRight, mixEnd * (float) wetRight);
                 break;
             }
 
@@ -856,8 +930,9 @@ void OpenEQAudioProcessor::runBandChain (std::array<EQBand, numBands>& chain, st
 
                 double wetMid = 1.0, wetSide = 1.0;
                 ResponseModel::panWeights (band.getPan(), wetMid, wetSide);
-                processLane (band, mid, numSamples, 0, mixStart * (float) wetMid, mixEnd * (float) wetMid);
-                processLane (band, side, numSamples, 1, mixStart * (float) wetSide, mixEnd * (float) wetSide);
+                processLanePair (band, mid, side, numSamples,
+                                 mixStart * (float) wetMid, mixEnd * (float) wetMid,
+                                 mixStart * (float) wetSide, mixEnd * (float) wetSide);
 
                 for (int n = 0; n < numSamples; ++n)
                 {
@@ -892,6 +967,7 @@ void OpenEQAudioProcessor::runBandChain (std::array<EQBand, numBands>& chain, st
             }
         }
     }
+    flushCascade();
 }
 
 void OpenEQAudioProcessor::applyWidthAndGain (juce::AudioBuffer<float>& buffer, int offset, int numSamples)
@@ -1465,12 +1541,7 @@ void OpenEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     sidechainRight = nullptr;
 
     for (int channel = 0; channel < ioChannels; ++channel)
-    {
-        auto* samples = buffer.getWritePointer (channel);
-        for (int i = 0; i < numSamples; ++i)
-            if (! std::isfinite (samples[i]))
-                samples[i] = 0.0f;
-    }
+        zeroNonFinite (buffer.getWritePointer (channel), numSamples);
 
     // Input section: the meter reads the host signal before the trim, the trim then
     // feeds the analyzer and the rest of the chain.
@@ -1571,17 +1642,7 @@ void OpenEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     // filter state instead of letting NaN or inf escape into the host.
     bool recoveredNonFinite = false;
     for (int channel = 0; channel < ioChannels; ++channel)
-    {
-        auto* samples = buffer.getWritePointer (channel);
-        for (int i = 0; i < numSamples; ++i)
-        {
-            if (! std::isfinite (samples[i]))
-            {
-                samples[i] = 0.0f;
-                recoveredNonFinite = true;
-            }
-        }
-    }
+        recoveredNonFinite = zeroNonFinite (buffer.getWritePointer (channel), numSamples) || recoveredNonFinite;
     if (recoveredNonFinite)
     {
         for (auto& band : bands)
@@ -2709,18 +2770,20 @@ void OpenEQAudioProcessor::applyWetTail (juce::AudioBuffer<float>& buffer, int o
     {
         double sum = 0.0;
         constexpr double probes[] = { 80.0, 200.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0 };
+        // Each audible band is designed once and then read at every probe, in the same band order.
+        int designedCount = 0;
+        for (int i = 0; i < numBands; ++i)
+        {
+            const auto& band = params[(size_t) i];
+            if (isAudible (band, anySolo))
+                autoGainDesigns[(size_t) designedCount++] = ResponseModel::designBand (band.type, band.frequency, band.gainDb,
+                                                                                      band.q, band.slopeDb, currentSampleRate);
+        }
         for (double frequency : probes)
         {
             double magnitude = 1.0;
-            for (int i = 0; i < numBands; ++i)
-            {
-                const auto& band = params[(size_t) i];
-                if (! isAudible (band, anySolo))
-                    continue;
-                const auto designed = ResponseModel::designBand (band.type, band.frequency, band.gainDb,
-                                                                  band.q, band.slopeDb, currentSampleRate);
-                magnitude *= (double) ResponseModel::designedMagnitude (designed, frequency, currentSampleRate);
-            }
+            for (int i = 0; i < designedCount; ++i)
+                magnitude *= (double) ResponseModel::designedMagnitude (autoGainDesigns[(size_t) i], frequency, currentSampleRate);
             sum += magnitude;
         }
         const float compensation = juce::jlimit (0.25f, 4.0f, (float) ((double) std::size (probes) / juce::jmax (1.0e-6, sum)));
@@ -2862,20 +2925,35 @@ void OpenEQAudioProcessor::applyMonitor (juce::AudioBuffer<float>& buffer, int n
 void OpenEQAudioProcessor::updateInputMeters (const juce::AudioBuffer<float>& buffer, int numSamples)
 {
     const int channels = juce::jmax (1, juce::jmin (ioChannels, buffer.getNumChannels(), 2));
-    for (int channel = 0; channel < channels; ++channel)
+    // Both channels in one pass: each channel's peak and sum keep their own order, the two chains overlap.
+    float peak[2] = {};
+    double sum[2] = {};
+    const float* left = buffer.getReadPointer (0);
+    if (channels > 1)
     {
-        const float* samples = buffer.getReadPointer (channel);
-        float peak = 0.0f;
-        double sum = 0.0;
+        const float* right = buffer.getReadPointer (1);
         for (int i = 0; i < numSamples; ++i)
         {
-            peak = juce::jmax (peak, std::abs (samples[i]));
-            sum += (double) samples[i] * (double) samples[i];
+            peak[0] = juce::jmax (peak[0], std::abs (left[i]));
+            sum[0] += (double) left[i] * (double) left[i];
+            peak[1] = juce::jmax (peak[1], std::abs (right[i]));
+            sum[1] += (double) right[i] * (double) right[i];
         }
-        inputMeterPeak[(size_t) channel].store (peak);
-        if (peak > inputMeterMaxPeak.load())
-            inputMeterMaxPeak.store (peak);
-        inputMeterRms[(size_t) channel].store ((float) std::sqrt (sum / (double) juce::jmax (1, numSamples)));
+    }
+    else
+    {
+        for (int i = 0; i < numSamples; ++i)
+        {
+            peak[0] = juce::jmax (peak[0], std::abs (left[i]));
+            sum[0] += (double) left[i] * (double) left[i];
+        }
+    }
+    for (int channel = 0; channel < channels; ++channel)
+    {
+        inputMeterPeak[(size_t) channel].store (peak[channel]);
+        if (peak[channel] > inputMeterMaxPeak.load())
+            inputMeterMaxPeak.store (peak[channel]);
+        inputMeterRms[(size_t) channel].store ((float) std::sqrt (sum[channel] / (double) juce::jmax (1, numSamples)));
     }
 }
 
@@ -2887,24 +2965,39 @@ void OpenEQAudioProcessor::updateMeters (const juce::AudioBuffer<float>& buffer,
     const float releasePerSample = (float) std::pow (0.1, 1.0 / (releaseSecondsFor20Db * juce::jmax (1.0, currentSampleRate)));
 
     const int channels = juce::jmax (1, juce::jmin (ioChannels, buffer.getNumChannels(), 2));
-    for (int channel = 0; channel < channels; ++channel)
+    // Both channels in one pass: each channel's recursions keep their own order, the two chains overlap.
+    float state[2] = { meterPeak[0].load(), channels > 1 ? meterPeak[1].load() : 0.0f };
+    float blockPeak[2] = {};
+    double sum[2] = {};
+    auto step = [&] (int channel, float sample)
     {
-        const float* samples = buffer.getReadPointer (channel);
-        float state = meterPeak[(size_t) channel].load();
-        float blockPeak = 0.0f;
-        double sum = 0.0;
+        const float magnitude = std::abs (sample);
+        blockPeak[channel] = juce::jmax (blockPeak[channel], magnitude);
+        state[channel] = juce::jmax (magnitude, state[channel] * releasePerSample);
+        sum[channel] += (double) sample * (double) sample;
+    };
+    const float* left = buffer.getReadPointer (0);
+    if (channels > 1)
+    {
+        const float* right = buffer.getReadPointer (1);
         for (int i = 0; i < numSamples; ++i)
         {
-            const float magnitude = std::abs (samples[i]);
-            blockPeak = juce::jmax (blockPeak, magnitude);
-            state = juce::jmax (magnitude, state * releasePerSample);
-            sum += (double) samples[i] * (double) samples[i];
+            step (0, left[i]);
+            step (1, right[i]);
         }
-        meterPeak[(size_t) channel].store (state);
-        meterRms[(size_t) channel].store ((float) std::sqrt (sum / (double) juce::jmax (1, numSamples)));
-        if (blockPeak > meterMaxPeak.load())
-            meterMaxPeak.store (blockPeak);
-        if (blockPeak >= 0.999f)
+    }
+    else
+    {
+        for (int i = 0; i < numSamples; ++i)
+            step (0, left[i]);
+    }
+    for (int channel = 0; channel < channels; ++channel)
+    {
+        meterPeak[(size_t) channel].store (state[channel]);
+        meterRms[(size_t) channel].store ((float) std::sqrt (sum[channel] / (double) juce::jmax (1, numSamples)));
+        if (blockPeak[channel] > meterMaxPeak.load())
+            meterMaxPeak.store (blockPeak[channel]);
+        if (blockPeak[channel] >= 0.999f)
             meterClipped.store (true);
     }
 }

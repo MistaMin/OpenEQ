@@ -293,6 +293,8 @@ private:
                        float* left, float* right, int numSamples, int channels,
                        const std::array<SliceMix, numBands>& mixes);
     void processLane (EQBand& band, float* data, int numSamples, int lane, float mixStart, float mixEnd);
+    void processLanePair (EQBand& band, float* dataA, float* dataB, int numSamples,
+                          float mixStartA, float mixEndA, float mixStartB, float mixEndB);
     void updateSplitFlags (const std::array<BandParameterState, numBands>& params) noexcept;
     /** Designs one band for the transient chain and, while any band is split, for the tonal chain. */
     bool designBandPair (int index, const BandParameterState& band, float frequency, float gainDb, float q,
@@ -403,6 +405,8 @@ private:
     LinearPhaseEngine linearPhaseEngine;
     Saturator saturator;
     ResonanceEngine spectral;
+    /** Auto Gain scratch: the audible bands' designs for one block. Audio thread only. */
+    std::array<ResponseModel::DesignedBand, numBands> autoGainDesigns {};
     EQBand auditionBand;
     EQBand detectorMonitor;
     int lastLatencyKey = -1;
