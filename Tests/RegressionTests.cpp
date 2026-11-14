@@ -1,3 +1,12 @@
+#if defined (__APPLE__)
+ // The message pump below runs the CoreFoundation run loop. The renames keep the system Point and
+ // Component types out of the way of the JUCE names, as JUCE's own native headers do.
+ #define Point CarbonDummyPointName
+ #define Component CarbonDummyCompName
+ #include <CoreFoundation/CoreFoundation.h>
+ #undef Point
+ #undef Component
+#endif
 #include "EQBand.h"
 #include "UI/ThemeFile.h"
 #include "PresetImport.h"
@@ -19,6 +28,7 @@
 void runFilterResponseTests();
 
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <dlfcn.h>
 #include <iomanip>
@@ -27,6 +37,7 @@ void runFilterResponseTests();
 #include <stdexcept>
 #include <string>
 #include <tuple>
+#include <thread>
 #include <utility>
 #include <vector>
 
@@ -3782,6 +3793,269 @@ static void checkCrossInstance()
     std::cout << "PASS: cross-instance registry and two-way parameter relay\n";
 }
 
+// Runs the message loop for about `ms`, so async updates, deferred callbacks and posted clicks are delivered.
+static void pumpMessages (int ms)
+{
+   #if defined (__APPLE__)
+    CFRunLoopRunInMode (kCFRunLoopDefaultMode, ms / 1000.0, false);
+   #else
+    juce::ignoreUnused (ms);
+   #endif
+}
+
+template <typename ComponentType>
+static ComponentType* findDescendant (juce::Component& root)
+{
+    for (auto* child : root.getChildren())
+    {
+        if (auto* match = dynamic_cast<ComponentType*> (child))
+            return match;
+        if (auto* deeper = findDescendant<ComponentType> (*child))
+            return deeper;
+    }
+    return nullptr;
+}
+
+static juce::Button* findButtonByText (juce::Component& root, const juce::String& text)
+{
+    for (auto* child : root.getChildren())
+    {
+        if (auto* button = dynamic_cast<juce::Button*> (child); button != nullptr && button->getButtonText() == text)
+            return button;
+        if (auto* deeper = findButtonByText (*child, text))
+            return deeper;
+    }
+    return nullptr;
+}
+
+static void checkDynamicsClickRebuild()
+{
+    // With the editor open, D on the EQ field and then DYNAMICS used to delete the DYNAMICS attachment from
+    // inside its own click: the D toggle follows the parameter synchronously, its handler asked the editor to
+    // rebuild the dynamics attachments, and the click then finished on freed memory.
+    OpenEQAudioProcessor processor;
+    silenceBands (processor);
+    configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
+    setRaw (processor.apvts, Params::bandShownID (0), 1.0f);
+    auto editor = std::make_unique<OpenEQAudioProcessorEditor> (processor);
+    editor->setSize (1500, 860);
+    pumpMessages (60);
+
+    auto* bandPanel = findDescendant<BandControlPanel> (*editor);
+    auto* dynamicsPanel = findDescendant<DynamicsPanel> (*editor);
+    require (bandPanel != nullptr && dynamicsPanel != nullptr, "Editor panels missing");
+    auto* dToggle = findButtonByText (*bandPanel, "D");
+    auto* dynamicsToggle = findButtonByText (*dynamicsPanel, "DYNAMICS");
+    require (dToggle != nullptr && dynamicsToggle != nullptr, "D or DYNAMICS toggle missing");
+
+    const auto dynOn = [&] { return rawValue (processor, Params::bandDynOnID (0)) > 0.5f; };
+    const auto aboveOn = [&] { return rawValue (processor, Params::bandDynAboveOnID (0)) > 0.5f; };
+    for (int round = 0; round < 12; ++round)
+    {
+        setRaw (processor.apvts, Params::bandDynOnID (0), 0.0f);
+        setRaw (processor.apvts, Params::bandDynBelowOnID (0), 0.0f);
+        setRaw (processor.apvts, Params::bandDynAboveOnID (0), 0.0f);
+        pumpMessages (15);
+        dToggle->triggerClick();
+        pumpMessages (25);
+        require (dynOn() && aboveOn(), "D should turn dynamics on with the Above panel");
+
+        // The route QA reported: the D edit is undone, then DYNAMICS turns dynamics on again.
+        setRaw (processor.apvts, Params::bandDynOnID (0), 0.0f);
+        setRaw (processor.apvts, Params::bandDynAboveOnID (0), 0.0f);
+        pumpMessages (15);
+        dynamicsToggle->triggerClick();
+        pumpMessages (25);
+        require (dynOn(), "DYNAMICS should turn dynamics on");
+        require (aboveOn(), "DYNAMICS on with no panel should enable Above, as D does");
+        require (dynamicsToggle->getToggleState() && dToggle->getToggleState(), "Both toggles should show dynamics on");
+
+        // The same click path driven synchronously, without the posted click.
+        dynamicsToggle->setToggleState (false, juce::sendNotificationSync);
+        require (! dynOn(), "DYNAMICS off should turn dynamics off");
+        setRaw (processor.apvts, Params::bandDynAboveOnID (0), 0.0f);
+        dynamicsToggle->setToggleState (true, juce::sendNotificationSync);
+        require (dynOn() && aboveOn(), "A synchronous DYNAMICS click should turn dynamics on with Above");
+        pumpMessages (15);
+        require (dynamicsToggle->getToggleState(), "DYNAMICS should still show on after the deferred rebuild");
+    }
+
+    // Random parameter values from another thread while the editor runs, as a host's automation does.
+    std::vector<juce::RangedAudioParameter*> fuzzed;
+    for (int band = 0; band < 2; ++band)
+        for (const auto& id : Params::bandParameterIDs (band))
+            if (auto* parameter = processor.apvts.getParameter (id))
+                fuzzed.push_back (parameter);
+    std::atomic<bool> finished { false };
+    std::thread automation ([&]
+    {
+        juce::Random random (17);
+        for (int round = 0; round < 150; ++round)
+        {
+            for (auto* parameter : fuzzed)
+                parameter->setValueNotifyingHost (random.nextFloat());
+            std::this_thread::sleep_for (std::chrono::milliseconds (2));
+        }
+        finished = true;
+    });
+    int turns = 0;
+    while (! finished.load())
+    {
+        pumpMessages (3);
+        ++turns;
+    }
+    automation.join();
+    pumpMessages (60);
+    std::cout << "  dynamics_click_rounds 12 automation_rounds 150 parameters " << fuzzed.size()
+              << " message_turns " << turns << "\n";
+    editor.reset();
+    pumpMessages (20);
+    std::cout << "PASS: D then DYNAMICS and editor automation rebuild the dynamics attachments outside the click\n";
+}
+
+static void checkBandSelectionWritesNothing()
+{
+    // Selecting a band used to bind the new band before releasing the old attachments, so the old ones wrote
+    // the new band's values into the previous band (Dynamic On, Below On and Auto went off).
+    OpenEQAudioProcessor processor;
+    silenceBands (processor);
+    configureBand (processor, 0, FilterType::Bell, 800.0f, 4.0f, 1.2f, 1, (int) StereoMode::Stereo, true);
+    configureBand (processor, 1, FilterType::Bell, 3000.0f, -2.0f, 0.8f, 1, (int) StereoMode::Stereo, true);
+    for (int band = 0; band < 2; ++band)
+        setRaw (processor.apvts, Params::bandShownID (band), 1.0f);
+    // Band 1 has every switch on and non-default values; band 2 keeps the defaults with the switches off.
+    setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
+    setRaw (processor.apvts, Params::bandDynBelowOnID (0), 1.0f);
+    setRaw (processor.apvts, Params::bandDynAboveOnID (0), 1.0f);
+    setRaw (processor.apvts, Params::bandDynAutoID (0), 1.0f);
+    setRaw (processor.apvts, Params::bandDynDetLinkID (0), 0.0f);
+    setRaw (processor.apvts, Params::bandDynRelFreeID (0), 1.0f);
+    setRaw (processor.apvts, Params::bandDynThreshID (0), -33.0f);
+    setRaw (processor.apvts, Params::bandDynAttackID (0), 3.0f);
+    setRaw (processor.apvts, Params::bandDynReleaseID (0), 400.0f);
+    setRaw (processor.apvts, Params::bandSplitOnID (0), 1.0f);
+    setRaw (processor.apvts, Params::bandDynOnID (1), 0.0f);
+    setRaw (processor.apvts, Params::bandDynBelowOnID (1), 0.0f);
+    setRaw (processor.apvts, Params::bandDynAboveOnID (1), 0.0f);
+    setRaw (processor.apvts, Params::bandDynAutoID (1), 0.0f);
+    setRaw (processor.apvts, Params::bandSplitOnID (1), 0.0f);
+
+    const auto snapshot = [&]
+    {
+        std::vector<float> values;
+        for (auto* parameter : processor.getParameters())
+            values.push_back (parameter->getValue());
+        return values;
+    };
+    const auto requireUnchanged = [&] (const std::vector<float>& before, const char* step)
+    {
+        const auto after = snapshot();
+        const auto& parameters = processor.getParameters();
+        for (size_t i = 0; i < before.size(); ++i)
+            if (std::abs (after[i] - before[i]) > 1.0e-7f)
+            {
+                const auto* ranged = dynamic_cast<juce::RangedAudioParameter*> (parameters[(int) i]);
+                requireMsg (false, std::string (step) + " wrote parameter "
+                                   + (ranged != nullptr ? ranged->getParameterID() : juce::String ((int) i)).toStdString());
+            }
+    };
+
+    {
+        // The dynamics inspector on its own.
+        DynamicsPanel panel (processor);
+        panel.setBounds (0, 0, 828, 212);
+        const auto before = snapshot();
+        for (int band : { 0, 1, 0, 1, 1, 0, 2, 0 })
+            panel.setSelectedBand (band);
+        pumpMessages (30);
+        requireUnchanged (before, "DynamicsPanel band selection");
+    }
+
+    {
+        // The whole editor, through the curve's selection callback and the band arrows.
+        auto editor = std::make_unique<OpenEQAudioProcessorEditor> (processor);
+        editor->setSize (1500, 860);
+        pumpMessages (60);
+        auto* curve = findDescendant<EQCurveComponent> (*editor);
+        auto* bandPanel = findDescendant<BandControlPanel> (*editor);
+        require (curve != nullptr && bandPanel != nullptr, "Editor curve or band panel missing");
+        const auto before = snapshot();
+        for (int band : { 0, 1, 0, 1, 1, 0, 3, 0, 1 })
+        {
+            curve->setSelectedBandExternally (band);
+            curve->onBandSelected (band);
+            pumpMessages (20);
+        }
+        requireUnchanged (before, "Editor band selection");
+        auto* next = findButtonByText (*bandPanel, ">");
+        auto* previous = findButtonByText (*bandPanel, "<");
+        require (next != nullptr && previous != nullptr, "Band arrows missing");
+        for (int step = 0; step < 4; ++step)
+        {
+            next->triggerClick();
+            pumpMessages (20);
+            previous->triggerClick();
+            pumpMessages (20);
+        }
+        requireUnchanged (before, "Band arrow selection");
+        require (rawValue (processor, Params::bandDynOnID (0)) > 0.5f
+                 && rawValue (processor, Params::bandDynBelowOnID (0)) > 0.5f
+                 && rawValue (processor, Params::bandDynAutoID (0)) > 0.5f,
+                 "Band 1 should keep Dynamic On, Below On and Auto");
+        editor.reset();
+        pumpMessages (20);
+    }
+
+    std::cout << "PASS: selecting bands in the dynamics panel and the editor writes no parameter\n";
+}
+
+static void checkRelayAddressReuse()
+{
+    // The relay compared raw pointers, so a new instance created at a destroyed target's address received
+    // the old link's edits. Each instance now has a registry id that is never reused.
+    int reused = 0;
+    int strangerEdits = 0;
+    int lastId = 0;
+    for (int round = 0; round < 200; ++round)
+    {
+        auto a = std::make_unique<OpenEQAudioProcessor>();
+        auto b = std::make_unique<OpenEQAudioProcessor>();
+        require (b->getInstanceId() > a->getInstanceId() && a->getInstanceId() > lastId, "Instance ids should rise");
+        a->setRemoteTarget (b.get());
+        setRaw (a->apvts, Params::bandGainID (5), 2.0f);
+        require (std::abs (rawValue (*b, Params::bandGainID (5)) - 2.0f) < 0.01f, "The link should mirror before the target dies");
+        void* oldTarget = b.get();
+        const int oldId = b->getInstanceId();
+        b.reset();
+
+        auto c = std::make_unique<OpenEQAudioProcessor>();
+        require (c->getInstanceId() != oldId, "A new instance must not reuse an id");
+        lastId = c->getInstanceId();
+        if ((void*) c.get() == oldTarget)
+            ++reused;
+        const float before = rawValue (*c, Params::bandGainID (5));
+        setRaw (a->apvts, Params::bandGainID (5), 7.0f);
+        if (std::abs (rawValue (*c, Params::bandGainID (5)) - before) > 1.0e-6f)
+            ++strangerEdits;
+        require (a->getRemoteTarget() == nullptr, "A destroyed target should drop the link even at a reused address");
+        const float localBefore = rawValue (*a, Params::bandFreqID (4));
+        setRaw (c->apvts, Params::bandFreqID (4), localBefore + 100.0f + (float) round);
+        require (std::abs (rawValue (*a, Params::bandFreqID (4)) - localBefore) < 1.0e-3f,
+                 "An unlinked instance's edits must stay local");
+
+        // Linking explicitly to the new instance works, also when it sits at the old address.
+        a->setRemoteTarget (c.get());
+        require (a->getRemoteTarget() == c.get() && a->getRemoteTargetId() == c->getInstanceId(), "Relinking should take the new id");
+        setRaw (a->apvts, Params::bandGainID (6), -3.0f);
+        require (std::abs (rawValue (*c, Params::bandGainID (6)) + 3.0f) < 0.01f, "A new link should mirror");
+        c.reset();
+        a.reset();
+    }
+    std::cout << "  relay_reuse_rounds 200 address_reused " << reused << " foreign_edits " << strangerEdits << "\n";
+    require (strangerEdits == 0, "An unlinked instance received a destroyed link's edits");
+    std::cout << "PASS: relay ignores a new instance at a destroyed target's address\n";
+}
+
 static std::vector<float> settledImpulseForPhase (float bandPhase, int mode = 1)
 {
     OpenEQAudioProcessor processor;
@@ -4864,6 +5138,9 @@ int main (int argc, char** argv)
     run ("filter-validation", runFilterResponseTests);
     run ("split-mode", checkSplitMode);
     run ("cross-instance", checkCrossInstance);
+    run ("relay-address-reuse", checkRelayAddressReuse);
+    run ("dynamics-click-rebuild", checkDynamicsClickRebuild);
+    run ("band-select-no-writes", checkBandSelectionWritesNothing);
     run ("phase-modes", checkPhaseModes);
 
     if (failures != 0)

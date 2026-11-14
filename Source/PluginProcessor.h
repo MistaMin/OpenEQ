@@ -212,6 +212,8 @@ public:
         Message thread. The mirror is dropped automatically when the target is destroyed. */
     void setRemoteTarget (OpenEQAudioProcessor* target);
     OpenEQAudioProcessor* getRemoteTarget() const noexcept { return remoteTarget; }
+    /** Registry id of the linked instance, 0 when unlinked. Compare it with the pointer: addresses are recycled. */
+    int getRemoteTargetId() const noexcept { return remoteTargetId; }
     /** Human name for the instance menu ("OpenEQ 3"). */
     juce::String getInstanceName() const;
 
@@ -483,6 +485,7 @@ private:
     int abSlot = 0;
     int instanceId = 0;
     OpenEQAudioProcessor* remoteTarget = nullptr;
+    int remoteTargetId = 0; // registry id of remoteTarget; the pointer alone can name a later instance
     RelayListener* ownRelay = nullptr;
     RelayListener* remoteRelay = nullptr;
     void relayParameter (const juce::String& parameterID, float normalisedValue, void* source);

@@ -102,6 +102,9 @@ private:
     NoteKeyboardStrip keyboardStrip;
     bool keysVisible = true;
     void refreshDynamicsStrip();
+    /** refreshDynamicsStrip on the next message-loop turn, for callers inside a control callback. */
+    void refreshDynamicsStripSoon();
+    bool dynamicsRefreshPending = false;
     juce::Rectangle<int> graphBounds;
 
     enum class InspectorTab

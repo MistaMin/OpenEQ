@@ -19,19 +19,15 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## Checks this release passed
 
-- Regression suite: 46 of 46 sections, exit 0, 20 consecutive runs after the fix below.
+- Regression suite: all sections (48 plus the closing batch), exit 0, repeated runs, Release.
 - Audio Unit validation (`auval`).
-- VST3 validator at strictness 10, including its editor tests.
-- Audio Unit validator at strictness 10 with its editor tests skipped.
+- VST3 and Audio Unit validators at strictness 10, including their editor tests.
 
-See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session, and several host and interface checks have not been run (see below).
+See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session, and host sweeps were run on the build before the last fixes and have not been repeated, and several interface checks have not been run (see below).
 
 ## Known issues
 
-- The Audio Unit validator's editor stress test crashes the plug-in (same family as the next item); the VST3 passes it.
-- Clicking the DYNAMICS key on the DYN field can crash the host process.
-- Selecting another band switches off the previous band's Dynamic On, Below On and Auto settings.
-- Parameters added since 0.3.0-beta were inserted into the middle of the parameter list instead of at the end. Hosts that identify parameters by position (not by name) can misread automation in projects saved with the older version.
+- Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the Floor control is reset.
 - Impulse Padding, Dyn Knee (with the Above/Below panels) and the 2x Oversampling control have no effect while playing; oversampling is read only when playback starts.
 - With host double precision, the external sidechain is not used.
@@ -41,6 +37,7 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 - Light theme: some value readouts, the notice line and graph labels are hard to read.
 - Some tooltips do not match the control ranges; default Output Gain can read "-0.0".
 - The RMS and input level bars depend on the host buffer size.
+- Automated validators can time out under heavy machine load; raise their time limit.
 - Native menus, real-display mouse interaction, the Standalone launch and old projects in a real host were not covered by testing.
 
 ## Installing

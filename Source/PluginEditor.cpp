@@ -307,7 +307,8 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
         {
             if (entry.id == ownId)
                 continue;
-            menu.addItem (itemId, entry.name, true, processorRef.getRemoteTarget() == entry.processor);
+            menu.addItem (itemId, entry.name, true, processorRef.getRemoteTarget() == entry.processor
+                                                    && processorRef.getRemoteTargetId() == entry.id);
             ++itemId;
         }
         menu.showMenuAsync (juce::PopupMenu::Options().withTargetComponent (instButton),
@@ -324,7 +325,7 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
             {
                 if (entry.id == processorRef.getInstanceId())
                     continue;
-                if (result == itemId && InstanceRegistry::get().isRegistered (entry.processor))
+                if (result == itemId && InstanceRegistry::get().isRegistered (entry.processor, entry.id))
                 {
                     processorRef.setRemoteTarget ((OpenEQAudioProcessor*) entry.processor);
                     instButton.setButtonText ("INSTANCE " + juce::String (entry.id));
@@ -515,7 +516,10 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
         const bool dynamic = processorRef.apvts.getRawParameterValue (Params::bandDynOnID (band))->load() > 0.5f;
         if (dynamic && activeTab != InspectorTab::Dynamics)
             setInspectorTab (InspectorTab::Dynamics);
-        refreshDynamicsStrip();
+        // This runs inside the D toggle's click handler, and that toggle follows the parameter synchronously:
+        // a click on DYNAMICS writes the parameter and lands here while the DYNAMICS attachment is still on
+        // the stack. Rebuilding the dynamics attachments now would delete it, so the rebuild waits a turn.
+        refreshDynamicsStripSoon();
     };
     bandControls.onSplitToggled = [this]
     {
@@ -731,6 +735,21 @@ void OpenEQAudioProcessorEditor::refreshDynamicsStrip()
 {
     const int band = eqCurve.getSelectedBand();
     dynamicsPanel.setSelectedBand (band);
+}
+
+void OpenEQAudioProcessorEditor::refreshDynamicsStripSoon()
+{
+    if (dynamicsRefreshPending)
+        return; // one rebuild covers every request made before it runs
+    dynamicsRefreshPending = true;
+    juce::MessageManager::callAsync ([safeEditor = juce::Component::SafePointer<OpenEQAudioProcessorEditor> (this)]
+    {
+        if (auto* editor = safeEditor.getComponent())
+        {
+            editor->dynamicsRefreshPending = false;
+            editor->refreshDynamicsStrip();
+        }
+    });
 }
 
 void OpenEQAudioProcessorEditor::setInspectorTab (InspectorTab tab)

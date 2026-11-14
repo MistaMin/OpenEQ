@@ -277,6 +277,9 @@ private:
 
     void rebuildBandAttachments()
     {
+        // Detach first: an old attachment still listening to a control would write the new band's value
+        // into the previous band when the new attachment sets that control.
+        splitAttachment.reset(); splitTransAttachment.reset(); splitTailAttachment.reset(); phaseAttachment.reset();
         auto& s = processor.apvts;
         splitAttachment = std::make_unique<ButtonAttachment> (s, Params::bandSplitOnID (currentBand), splitToggle);
         splitTransAttachment = std::make_unique<SliderAttachment> (s, Params::bandSplitTransID (currentBand), splitTransKnob);

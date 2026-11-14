@@ -57,15 +57,18 @@ static void detachRelayListener (juce::AudioProcessorValueTreeState& state, Open
 
 void OpenEQAudioProcessor::setRemoteTarget (OpenEQAudioProcessor* target)
 {
-    if (target == remoteTarget)
-        return;
     if (target != nullptr && ! InstanceRegistry::get().isRegistered (target))
         target = nullptr;
+    // Same address and same id: already linked. Same address with another id is a new instance.
+    const int targetId = target != nullptr ? target->getInstanceId() : 0;
+    if (target == remoteTarget && targetId == remoteTargetId)
+        return;
 
     if (remoteTarget != nullptr && remoteRelay != nullptr)
     {
         // A destroyed target took its listener lists with it; touching its state would be a use after free.
-        if (InstanceRegistry::get().isRegistered (remoteTarget))
+        // The id check also rejects a new instance that was created at the destroyed target's address.
+        if (InstanceRegistry::get().isRegistered (remoteTarget, remoteTargetId))
             detachRelayListener (remoteTarget->apvts, *remoteRelay);
         delete remoteRelay;
         remoteRelay = nullptr;
@@ -74,6 +77,7 @@ void OpenEQAudioProcessor::setRemoteTarget (OpenEQAudioProcessor* target)
         detachRelayListener (apvts, *ownRelay);
 
     remoteTarget = target;
+    remoteTargetId = targetId;
     if (remoteTarget != nullptr)
     {
         attachRelayListener (apvts, *ownRelay);
@@ -88,9 +92,9 @@ void OpenEQAudioProcessor::relayParameter (const juce::String& parameterID, floa
 {
     if (remoteTarget == nullptr)
         return;
-    if (! InstanceRegistry::get().isRegistered (remoteTarget))
+    if (! InstanceRegistry::get().isRegistered (remoteTarget, remoteTargetId))
     {
-        // The target was destroyed: drop the mirror from the message thread.
+        // The target was destroyed (a new instance at the same address has another id): drop the mirror.
         setRemoteTarget (nullptr);
         return;
     }

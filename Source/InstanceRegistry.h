@@ -8,7 +8,8 @@
     Hosts that isolate plugins in another process cannot see this registry. Publishing is for the
     editor timer, not the audio thread. Processors register in their constructor and remove
     themselves in the destructor; entries carry a non-owning pointer that consumers must re-check
-    against the registry snapshot before use. */
+    against the registry snapshot before use. Ids rise monotonically and are never reused, so an id
+    names one instance for the life of the process even when a later instance gets the same address. */
 class InstanceRegistry
 {
 public:
@@ -71,6 +72,17 @@ public:
         const std::lock_guard<std::mutex> lock (mutex);
         for (const auto& entry : entries)
             if (entry.processor == processorToCheck)
+                return true;
+        return false;
+    }
+
+    /** True while the instance that registered as `id` at `processor` is still alive. A new instance
+        created at a recycled address has a different id, so it never passes for the old one. */
+    bool isRegistered (void* processorToCheck, int idToCheck) const
+    {
+        const std::lock_guard<std::mutex> lock (mutex);
+        for (const auto& entry : entries)
+            if (entry.id == idToCheck && entry.processor == processorToCheck)
                 return true;
         return false;
     }

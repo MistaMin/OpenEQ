@@ -9,7 +9,9 @@ First numbered beta release (numeric version 1.0.0). Builds on the 0.3.0-beta so
 - New analyzer views: POST, PRE, SIDE, WATER, SPECTRO and SPEC 3D.
 - Input Trim, shared input/output level meter with peak hold, and a grouped output section.
 - Faster band processing chain, split medians, analyzer rings, meters, auto gain and convolution.
-- Fixed a crash when a linked instance outlived the instance it was linked to.
+- Fixed a crash when a linked instance outlived the instance it was linked to, and a link that could be taken over by a new instance created at the same memory address.
+- Fixed a crash when clicking the DYNAMICS key with the editor open.
+- Selecting another band no longer switches off the previous band's dynamics settings.
 - The release label now reads "1.0 Beta".
 
 Known issues are listed in [RELEASE_NOTES.md](RELEASE_NOTES.md).

@@ -179,6 +179,17 @@ void DynamicsPanel::rebuildAttachments()
                           &lookToggle, &linkToggle, &listenToggle, &relFreeToggle })
         toggle->setAccent (accent);
 
+    // Detach every band control before binding the new band. A new attachment pushes the new band's value
+    // into its control at once; an old attachment still listening to that control would write that value
+    // into the previous band. Selecting a band must not write any parameter.
+    dynamicsAttachment.reset();
+    belowRangeAttachment.reset(); belowRatioAttachment.reset(); threshAttachment.reset();
+    aboveRangeAttachment.reset(); aboveRatioAttachment.reset();
+    attackAttachment.reset(); releaseAttachment.reset(); kneeAttachment.reset(); onsetsAttachment.reset();
+    relativeAttachment.reset(); aheadAttachment.reset();
+    detFreqAttachment.reset(); detQAttachment.reset(); relFreqAttachment.reset(); relQAttachment.reset();
+    belowAttachment.reset(); aboveAttachment.reset(); autoAttachment.reset(); linkAttachment.reset(); relFreeAttachment.reset();
+
     auto& s = processor.apvts;
     dynamicsAttachment = std::make_unique<ButtonAttachment> (s, Params::bandDynOnID (currentBand), dynamicsToggle);
     belowRangeAttachment = std::make_unique<SliderAttachment> (s, Params::bandDynBelowRangeID (currentBand), belowRangeSlider);
