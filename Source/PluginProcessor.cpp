@@ -64,7 +64,9 @@ void OpenEQAudioProcessor::setRemoteTarget (OpenEQAudioProcessor* target)
 
     if (remoteTarget != nullptr && remoteRelay != nullptr)
     {
-        detachRelayListener (remoteTarget->apvts, *remoteRelay);
+        // A destroyed target took its listener lists with it; touching its state would be a use after free.
+        if (InstanceRegistry::get().isRegistered (remoteTarget))
+            detachRelayListener (remoteTarget->apvts, *remoteRelay);
         delete remoteRelay;
         remoteRelay = nullptr;
     }

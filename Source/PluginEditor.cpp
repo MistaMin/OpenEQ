@@ -789,7 +789,7 @@ void OpenEQAudioProcessorEditor::resized()
 
     // Row 1: Left (Title + INST cross-instance badge)
     titleLabel.setBounds (row1.removeFromLeft (90).withHeight (28));
-    // The beta channel label stays visible: this build is 0.3.0-beta, not a finished release.
+    // The beta channel label stays visible: this build is 1.0 Beta, not a finished release.
     subtitleLabel.setBounds (row1.removeFromLeft (58).withSizeKeepingCentre (58, 16));
     row1.removeFromLeft (4);
     instButton.setBounds (row1.removeFromLeft (92).reduced (0, 2));

@@ -1,6 +1,6 @@
 # OpenEQ
 
-Version **0.3.0-beta** — beta software under active development.
+Version **1.0 Beta** — beta software under active development.
 
 OpenEQ is a parametric and dynamic audio equalizer built with C++20, JUCE, and GoodLookinUI. It builds as VST3, Audio Unit, and a standalone application.
 
@@ -18,6 +18,8 @@ OpenEQ is a parametric and dynamic audio equalizer built with C++20, JUCE, and G
 - Output gain, width, balance, side trim, oversampling, and host automation/state restoration.
 
 ## Beta status
+
+Known issues for this release are listed in [RELEASE_NOTES.md](RELEASE_NOTES.md); the changelog is in [CHANGELOG.md](CHANGELOG.md).
 
 This is a development beta. Validation is ongoing across hosts, sample rates, routing configurations, and processing modes. Save your sessions and report reproducible problems with the host version, sample rate, buffer size, and reproduction steps.
 

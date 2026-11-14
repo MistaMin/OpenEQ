@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(OpenEQ VERSION 0.3.0) # visible label: Source/Version.h (0.3.0-beta)
+project(OpenEQ VERSION 1.0.0) # visible label: Source/Version.h (1.0 Beta)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
