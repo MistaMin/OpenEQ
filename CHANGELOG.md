@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased (after 1.0 Beta)
+## 1.0 Beta
+
+First numbered beta release (numeric version 1.0.0). Builds on the 0.3.0-beta source.
 
 - Instance menu: the INST button lists every OpenEQ instance in this host process by its track name (with the track colour when the host gives one; "Instance N" when it gives none, and " (2)" for duplicates). Choosing one makes this window edit that instance; choosing this plug-in's own row switches back. If the edited instance is closed, the window returns to its own instance. The header badge shows the name of the instance being edited. Hosts that run each plug-in in its own process cannot show other instances.
 - "Rename ..." in the instance menu gives the edited instance a name of your own. It wins over the track name, is saved with the session (not in presets or A/B slots), and helps in hosts that do not report track names. Unnamed instances read "Instance <id>", and every listed name is unique.
@@ -9,11 +11,6 @@
 - The settings file is guarded by an inter-process lock, so two host processes do not overwrite each other's settings.
 - Build: the measurement probes (`response_probe`, `response_compare`, `plugin_probe`) now live in `Tools/` and are built only with `-DOPENEQ_BUILD_PROBES=ON`.
 - Tests: the regression suite keeps its settings and presets in a temporary folder and no longer needs an enlarged stack.
-
-## 1.0 Beta
-
-First numbered beta release (numeric version 1.0.0). Builds on the 0.3.0-beta source.
-
 - Transient/tonal split is a two-stream engine; each band has its own gain per stream. About 37 ms of latency at 48 kHz while any band is split (Zero Latency mode only).
 - Resonance suppressor on the RESO field: compares each frequency with its smoothed surroundings and removes only the excess, independent of input level. About 43 ms of latency at 48 kHz while on.
 - New analyzer views: POST, PRE, SIDE, WATER, SPECTRO and SPEC 3D.

@@ -16,20 +16,17 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 - Resonance suppressor (about 43 ms latency at 48 kHz while on).
 - Six analyzer views, Input Trim, shared input/output meter with peak hold.
 - Performance work on the band chain, analyzer, meters, auto gain and convolution.
-
-## Since 1.0 Beta (source only, not in the installer yet)
-
 - The INST button lists the instances in this host process by track name and lets this window edit any of them. Hosts that run each plug-in in its own process cannot show other instances.
 - "Rename ..." in that menu names an instance yourself (saved with the session), for hosts that do not report track names.
 - A damaged preset file now reports failure and changes nothing.
 
 ## Checks this release passed
 
-- Regression suite: all sections (48 plus the closing batch), exit 0, repeated runs, Release.
+- Regression suite: 55 of 55, exit 0, repeated runs in Release and one in Debug.
 - Audio Unit validation (`auval`).
 - VST3 and Audio Unit validators at strictness 10, including their editor tests.
 
-See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session, and host sweeps were run on the build before the last fixes and have not been repeated, and several interface checks have not been run (see below).
+See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session, and host sweeps in a real DAW were run on an earlier build and have not been repeated for the instance switcher, which was tested in code only (see below).
 
 ## Known issues
 
@@ -44,6 +41,7 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 - Some tooltips do not match the control ranges; default Output Gain can read "-0.0".
 - The RMS and input level bars depend on the host buffer size.
 - Automated validators can time out under heavy machine load; raise their time limit.
+- The instance menu and its Rename dialog have not been clicked in a real host; Audio Unit hosts may not report track names, so use Rename there.
 - Native menus, real-display mouse interaction, the Standalone launch and old projects in a real host were not covered by testing.
 
 ## Installing
