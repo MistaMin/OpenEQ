@@ -17,6 +17,12 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 - Six analyzer views, Input Trim, shared input/output meter with peak hold.
 - Performance work on the band chain, analyzer, meters, auto gain and convolution.
 
+## Since 1.0 Beta (source only, not in the installer yet)
+
+- The INST button lists the instances in this host process by track name and lets this window edit any of them. Hosts that run each plug-in in its own process cannot show other instances.
+- "Rename ..." in that menu names an instance yourself (saved with the session), for hosts that do not report track names.
+- A damaged preset file now reports failure and changes nothing.
+
 ## Checks this release passed
 
 - Regression suite: all sections (48 plus the closing batch), exit 0, repeated runs, Release.

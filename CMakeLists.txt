@@ -36,6 +36,8 @@ juce_generate_juce_header(OpenEQ)
 target_sources(OpenEQ
     PRIVATE
         Source/PluginProcessor.cpp
+        Source/InstanceLink.cpp
+        Source/ProcessorState.cpp
         Source/PluginEditor.cpp
         Source/SpectrumAnalyzer.cpp
         Source/EQCurveComponent.cpp
@@ -64,13 +66,6 @@ if(BUILD_TESTING)
     # dyld only honours __interpose from a different image than the caller.
     add_library(OpenEQAllocInterpose SHARED Tests/AllocInterpose.c)
     add_executable(OpenEQRegressionTests Tests/RegressionTests.cpp Tests/FilterResponseTests.cpp)
-    # The tests stack-allocate multiple processors in one function. Debug does not reuse
-    # their stack slots: checkRoadmap alone needs ~34 MB, exceeding the Release 32 MB stack.
-    # This only sizes the test runner; plugin binaries and test tolerances are unchanged.
-    if (APPLE)
-        target_link_options(OpenEQRegressionTests PRIVATE
-            "-Wl,-stack_size,$<IF:$<CONFIG:Debug>,0x4000000,0x2000000>")
-    endif()
     target_include_directories(OpenEQRegressionTests PRIVATE
         Source
         $<TARGET_PROPERTY:OpenEQ,INCLUDE_DIRECTORIES>)
@@ -78,9 +73,15 @@ if(BUILD_TESTING)
         $<TARGET_PROPERTY:OpenEQ,COMPILE_DEFINITIONS>)
     target_link_libraries(OpenEQRegressionTests PRIVATE OpenEQ OpenEQAllocInterpose)
     add_test(NAME OpenEQRegressionTests COMMAND OpenEQRegressionTests)
+endif()
+
+# Measurement probes (Tools/): response_probe, response_compare and plugin_probe. They are not tests and are
+# not built unless asked for: cmake -B build -DOPENEQ_BUILD_PROBES=ON
+option(OPENEQ_BUILD_PROBES "Build the measurement probe tools" OFF)
+if(OPENEQ_BUILD_PROBES)
     # response_probe: a tiny JUCE host that measures the installed reference VST3 (docs/FILTER_VALIDATION.md).
     juce_add_console_app(response_probe PRODUCT_NAME "response_probe")
-    target_sources(response_probe PRIVATE scratchpad/response_probe.cpp)
+    target_sources(response_probe PRIVATE Tools/response_probe.cpp)
     target_link_libraries(response_probe PRIVATE
         juce::juce_audio_plugin_client
         juce::juce_audio_processors
@@ -110,7 +111,7 @@ if(BUILD_TESTING)
     juce_generate_juce_header(plugin_probe)
     # response_compare: OpenEQ's importer side of a fidelity row, compared against a response_probe measurement.
     juce_add_console_app(response_compare PRODUCT_NAME "response_compare")
-    target_sources(response_compare PRIVATE scratchpad/response_compare.cpp)
+    target_sources(response_compare PRIVATE Tools/response_compare.cpp)
     target_include_directories(response_compare PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Source)
     target_link_libraries(response_compare PRIVATE
         juce::juce_audio_processors
@@ -122,5 +123,3 @@ if(BUILD_TESTING)
         juce::juce_recommended_config_flags)
     juce_generate_juce_header(response_compare)
 endif()
-
-

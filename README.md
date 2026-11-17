@@ -14,7 +14,7 @@ OpenEQ is a parametric and dynamic audio equalizer built with C++20, JUCE, and G
 - Zero-latency, linear-phase, analogue, mixed-phase, and analogue zero-latency processing modes, with configurable FIR windows and offline render quality.
 - Interactive response graph, pre/post/sidechain spectrum analysis, waterfall display, and note keyboard.
 - Movable, collapsible inspector with EQ, dynamics, split and suppressor tabs.
-- Band management, presets, JSON preset import, theme files, undo/redo, A/B comparison, and access to other OpenEQ instances in the same host process.
+- Band management, presets, JSON preset import, theme files, undo/redo, A/B comparison, and an instance switcher that lists the other OpenEQ instances in the same host process by track name and edits any of them from one window.
 - Output gain, width, balance, side trim, oversampling, and host automation/state restoration.
 
 ## Beta status
@@ -37,7 +37,9 @@ ctest --test-dir build --output-on-failure
 
 Build outputs are in `build/OpenEQ_artefacts/Release/{VST3,AU,Standalone}/`. Plugin copying after build is enabled; the configured JUCE destinations receive the AU and VST3 bundles.
 
-Optional measurement tools are `response_probe` and `response_compare`. The probe requires an explicit `--plugin <VST3 path>` argument.
+The measurement tools `response_probe`, `response_compare` and `plugin_probe` (sources in `Tools/`) are not built by default. Configure with `-DOPENEQ_BUILD_PROBES=ON` to build them. `response_probe` requires an explicit `--plugin <VST3 path>` argument.
+
+The regression suite keeps its settings and presets in a temporary folder.
 
 ## Licensing
 

@@ -32,91 +32,6 @@ namespace
     }
 }
 
-struct OpenEQAudioProcessor::RelayListener final : public juce::AudioProcessorValueTreeState::Listener
-{
-    OpenEQAudioProcessor* owner = nullptr;
-    void* source = nullptr;
-    void parameterChanged (const juce::String& parameterID, float newValue) override
-    {
-        if (owner != nullptr)
-            owner->relayParameter (parameterID, newValue, source);
-    }
-};
-
-static void attachRelayListener (juce::AudioProcessorValueTreeState& state, OpenEQAudioProcessor::RelayListener& listener)
-{
-    for (int i = 0; i < state.state.getNumChildren(); ++i)
-        state.addParameterListener (state.state.getChild (i).getProperty ("id").toString(), &listener);
-}
-
-static void detachRelayListener (juce::AudioProcessorValueTreeState& state, OpenEQAudioProcessor::RelayListener& listener)
-{
-    for (int i = 0; i < state.state.getNumChildren(); ++i)
-        state.removeParameterListener (state.state.getChild (i).getProperty ("id").toString(), &listener);
-}
-
-void OpenEQAudioProcessor::setRemoteTarget (OpenEQAudioProcessor* target)
-{
-    if (target != nullptr && ! InstanceRegistry::get().isRegistered (target))
-        target = nullptr;
-    // Same address and same id: already linked. Same address with another id is a new instance.
-    const int targetId = target != nullptr ? target->getInstanceId() : 0;
-    if (target == remoteTarget && targetId == remoteTargetId)
-        return;
-
-    if (remoteTarget != nullptr && remoteRelay != nullptr)
-    {
-        // A destroyed target took its listener lists with it; touching its state would be a use after free.
-        // The id check also rejects a new instance that was created at the destroyed target's address.
-        if (InstanceRegistry::get().isRegistered (remoteTarget, remoteTargetId))
-            detachRelayListener (remoteTarget->apvts, *remoteRelay);
-        delete remoteRelay;
-        remoteRelay = nullptr;
-    }
-    if (ownRelay != nullptr)
-        detachRelayListener (apvts, *ownRelay);
-
-    remoteTarget = target;
-    remoteTargetId = targetId;
-    if (remoteTarget != nullptr)
-    {
-        attachRelayListener (apvts, *ownRelay);
-        remoteRelay = new RelayListener;
-        remoteRelay->owner = this;
-        remoteRelay->source = remoteTarget;
-        attachRelayListener (remoteTarget->apvts, *remoteRelay);
-    }
-}
-
-void OpenEQAudioProcessor::relayParameter (const juce::String& parameterID, float rawValue, void* source)
-{
-    if (remoteTarget == nullptr)
-        return;
-    if (! InstanceRegistry::get().isRegistered (remoteTarget, remoteTargetId))
-    {
-        // The target was destroyed (a new instance at the same address has another id): drop the mirror.
-        setRemoteTarget (nullptr);
-        return;
-    }
-
-    const bool fromSelf = (source == this);
-    auto& destination = fromSelf ? remoteTarget->apvts : apvts;
-    if (auto* parameter = destination.getParameter (parameterID))
-    {
-        const float normalised = parameter->convertTo0to1 (rawValue);
-        if (std::abs (normalised - parameter->getValue()) < 1.0e-9f)
-            return; // echo of the value we just wrote
-        parameter->setValueNotifyingHost (normalised);
-    }
-}
-
-juce::String OpenEQAudioProcessor::getInstanceName() const
-{
-    if (const auto* entry = InstanceRegistry::get().findByProcessor ((void*) this))
-        return entry->name;
-    return "OpenEQ";
-}
-
 OpenEQAudioProcessor::OpenEQAudioProcessor()
     : AudioProcessor (BusesProperties()
                            .withInput ("Input", juce::AudioChannelSet::stereo(), true)
@@ -126,25 +41,23 @@ OpenEQAudioProcessor::OpenEQAudioProcessor()
 {
     cacheParameterPointers();
     // A saved default (reference "Save as Default") becomes the starting state of new instances.
+    // A damaged default file applies nothing, so the instance starts from the parameter defaults.
     if (defaultPresetFile().existsAsFile())
-        loadPresetFile (defaultPresetFile());
+        if (! loadPresetFile (defaultPresetFile()))
+            DBG ("OpenEQ: the saved default preset could not be read and was ignored");
     oversampler = std::make_unique<juce::dsp::Oversampling<float>> (2, 1, juce::dsp::Oversampling<float>::filterHalfBandPolyphaseIIR, true);
     sidechainOversampler = std::make_unique<juce::dsp::Oversampling<float>> (2, 1, juce::dsp::Oversampling<float>::filterHalfBandPolyphaseIIR, true);
     publishedGraph = buildIdleGraph();
     abSlots[0] = apvts.copyState();
     abSlots[1] = abSlots[0].createCopy();
-    instanceId = InstanceRegistry::get().add (juce::String ("Instance ") + juce::String (InstanceRegistry::get().snapshot().size() + 1), this);
-    ownRelay = new RelayListener;
-    ownRelay->owner = this;
-    ownRelay->source = this;
+    instanceId = InstanceRegistry::get().add ({}, this); // fallback "Instance <id>"
+    InstanceRegistry::get().setUserName (instanceId, getUserInstanceName());
+    initInstanceLink();
 }
 
 OpenEQAudioProcessor::~OpenEQAudioProcessor()
 {
-    setRemoteTarget (nullptr);
-    InstanceRegistry::get().remove (instanceId);
-    delete ownRelay;
-    ownRelay = nullptr;
+    shutdownInstanceLink();
 }
 
 void OpenEQAudioProcessor::cacheParameterPointers()
@@ -1927,96 +1840,6 @@ juce::AudioProcessorEditor* OpenEQAudioProcessor::createEditor()
     return new OpenEQAudioProcessorEditor (*this);
 }
 
-void OpenEQAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
-{
-    auto state = apvts.copyState();
-
-    state.setProperty ("schema", 3, nullptr);
-    state.setProperty ("abSlot", abSlot, nullptr);
-    if (auto otherXml = abSlots[1 - abSlot].createXml())
-        state.setProperty ("abOther", otherXml->toString(), nullptr);
-    std::unique_ptr<juce::XmlElement> xml (state.createXml());
-    copyXmlToBinary (*xml, destData);
-}
-
-/** True when the saved tree carries a parameter child, whatever its value. */
-static bool stateContainsParameter (const juce::ValueTree& state, const juce::String& parameterID)
-{
-    for (int i = 0; i < state.getNumChildren(); ++i)
-    {
-        const auto child = state.getChild (i);
-        if (child.getProperty ("id").toString() == parameterID || child.getType().toString() == parameterID)
-            return true;
-    }
-    return false;
-}
-
-/** Saved sessions from before the Below/Above panels have no panel children at all. */
-static bool stateHasDynamicsPanels (const juce::ValueTree& state)
-{
-    for (int i = 0; i < Params::numBands; ++i)
-        if (stateContainsParameter (state, Params::bandDynBelowOnID (i))
-            || stateContainsParameter (state, Params::bandDynAboveOnID (i)))
-            return true;
-    return false;
-}
-
-void OpenEQAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
-{
-    std::unique_ptr<juce::XmlElement> xml (getXmlFromBinary (data, sizeInBytes));
-    if (xml == nullptr || ! xml->hasTagName (apvts.state.getType()))
-        return;
-
-    auto tree = juce::ValueTree::fromXml (*xml);
-    const int schema = (int) tree.getProperty ("schema", 1);
-    // Presence of the panel parameters is the migration test, not the live panel switches: a current
-    // state may legitimately have both panels off, and must then keep the legacy single-action values out.
-    const bool hasDynamicsPanels = stateHasDynamicsPanels (tree);
-    const int slot = juce::jlimit (0, 1, (int) tree.getProperty ("abSlot", 0));
-    const auto otherText = tree.getProperty ("abOther").toString();
-    tree.removeProperty ("schema", nullptr);
-    tree.removeProperty ("abSlot", nullptr);
-    tree.removeProperty ("abOther", nullptr);
-    apvts.replaceState (tree);
-    abSlot = slot;
-    abSlots[abSlot] = apvts.copyState();
-    if (otherText.isNotEmpty())
-        if (auto otherXml = juce::parseXML (otherText))
-            abSlots[1 - abSlot] = juce::ValueTree::fromXml (*otherXml);
-    if (! abSlots[1 - abSlot].isValid())
-        abSlots[1 - abSlot] = abSlots[abSlot].createCopy();
-    refreshOtherSlotSplit();
-
-    if (schema < 2)
-    {
-        for (int i = 0; i < numBands; ++i)
-        {
-            const float defaultFreq = juce::jlimit (20.0f, 20000.0f, 60.0f * std::pow (1.75f, (float) i));
-            const bool active = apvts.getRawParameterValue (Params::bandActiveID (i))->load() > 0.5f;
-            const bool nonDefault = active
-                || std::abs (apvts.getRawParameterValue (Params::bandFreqID (i))->load() - defaultFreq) > 0.5f
-                || std::abs (apvts.getRawParameterValue (Params::bandGainID (i))->load()) > 0.01f
-                || (int) apvts.getRawParameterValue (Params::bandTypeID (i))->load() != 0
-                || std::abs (apvts.getRawParameterValue (Params::bandQID (i))->load() - 1.0f) > 0.001f
-                || (int) apvts.getRawParameterValue (Params::bandSlopeID (i))->load() != 1
-                || (int) apvts.getRawParameterValue (Params::bandStereoID (i))->load() != 0
-                || apvts.getRawParameterValue (Params::bandSoloID (i))->load() > 0.5f
-                || apvts.getRawParameterValue (Params::bandDynOnID (i))->load() > 0.5f;
-            if (nonDefault)
-                if (auto* shown = apvts.getParameter (Params::bandShownID (i)))
-                    shown->setValueNotifyingHost (1.0f);
-        }
-    }
-
-    if (! hasDynamicsPanels)
-        migrateLegacyDynamics();
-    if (schema < 3)
-        migrateLegacySlopes();
-
-    monitorMode.store (0);
-    auditionBandIndex.store (-1);
-    detectorAuditionIndex.store (-1);
-}
 
 void OpenEQAudioProcessor::ensureCutSlope (int bandIndex)
 {
@@ -2030,43 +1853,6 @@ void OpenEQAudioProcessor::ensureCutSlope (int bandIndex)
         slope->setValueNotifyingHost (slope->convertTo0to1 (0.5f));
 }
 
-void OpenEQAudioProcessor::migrateLegacySlopes()
-{
-    // Sessions saved before schema 3 had a 7-step slope menu that only the cuts used. The continuous slope replaces it:
-    // a cut keeps its dB per octave, and every other type starts at slope 0 (a second-order bell, a first-order shelf).
-    for (int i = 0; i < numBands; ++i)
-    {
-        auto* slopeNorm = apvts.getParameter (Params::bandSlopeNormID (i));
-        if (slopeNorm == nullptr)
-            continue;
-        const auto type = (FilterType) juce::jlimit (0, filterTypeCount - 1, (int) apvts.getRawParameterValue (Params::bandTypeID (i))->load());
-        float value = 0.0f;
-        if (type == FilterType::LowCut || type == FilterType::HighCut)
-            value = Params::slopeNormForCutDb ((float) Params::slopeIndexToDb ((int) apvts.getRawParameterValue (Params::bandSlopeID (i))->load()));
-        slopeNorm->setValueNotifyingHost (slopeNorm->convertTo0to1 (value));
-    }
-}
-
-void OpenEQAudioProcessor::migrateLegacyDynamics()
-{
-    // Sessions saved before the Below and Above panels used one action with one range. Moving that into the
-    // matching panel gives the same offsets, because the reference rule with a 100% ratio is the old limit.
-    for (int i = 0; i < numBands; ++i)
-    {
-        const bool dynamic = apvts.getRawParameterValue (Params::bandDynOnID (i))->load() > 0.5f;
-        const bool hasPanel = apvts.getRawParameterValue (Params::bandDynBelowOnID (i))->load() > 0.5f
-                           || apvts.getRawParameterValue (Params::bandDynAboveOnID (i))->load() > 0.5f;
-        if (! dynamic || hasPanel)
-            continue;
-
-        const float range = apvts.getRawParameterValue (Params::bandDynRangeID (i))->load();
-        const int action = (int) apvts.getRawParameterValue (Params::bandDynActionID (i))->load();
-        const bool above = action == 0;
-        setRawFromUI (above ? Params::bandDynAboveOnID (i) : Params::bandDynBelowOnID (i), 1.0f);
-        setRawFromUI (above ? Params::bandDynAboveRangeID (i) : Params::bandDynBelowRangeID (i), range);
-        setRawFromUI (above ? Params::bandDynAboveRatioID (i) : Params::bandDynBelowRatioID (i), 100.0f);
-    }
-}
 
 struct OpenEQParameterSetAction : public juce::UndoableAction
 {
@@ -2197,109 +1983,6 @@ void OpenEQAudioProcessor::copyABToOther()
     refreshOtherSlotSplit();
 }
 
-juce::File OpenEQAudioProcessor::userPresetDirectory() const
-{
-    auto directory = juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)
-                         .getChildFile ("OpenEQ")
-                         .getChildFile ("Presets");
-    directory.createDirectory();
-    // One-time migration from the pre-rename folder (GodEQ): move presets and the saved default over.
-    const auto legacy = juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)
-                            .getChildFile ("GodEQ");
-    if (legacy.isDirectory())
-    {
-        if (directory.findChildFiles (juce::File::findFiles, false).isEmpty())
-            for (const auto& legacyPreset : juce::Array<juce::File> (legacy.getChildFile ("Presets").findChildFiles (juce::File::findFiles, false)))
-                legacyPreset.copyFileTo (directory.getChildFile (legacyPreset.getFileName()).getFullPathName());
-        const auto legacyDefault = legacy.getChildFile ("default.godeq");
-        if (legacyDefault.existsAsFile() && ! defaultPresetFile().existsAsFile())
-            legacyDefault.copyFileTo (defaultPresetFile());
-    }
-    return directory;
-}
-
-juce::Array<juce::File> OpenEQAudioProcessor::listUserPresets() const
-{
-    juce::Array<juce::File> files;
-    userPresetDirectory().findChildFiles (files, juce::File::findFiles, false, "*.opeq");
-    userPresetDirectory().findChildFiles (files, juce::File::findFiles, false, "*.godeq");
-    files.sort();
-    return files;
-}
-
-juce::File OpenEQAudioProcessor::defaultPresetFile() const
-{
-    return juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)
-               .getChildFile ("OpenEQ")
-               .getChildFile ("default.opeq");
-}
-
-bool OpenEQAudioProcessor::saveAsDefault()
-{
-    const auto file = defaultPresetFile();
-    file.getParentDirectory().createDirectory();
-    return savePresetFile (file);
-}
-
-bool OpenEQAudioProcessor::savePresetFile (const juce::File& file)
-{
-    auto state = apvts.copyState();
-    state.setProperty ("schema", 3, nullptr);
-    if (auto xml = state.createXml())
-        return xml->writeTo (file);
-    return false;
-}
-
-bool OpenEQAudioProcessor::loadPresetFile (const juce::File& file)
-{
-    if (auto xml = juce::XmlDocument::parse (file))
-    {
-        if (xml->hasTagName (apvts.state.getType()))
-        {
-            juce::MemoryBlock block;
-            copyXmlToBinary (*xml, block);
-            setStateInformation (block.getData(), (int) block.getSize());
-            return true;
-        }
-    }
-
-    juce::MemoryBlock block;
-    if (! file.loadFileAsData (block))
-        return false;
-    setStateInformation (block.getData(), (int) block.getSize());
-    return true;
-}
-
-void OpenEQAudioProcessor::loadFactoryPreset (int index)
-{
-    beginEdit ("Factory Preset");
-    for (auto* parameter : getParameters())
-    {
-        auto* ranged = dynamic_cast<juce::RangedAudioParameter*> (parameter);
-        if (ranged == nullptr)
-            continue;
-        setRawFromUI (ranged->getParameterID(), ranged->convertFrom0to1 (ranged->getDefaultValue()));
-    }
-
-    if (index == 1)
-    {
-        setRawFromUI (Params::bandTypeID (0), (float) FilterType::TiltShelf);
-        setRawFromUI (Params::bandFreqID (0), 800.0f);
-        setRawFromUI (Params::bandGainID (0), 4.0f);
-        setRawFromUI (Params::bandActiveID (0), 1.0f);
-        setRawFromUI (Params::bandShownID (0), 1.0f);
-    }
-    else if (index == 2)
-    {
-        setRawFromUI (Params::bandTypeID (0), (float) FilterType::Bell);
-        setRawFromUI (Params::bandFreqID (0), 3500.0f);
-        setRawFromUI (Params::bandGainID (0), 3.0f);
-        setRawFromUI (Params::bandQID (0), 0.8f);
-        setRawFromUI (Params::bandActiveID (0), 1.0f);
-        setRawFromUI (Params::bandShownID (0), 1.0f);
-    }
-    endEdit();
-}
 
 bool OpenEQAudioProcessor::isBandUsed (int index) const
 {

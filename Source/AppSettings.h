@@ -3,7 +3,12 @@
 #include <memory>
 
 /** Global OpenEQ settings, shared by every instance and kept in the user's Application Support folder.
-    reference keeps its settings global in the same way. Each write saves at once. */
+    reference keeps its settings global in the same way. Each write saves at once. An inter-process lock
+    named for the app guards every load and save, so two processes do not overwrite each other's file.
+
+    The storage folder can be redirected before first use with setStorageFolderOverride. The settings file,
+    user presets and the saved default then live in that folder. The test runner uses this so it never
+    touches the user's real files. */
 class AppSettings
 {
 public:
@@ -12,6 +17,16 @@ public:
         static AppSettings instance;
         return instance;
     }
+
+    /** Redirects the settings file and the preset folders. Call before anything uses AppSettings or creates a
+        processor: the settings file is opened once. An empty File removes the override. */
+    static void setStorageFolderOverride (const juce::File& folder) { overrideFolder() = folder; }
+
+    /** The override folder, or an empty File when there is none. */
+    static juce::File storageFolderOverride() { return overrideFolder(); }
+
+    /** The settings file in use. */
+    juce::File settingsFile() const { return properties != nullptr ? properties->getFile() : juce::File(); }
 
     enum class FloatingController { All = 0, MonitorOnly, Off };
 
@@ -181,7 +196,16 @@ private:
         options.folderName = "OpenEQ";
         options.storageFormat = juce::PropertiesFile::storeAsXML;
         options.commonToAllUsers = false;
-        properties = std::make_unique<juce::PropertiesFile> (options.getDefaultFile(), options);
+        options.processLock = &processLock;
+        const auto redirected = storageFolderOverride();
+        const auto file = redirected != juce::File() ? redirected.getChildFile ("OpenEQ.xml") : options.getDefaultFile();
+        properties = std::make_unique<juce::PropertiesFile> (file, options);
+    }
+
+    static juce::File& overrideFolder()
+    {
+        static juce::File folder;
+        return folder;
     }
 
     const juce::PropertiesFile& store() const
@@ -198,5 +222,7 @@ private:
         properties->saveIfNeeded();
     }
 
+    // Declared before the properties file, which keeps a pointer to it and uses it until it is destroyed.
+    juce::InterProcessLock processLock { "OpenEQSettings" };
     std::unique_ptr<juce::PropertiesFile> properties;
 };

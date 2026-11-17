@@ -21,9 +21,9 @@ static void refreshThemeRecursive (juce::Component& component)
             refreshThemeRecursive (*child);
 }
 
-OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
-    : AudioProcessorEditor (&p),
-      processorRef (p),
+OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcessorEditor& w)
+    : processorRef (p),
+      window (w),
       processingModeCycle (p.apvts, "processingMode", "MODE"),
       linearPhaseQualityCycle (p.apvts, "linearPhaseQuality", "QUALITY"),
       mixCrossoverCycle (p.apvts, "mixCrossover", "XOVER"),
@@ -206,11 +206,11 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
             settingsPanel->onGuiScaleChanged = [this] (int percent) { applyGuiScale ((float) percent / 100.0f); };
             settingsPanel->onRestoreSize = [this]
             {
-                fullScreen = false;
+                window.fullScreen = false;
                 fullButton.setButtonText ("Full");
-                restoreWidth = juce::roundToInt (1500.0f * guiScale);
-                restoreHeight = juce::roundToInt (860.0f * guiScale);
-                setSize (restoreWidth, restoreHeight);
+                window.restoreWidth = juce::roundToInt (1500.0f * guiScale);
+                window.restoreHeight = juce::roundToInt (860.0f * guiScale);
+                window.setSize (window.restoreWidth, window.restoreHeight);
             };
             settingsPanel->onThemeChanged = [this] (int index)
             {
@@ -260,24 +260,25 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
     fullButton.setTooltip ("Fill the display, or return to the previous size. Hosts may not allow plugin windows to resize.");
     fullButton.onClick = [this]
     {
-        if (! fullScreen)
+        if (! window.fullScreen)
         {
-            restoreWidth = getWidth();
-            restoreHeight = getHeight();
+            window.restoreWidth = window.getWidth();
+            window.restoreHeight = window.getHeight();
             if (auto* display = juce::Desktop::getInstance().getDisplays().getPrimaryDisplay())
             {
                 const auto area = display->userArea;
-                fullScreen = true;
-                setSize (area.getWidth(), area.getHeight());
+                window.fullScreen = true;
+                window.setSize (area.getWidth(), area.getHeight());
             }
         }
         else
         {
-            fullScreen = false;
-            setSize (restoreWidth, restoreHeight);
+            window.fullScreen = false;
+            window.setSize (window.restoreWidth, window.restoreHeight);
         }
-        fullButton.setButtonText (fullScreen ? "Window" : "Full");
+        fullButton.setButtonText (window.fullScreen ? "Window" : "Full");
     };
+    fullButton.setButtonText (window.fullScreen ? "Window" : "Full");
 
     for (auto* button : { &undoButton, &redoButton, &slotAButton, &slotBButton, &presetButton, &instButton, &grabButton, &spectrumSourceButton, &listButton, &rangeButton, &fftButton, &keysButton, &fullButton, &settingsButton })
     {
@@ -297,45 +298,57 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
     slotBButton.setTooltip ("Hear slot B");
     instButton.onClick = [this]
     {
-        // Cross-instance access: view and control any other OpenEQ instance from this window, and vice versa.
+        // Every OpenEQ instance in this process, by track name. Choosing one makes this window edit it; the
+        // switch happens on a later message-loop turn, after this menu has closed. The submenu mirrors this
+        // window's own instance with another one (two-way parameter link).
+        auto& own = window.getOwnProcessor();
+        const auto model = InstanceMenu::build (InstanceRegistry::get().snapshot(), own.getInstanceId(),
+                                                processorRef.getInstanceId(), own.getRemoteTargetId());
         juce::PopupMenu menu;
-        const auto entries = InstanceRegistry::get().snapshot();
-        const int ownId = processorRef.getInstanceId();
-        menu.addItem (1, "This window (" + processorRef.getInstanceName() + ")", true, processorRef.getRemoteTarget() == nullptr);
-        int itemId = 2;
-        for (const auto& entry : entries)
+        menu.addSectionHeader ("Edit in this window");
+        const auto swatch = [] (juce::Colour colour)
         {
-            if (entry.id == ownId)
-                continue;
-            menu.addItem (itemId, entry.name, true, processorRef.getRemoteTarget() == entry.processor
-                                                    && processorRef.getRemoteTargetId() == entry.id);
-            ++itemId;
+            auto drawable = std::make_unique<juce::DrawableRectangle>();
+            drawable->setRectangle (juce::Parallelogram<float> (juce::Rectangle<float> (0.0f, 0.0f, 12.0f, 12.0f)));
+            drawable->setCornerSize ({ 2.0f, 2.0f });
+            drawable->setFill (juce::FillType (colour));
+            return drawable;
+        };
+        for (size_t i = 0; i < model.rows.size(); ++i)
+        {
+            const auto& row = model.rows[i];
+            juce::PopupMenu::Item item (InstanceMenu::switchLabel (row));
+            item.itemID = InstanceMenu::switchItemBase + (int) i;
+            item.isTicked = row.isControlled;
+            if (row.hasColour)
+                item.image = swatch (row.colour);
+            menu.addItem (std::move (item));
+        }
+        menu.addSeparator();
+        menu.addItem (InstanceMenu::renameItem, "Rename " + processorRef.getInstanceName() + "...");
+        if (model.emptyNote.isNotEmpty())
+        {
+            menu.addItem (juce::PopupMenu::Item (model.emptyNote).setEnabled (false));
+        }
+        else
+        {
+            juce::PopupMenu link;
+            link.addItem (InstanceMenu::unlinkItem, "Off", true, own.getRemoteTargetId() == 0);
+            for (size_t i = 0; i < model.rows.size(); ++i)
+                if (! model.rows[i].isOwn)
+                    link.addItem (InstanceMenu::linkItemBase + (int) i, model.rows[i].label, true, model.rows[i].isLinked);
+            menu.addSubMenu ("Mirror parameters of " + own.getInstanceName() + " with", link);
+            menu.addItem (juce::PopupMenu::Item (InstanceMenu::processScopeNote()).setEnabled (false));
         }
         menu.showMenuAsync (juce::PopupMenu::Options().withTargetComponent (instButton),
-                             [this, entries] (int result)
+                            [safeWindow = juce::Component::SafePointer<OpenEQAudioProcessorEditor> (&window), model] (int result)
         {
-            if (result == 1)
-            {
-                processorRef.setRemoteTarget (nullptr);
-                instButton.setButtonText ("INSTANCE");
-                return;
-            }
-            int itemId = 2;
-            for (const auto& entry : entries)
-            {
-                if (entry.id == processorRef.getInstanceId())
-                    continue;
-                if (result == itemId && InstanceRegistry::get().isRegistered (entry.processor, entry.id))
-                {
-                    processorRef.setRemoteTarget ((OpenEQAudioProcessor*) entry.processor);
-                    instButton.setButtonText ("INSTANCE " + juce::String (entry.id));
-                    return;
-                }
-                ++itemId;
-            }
+            // The view that opened this menu may be gone by now; the window and the ids are all that is used.
+            if (auto* editor = safeWindow.getComponent())
+                editor->applyInstanceChoice (InstanceMenu::decode (model, result));
         });
     };
-    instButton.setTooltip ("Access another OpenEQ instance: view and control it from this window (both directions).");
+    instButton.setTooltip ("Instances in this session, by track name. Choose one to edit it in this window.");
 
     presetButton.onClick = [this]
     {
@@ -560,23 +573,24 @@ OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
     for (auto* btn : { &spectrumSourceButton, &rangeButton, &fftButton, &keysButton, &grabButton, &listButton })
         btn->toFront (false);
 
-    setResizable (true, true);
-    setResizeLimits (juce::roundToInt (1100.0f * guiScale), juce::roundToInt (640.0f * guiScale),
-                     juce::roundToInt (1900.0f * guiScale), juce::roundToInt (1200.0f * guiScale));
-    setSize (juce::roundToInt (1500.0f * guiScale), juce::roundToInt (860.0f * guiScale));
-    setWantsKeyboardFocus (true);
+    refreshInstanceBadge();
+    processorRef.viewOpened();
 }
 
-OpenEQAudioProcessorEditor::~OpenEQAudioProcessorEditor()
+OpenEQEditorView::~OpenEQEditorView()
 {
     stopTimer();
-    processorRef.setMonitorMode (0);
-    processorRef.setAudition (false, -1);
-    processorRef.setDetectorAudition (false, -1);
+    // Monitoring and audition are shared by every view of this processor; only the last one resets them.
+    if (processorRef.viewClosed())
+    {
+        processorRef.setMonitorMode (0);
+        processorRef.setAudition (false, -1);
+        processorRef.setDetectorAudition (false, -1);
+    }
     setLookAndFeel (nullptr);
 }
 
-bool OpenEQAudioProcessorEditor::keyPressed (const juce::KeyPress& key)
+bool OpenEQEditorView::handleKey (const juce::KeyPress& key)
 {
     if (key.getTextCharacter() == 'c' || key.getTextCharacter() == 'C' || key.isKeyCode (juce::KeyPress::spaceKey))
     {
@@ -618,8 +632,9 @@ bool OpenEQAudioProcessorEditor::keyPressed (const juce::KeyPress& key)
     return false;
 }
 
-void OpenEQAudioProcessorEditor::timerCallback()
+void OpenEQEditorView::timerCallback()
 {
+    refreshInstanceBadge();
     noticeLabel.setText (processorRef.restrictionNotice(), juce::dontSendNotification);
     const bool slotA = processorRef.getAudibleABSlot() == 0;
     slotAButton.setToggleState (slotA, juce::dontSendNotification);
@@ -672,12 +687,12 @@ void OpenEQAudioProcessorEditor::timerCallback()
     floatingInspector.setAccent (splitOn ? Theme::splitTransCol : (dynOn ? juce::Colour (0xff35c6f0) : Theme::stereoCol));
 }
 
-void OpenEQAudioProcessorEditor::paint (juce::Graphics& g)
+void OpenEQEditorView::paint (juce::Graphics& g)
 {
     g.fillAll (Theme::chassisBottom);
 }
 
-void OpenEQAudioProcessorEditor::paintStage (juce::Graphics& g)
+void OpenEQEditorView::paintStage (juce::Graphics& g)
 {
     const auto full = logicalBounds().toFloat();
 
@@ -729,20 +744,29 @@ void OpenEQAudioProcessorEditor::paintStage (juce::Graphics& g)
     g.drawRoundedRectangle (graphBounds.toFloat(), 6.0f, 1.0f);
     g.setColour (juce::Colour (0x2affffff));
     g.drawRoundedRectangle (graphBounds.toFloat().reduced (1.5f), 5.0f, 0.75f);
+
+    // Track colour next to the instance badge, when the host reports one.
+    if (hasBadgeColour && ! badgeSwatch.isEmpty())
+    {
+        g.setColour (badgeColour);
+        g.fillRoundedRectangle (badgeSwatch.toFloat(), 2.0f);
+        g.setColour (juce::Colours::black.withAlpha (0.5f));
+        g.drawRoundedRectangle (badgeSwatch.toFloat(), 2.0f, 0.75f);
+    }
 }
 
-void OpenEQAudioProcessorEditor::refreshDynamicsStrip()
+void OpenEQEditorView::refreshDynamicsStrip()
 {
     const int band = eqCurve.getSelectedBand();
     dynamicsPanel.setSelectedBand (band);
 }
 
-void OpenEQAudioProcessorEditor::refreshDynamicsStripSoon()
+void OpenEQEditorView::refreshDynamicsStripSoon()
 {
     if (dynamicsRefreshPending)
         return; // one rebuild covers every request made before it runs
     dynamicsRefreshPending = true;
-    juce::MessageManager::callAsync ([safeEditor = juce::Component::SafePointer<OpenEQAudioProcessorEditor> (this)]
+    juce::MessageManager::callAsync ([safeEditor = juce::Component::SafePointer<OpenEQEditorView> (this)]
     {
         if (auto* editor = safeEditor.getComponent())
         {
@@ -752,7 +776,7 @@ void OpenEQAudioProcessorEditor::refreshDynamicsStripSoon()
     });
 }
 
-void OpenEQAudioProcessorEditor::setInspectorTab (InspectorTab tab)
+void OpenEQEditorView::setInspectorTab (InspectorTab tab)
 {
     activeTab = tab;
     switch (tab)
@@ -776,23 +800,23 @@ void OpenEQAudioProcessorEditor::setInspectorTab (InspectorTab tab)
     resized();
 }
 
-juce::Rectangle<int> OpenEQAudioProcessorEditor::logicalBounds() const
+juce::Rectangle<int> OpenEQEditorView::logicalBounds() const
 {
     return { 0, 0, juce::roundToInt ((float) getWidth() / guiScale), juce::roundToInt ((float) getHeight() / guiScale) };
 }
 
-void OpenEQAudioProcessorEditor::applyGuiScale (float newScale)
+void OpenEQEditorView::applyGuiScale (float newScale)
 {
     const auto logical = logicalBounds();
     guiScale = juce::jlimit (0.5f, 2.0f, newScale);
-    setResizeLimits (juce::roundToInt (1100.0f * guiScale), juce::roundToInt (640.0f * guiScale),
-                     juce::roundToInt (1900.0f * guiScale), juce::roundToInt (1200.0f * guiScale));
-    setSize (juce::roundToInt ((float) logical.getWidth() * guiScale), juce::roundToInt ((float) logical.getHeight() * guiScale));
+    window.setResizeLimits (juce::roundToInt (1100.0f * guiScale), juce::roundToInt (640.0f * guiScale),
+                            juce::roundToInt (1900.0f * guiScale), juce::roundToInt (1200.0f * guiScale));
+    window.setSize (juce::roundToInt ((float) logical.getWidth() * guiScale), juce::roundToInt ((float) logical.getHeight() * guiScale));
     resized();
     repaint();
 }
 
-void OpenEQAudioProcessorEditor::resized()
+void OpenEQEditorView::resized()
 {
     // The stage keeps the window's full size and draws at the GUI scale. Layout below uses unscaled coordinates.
     stage.setBounds (getLocalBounds());
@@ -811,7 +835,9 @@ void OpenEQAudioProcessorEditor::resized()
     // The beta channel label stays visible: this build is 1.0 Beta, not a finished release.
     subtitleLabel.setBounds (row1.removeFromLeft (58).withSizeKeepingCentre (58, 16));
     row1.removeFromLeft (4);
-    instButton.setBounds (row1.removeFromLeft (92).reduced (0, 2));
+    badgeSwatch = row1.removeFromLeft (10).withSizeKeepingCentre (8, 16);
+    row1.removeFromLeft (2);
+    instButton.setBounds (row1.removeFromLeft (170).reduced (0, 2));
 
     // Row 1: Right (Master Utilities)
     settingsButton.setBounds (row1.removeFromRight (68).reduced (2, 2));
@@ -912,4 +938,191 @@ void OpenEQAudioProcessorEditor::resized()
         spectralPanel.setBounds (contentArea);
         bandList.setBounds (contentArea);
     }
+}
+
+void OpenEQEditorView::refreshInstanceBadge()
+{
+    // The registry generation changes when any instance is added, removed or renamed by its host.
+    const auto generation = InstanceRegistry::get().getGeneration();
+    if (badgeValid && generation == badgeGeneration)
+        return;
+    badgeValid = true;
+    badgeGeneration = generation;
+
+    juce::String name = processorRef.getInstanceName();
+    hasBadgeColour = false;
+    for (const auto& entry : InstanceRegistry::get().snapshot())
+    {
+        if (entry.id != processorRef.getInstanceId())
+            continue;
+        name = entry.name;
+        hasBadgeColour = entry.hasTrackColour;
+        badgeColour = juce::Colour (entry.trackColour);
+    }
+    const bool other = &processorRef != &window.getOwnProcessor();
+    instButton.setButtonText (other ? "EDITING " + name : name);
+    instButton.setToggleState (other, juce::dontSendNotification);
+    instButton.setTooltip (other ? "This window is editing " + name + ". Its own instance is "
+                                       + window.getOwnProcessor().getInstanceName() + ". Click to switch."
+                                 : "Instances in this session, by track name. Choose one to edit it in this window.");
+    stage.repaint();
+}
+
+//==============================================================================
+OpenEQAudioProcessorEditor::OpenEQAudioProcessorEditor (OpenEQAudioProcessor& p)
+    : AudioProcessorEditor (&p),
+      ownProcessor (p),
+      controlled (&p),
+      controlledId (p.getInstanceId())
+{
+    setOpaque (true);
+    view = std::make_unique<OpenEQEditorView> (p, *this);
+    addAndMakeVisible (*view, 0);
+
+    const float guiScale = (float) AppSettings::get().guiScalePercent() / 100.0f;
+    setResizable (true, true);
+    setResizeLimits (juce::roundToInt (1100.0f * guiScale), juce::roundToInt (640.0f * guiScale),
+                     juce::roundToInt (1900.0f * guiScale), juce::roundToInt (1200.0f * guiScale));
+    setSize (juce::roundToInt (1500.0f * guiScale), juce::roundToInt (860.0f * guiScale));
+    setWantsKeyboardFocus (true);
+}
+
+OpenEQAudioProcessorEditor::~OpenEQAudioProcessorEditor()
+{
+    if (controlled != &ownProcessor)
+        controlled->removeClosingListener (this);
+    view.reset();
+}
+
+void OpenEQAudioProcessorEditor::paint (juce::Graphics& g)
+{
+    g.fillAll (Theme::chassisBottom);
+}
+
+void OpenEQAudioProcessorEditor::resized()
+{
+    if (view != nullptr)
+        view->setBounds (getLocalBounds());
+}
+
+bool OpenEQAudioProcessorEditor::keyPressed (const juce::KeyPress& key)
+{
+    return view != nullptr && view->handleKey (key);
+}
+
+void OpenEQAudioProcessorEditor::showInstance (int registryId)
+{
+    // Never rebuild inside the click or menu callback that asked: the view that owns the caller would be
+    // deleted under it. The rebuild runs on a later message-loop turn, and only while this window exists.
+    juce::MessageManager::callAsync ([safeEditor = juce::Component::SafePointer<OpenEQAudioProcessorEditor> (this), registryId]
+    {
+        if (auto* editor = safeEditor.getComponent())
+            editor->switchToId (registryId);
+    });
+}
+
+void OpenEQAudioProcessorEditor::applyInstanceChoice (const InstanceMenu::Choice& choice)
+{
+    using Kind = InstanceMenu::Choice::Kind;
+    if (choice.kind == Kind::Switch)
+    {
+        showInstance (choice.instanceId);
+    }
+    else if (choice.kind == Kind::Unlink)
+    {
+        ownProcessor.setRemoteTarget (nullptr);
+    }
+    else if (choice.kind == Kind::Rename)
+    {
+        auto* dialog = new juce::AlertWindow ("Rename instance",
+                                              "Shown in the instance menu of every OpenEQ window and saved with the session. "
+                                              "Leave empty to use the track name.",
+                                              juce::MessageBoxIconType::NoIcon);
+        const auto id = choice.instanceId;
+        auto* target = static_cast<OpenEQAudioProcessor*> (InstanceRegistry::get().processorFor (id));
+        if (target == nullptr)
+        {
+            delete dialog;
+            return;
+        }
+        dialog->addTextEditor ("name", target->getUserInstanceName());
+        dialog->addButton ("Rename", 1, juce::KeyPress (juce::KeyPress::returnKey));
+        dialog->addButton ("Cancel", 0, juce::KeyPress (juce::KeyPress::escapeKey));
+        dialog->enterModalState (true, juce::ModalCallbackFunction::create (
+            [safeEditor = juce::Component::SafePointer<OpenEQAudioProcessorEditor> (this), dialog, id] (int result)
+            {
+                if (auto* editor = safeEditor.getComponent(); editor != nullptr && result == 1)
+                    editor->renameInstance (id, dialog->getTextEditorContents ("name"));
+            }), true);
+    }
+    else if (choice.kind == Kind::Link)
+    {
+        // Message thread: the registry lookup and the link cannot overlap the target's destruction.
+        if (auto* target = static_cast<OpenEQAudioProcessor*> (InstanceRegistry::get().processorFor (choice.instanceId)))
+            ownProcessor.setRemoteTarget (target);
+    }
+}
+
+bool OpenEQAudioProcessorEditor::renameInstance (int registryId, const juce::String& name)
+{
+    // Message thread: the id lookup cannot overlap the instance's destruction.
+    auto* target = static_cast<OpenEQAudioProcessor*> (InstanceRegistry::get().processorFor (registryId));
+    if (target == nullptr)
+        return false;
+    target->setUserInstanceName (name);
+    return true;
+}
+
+bool OpenEQAudioProcessorEditor::switchToId (int registryId)
+{
+    if (registryId == ownProcessor.getInstanceId())
+    {
+        switchTo (ownProcessor);
+        return true;
+    }
+    // Message thread: instances are destroyed here, so the pointer is valid for the rest of this call.
+    auto* target = static_cast<OpenEQAudioProcessor*> (InstanceRegistry::get().processorFor (registryId));
+    if (target == nullptr)
+        return false; // closed since the menu was built
+    switchTo (*target);
+    return true;
+}
+
+void OpenEQAudioProcessorEditor::switchTo (OpenEQAudioProcessor& target)
+{
+    if (&target == controlled && view != nullptr)
+        return;
+    const bool hadFocus = hasKeyboardFocus (true);
+    if (controlled != &ownProcessor)
+        controlled->removeClosingListener (this);
+    // Deleting the view removes every attachment and listener it had on the previous processor.
+    view.reset();
+    controlled = &target;
+    controlledId = target.getInstanceId();
+    if (controlled != &ownProcessor)
+        controlled->addClosingListener (this);
+    view = std::make_unique<OpenEQEditorView> (target, *this);
+    addAndMakeVisible (*view, 0); // behind the resize corner
+    view->setBounds (getLocalBounds());
+    ++viewRebuilds;
+    if (hadFocus)
+        grabKeyboardFocus();
+}
+
+void OpenEQAudioProcessorEditor::instanceClosing (OpenEQAudioProcessor& closing)
+{
+    // Runs inside the other instance's destructor, on the message thread or with the message manager locked
+    // (see shutdownInstanceLink). Only drop the view, which holds every attachment and listener on the
+    // closing processor; the window stays blank until its own view is rebuilt on a later message-loop turn.
+    if (&closing != controlled || controlled == &ownProcessor)
+        return;
+    closing.removeClosingListener (this);
+    view.reset();
+    controlled = &ownProcessor;
+    controlledId = ownProcessor.getInstanceId();
+    juce::MessageManager::callAsync ([safeEditor = juce::Component::SafePointer<OpenEQAudioProcessorEditor> (this)]
+    {
+        if (auto* editor = safeEditor.getComponent(); editor != nullptr && editor->view == nullptr)
+            editor->switchTo (editor->ownProcessor);
+    });
 }

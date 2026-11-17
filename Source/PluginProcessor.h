@@ -10,7 +10,6 @@
 #include "Analyzer.h"
 #include "ResponseModel.h"
 #include "Saturator.h"
-#include "SpectralEngine.h"
 #include "ResonanceEngine.h"
 #include "SplitSeparator.h"
 #include "InstanceRegistry.h"
@@ -89,6 +88,8 @@ public:
 
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    /** Host track name and colour. Stored in the instance registry for the instance menu; not saved. */
+    void updateTrackProperties (const TrackProperties& properties) override;
 
     static constexpr int numBands = Params::numBands;
     static_assert (numBands == ResponseModel::graphBandCount);
@@ -209,16 +210,43 @@ public:
 
     /** Mirrors this instance's parameters with another OpenEQ instance, both ways: edits and host
         automation on either side are applied to the other. nullptr targets self (no relay).
-        Message thread. The mirror is dropped automatically when the target is destroyed. */
+        Message thread. The mirror is dropped automatically when the target is destroyed.
+        Changes made on the message thread are written to the other instance at once. Changes made on any
+        other thread (host automation on the audio thread) only mark a preallocated slot; a message-thread
+        timer writes them, so the audio path never locks, allocates, deletes or touches the other instance. */
     void setRemoteTarget (OpenEQAudioProcessor* target);
-    OpenEQAudioProcessor* getRemoteTarget() const noexcept { return remoteTarget; }
+    /** Safe to read from any thread. Never dereference it outside the message thread. */
+    OpenEQAudioProcessor* getRemoteTarget() const noexcept { return remoteTarget.load (std::memory_order_acquire); }
     /** Registry id of the linked instance, 0 when unlinked. Compare it with the pointer: addresses are recycled. */
-    int getRemoteTargetId() const noexcept { return remoteTargetId; }
-    /** Human name for the instance menu ("OpenEQ 3"). */
+    int getRemoteTargetId() const noexcept { return remoteTargetId.load (std::memory_order_acquire); }
+    /** Display name for the instance menu: the host track name, else "Instance N", with " (2)" for duplicates. */
     juce::String getInstanceName() const;
 
+    /** Told on the message thread when an instance starts to be destroyed, while its state is still intact.
+        An editor that controls another instance uses this to let go of it in time. */
+    struct ClosingListener
+    {
+        virtual ~ClosingListener() = default;
+        virtual void instanceClosing (OpenEQAudioProcessor& closing) = 0;
+    };
+    void addClosingListener (ClosingListener* listener) { closingListeners.add (listener); }
+    void removeClosingListener (ClosingListener* listener) { closingListeners.remove (listener); }
+
+    /** A name the user typed for this instance. It wins over the host track name, is saved with the session
+        (state property "instanceName", not a parameter) and is not part of presets or A/B slots.
+        Empty returns to the track name or the fallback. Message thread. */
+    void setUserInstanceName (const juce::String& name);
+    juce::String getUserInstanceName() const;
+
+    /** Editor views open on this processor, from any window. Message thread. viewClosed returns true for the
+        last one, which is the only one that may reset shared monitoring state. */
+    void viewOpened() noexcept { openViews.fetch_add (1); }
+    bool viewClosed() noexcept { return openViews.fetch_sub (1) == 1; }
+    int getOpenViewCount() const noexcept { return openViews.load(); }
+
 public:
-    struct RelayListener; // defined in PluginProcessor.cpp; listens on an apvts state tree
+    struct RelayListener; // defined in InstanceLink.cpp; listens on an apvts state tree
+    struct RelayPump;     // defined in InstanceLink.cpp; message-thread timer that writes relayed changes
 private:
     struct CachedBandParams
     {
@@ -484,11 +512,39 @@ private:
     juce::ValueTree abSlots[2];
     int abSlot = 0;
     int instanceId = 0;
-    OpenEQAudioProcessor* remoteTarget = nullptr;
-    int remoteTargetId = 0; // registry id of remoteTarget; the pointer alone can name a later instance
+    // The link the relays follow. Written on the message thread, read from any thread.
+    std::atomic<OpenEQAudioProcessor*> remoteTarget { nullptr };
+    std::atomic<int> remoteTargetId { 0 }; // registry id of remoteTarget; the pointer alone can name a later instance
+    // The instance whose state remoteRelay is attached to. Message thread only.
+    OpenEQAudioProcessor* attachedTarget = nullptr;
+    int attachedTargetId = 0;
+    int linkGeneration = 0; // message thread; changes on every link change, so stale deferred teardowns do nothing
     RelayListener* ownRelay = nullptr;
     RelayListener* remoteRelay = nullptr;
-    void relayParameter (const juce::String& parameterID, float normalisedValue, void* source);
+    RelayPump* relayPump = nullptr;
+    // One slot per parameter and direction (0: this instance changed, 1: the target changed). Allocated
+    // in the constructor; the relays only store into them.
+    std::unique_ptr<std::atomic<float>[]> relayValues;
+    std::unique_ptr<std::atomic<bool>[]> relayFlags;
+    int relaySlotCount = 0;
+    std::atomic<bool> relayPending { false };
+    juce::ListenerList<ClosingListener> closingListeners;
+    juce::String userInstanceName;
+    mutable juce::CriticalSection userNameLock; // getStateInformation may run on a host worker thread
+    std::atomic<int> openViews { 0 };
+    void relayParameter (const juce::String& parameterID, float rawValue, void* source);
+    /** Message thread: writes one relayed value into the other side, unless it is an echo. */
+    void writeRelayed (OpenEQAudioProcessor& destination, const juce::String& parameterID, float rawValue);
+    /** Message thread: writes every marked slot. Called by the relay timer. */
+    void drainRelay();
+    /** Message thread: detaches both relays and forgets the attached target. */
+    void releaseLink();
+    void initInstanceLink();
+    void shutdownInstanceLink();
+    /** Applies a saved state. False when the data is not an OpenEQ state, in which case nothing changed. */
+    bool applyState (const void* data, int sizeInBytes);
+    /** Root of the preset folders: the settings override folder when one is set, else the user folder. */
+    juce::File presetRootDirectory() const;
 
     friend struct OpenEQParameterSetAction;
     void applyNormalised (const juce::String& parameterID, float normalised);

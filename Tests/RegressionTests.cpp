@@ -24,6 +24,8 @@
 #include "InstanceRegistry.h"
 #include "UI/ValueFormat.h"
 #include "AllocInterpose.h"
+#include "AppSettings.h"
+#include "InstanceMenu.h"
 
 void runFilterResponseTests();
 
@@ -263,7 +265,8 @@ static void checkLayout (juce::Component& component)
 
 static void checkBandControls()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     BandControlPanel panel (processor);
     for (int width : { 800, 1130, 1630 })
     {
@@ -325,7 +328,8 @@ static void checkRouting()
     std::cout << "  bell_18_db_magnitude " << plus18 << "\n";
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -338,7 +342,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Left, true);
         prepareStereo (processor, 48000.0, 512);
@@ -354,7 +359,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Right, true);
         prepareStereo (processor, 48000.0, 512);
@@ -370,7 +376,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Mid, true);
         prepareStereo (processor, 48000.0, 512);
@@ -380,7 +387,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Mid, true);
         prepareStereo (processor, 48000.0, 512);
@@ -395,7 +403,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Side, true);
         prepareStereo (processor, 48000.0, 512);
@@ -405,7 +414,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Side, true);
         prepareStereo (processor, 48000.0, 512);
@@ -420,7 +430,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         configureBand (processor, 1, FilterType::Bell, 1000.0f, 18.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
@@ -433,7 +444,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 18.0f, 1.0f, 1, (int) StereoMode::Stereo, false);
         prepareStereo (processor, 48000.0, 512);
@@ -450,7 +462,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -467,7 +480,8 @@ static void checkRouting()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         juce::AudioProcessor::BusesLayout layout;
         layout.inputBuses.add (juce::AudioChannelSet::mono());
         layout.inputBuses.add (juce::AudioChannelSet::disabled());
@@ -522,8 +536,11 @@ static void checkBlockHandling()
     input.setSample (0, 10, 0.55f);
     input.setSample (1, 400, -0.4f);
 
-    OpenEQAudioProcessor whole;
-    OpenEQAudioProcessor chunked;
+    auto wholeOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& whole = *wholeOwner;
+    auto chunkedOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& chunked = *chunkedOwner;
     configure (whole);
     configure (chunked);
     prepareStereo (whole, 48000.0, 512);
@@ -540,8 +557,10 @@ static void checkBlockHandling()
 
     juce::AudioBuffer<float> longInput (2, 5000);
     fillTone (longInput, 48000.0, 440.0, 0.12f, 20, Tone::Centered);
-    OpenEQAudioProcessor preparedSmall;
-    OpenEQAudioProcessor preparedLarge;
+    auto preparedSmallOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& preparedSmall = *preparedSmallOwner;
+    auto preparedLargeOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& preparedLarge = *preparedLargeOwner;
     configure (preparedSmall);
     configure (preparedLarge);
     prepareStereo (preparedSmall, 48000.0, 128);
@@ -557,7 +576,8 @@ static void checkBlockHandling()
 
     for (int size : { 1, 7, 32, 511, 512, 513 })
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         configure (processor);
         prepareStereo (processor, 48000.0, 128);
         juce::AudioBuffer<float> buffer (2, size);
@@ -567,7 +587,8 @@ static void checkBlockHandling()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -588,7 +609,8 @@ static void checkBlockHandling()
 
 static void checkSmoothing()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     prepareStereo (processor, 48000.0, 512);
@@ -626,7 +648,9 @@ static void checkSmoothing()
     std::cout << "  settled_gain_design_delta " << steadyDelta << "\n";
     require (steadyDelta == 0, "Settled gain kept rebuilding coefficients");
 
-    OpenEQAudioProcessor bypassed;
+    auto bypassedOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& bypassed = *bypassedOwner;
     silenceBands (bypassed);
     configureBand (bypassed, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     prepareStereo (bypassed, 48000.0, 512);
@@ -653,7 +677,9 @@ static void checkSmoothing()
     require (allFinite (tail), "Band bypass fade produced a non-finite sample");
     require (tailError < 1.0e-5f, "Band bypass tail did not return to the dry signal");
 
-    OpenEQAudioProcessor globalBypass;
+    auto globalBypassOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& globalBypass = *globalBypassOwner;
     silenceBands (globalBypass);
     configureBand (globalBypass, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     setRaw (globalBypass.apvts, "bypass", 1.0f);
@@ -692,7 +718,8 @@ static double analyticalCut (bool lowCut, int slopeDb, double frequency, double 
 static void checkSnapshotsAndResponse()
 {
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         setRaw (processor.apvts, Params::bandFreqID (0), 3333.0f);
         processor.serviceIdleGraph();
         const auto idle = processor.getGraphSnapshot();
@@ -702,7 +729,8 @@ static void checkSnapshotsAndResponse()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -724,7 +752,8 @@ static void checkSnapshotsAndResponse()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::LowCut, 1000.0f, 0.0f, 1.0f, 2, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -763,7 +792,8 @@ static void checkSnapshotsAndResponse()
 
 static void checkDynamicsShortBlock()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -798,7 +828,8 @@ static void checkDynamicsShortBlock()
 
 static void checkNyquistAndTypes()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 20000.0f, 18.0f, 40.0f, 1, (int) StereoMode::Stereo, true);
     prepareStereo (processor, 22050.0, 256);
@@ -822,7 +853,8 @@ static void checkNyquistAndTypes()
     {
         for (int type = 0; type < filterTypeCount; ++type)
         {
-            OpenEQAudioProcessor smoke;
+            auto smokeOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& smoke = *smokeOwner;
             silenceBands (smoke);
             configureBand (smoke, 0, (FilterType) type, 1000.0f, 6.0f, 2.0f, 2, (int) StereoMode::Stereo, true);
             prepareStereo (smoke, sampleRate, 256);
@@ -847,7 +879,8 @@ static bool stateHasParameter (const juce::ValueTree& state, const char* id)
 
 static void checkStateRoundTrip()
 {
-    OpenEQAudioProcessor original;
+    auto originalOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& original = *originalOwner;
     configureBand (original, 7, FilterType::HighCut, 3456.0f, -6.5f, 2.5f, 4, (int) StereoMode::Right, true);
     require (original.apvts.getParameter ("b0_freq") != nullptr, "b0_freq is missing");
     require (original.apvts.getParameter ("b7_freq") != nullptr, "b7_freq is missing");
@@ -858,7 +891,9 @@ static void checkStateRoundTrip()
     original.getStateInformation (state);
     require (state.getSize() > 0, "State block was empty");
 
-    OpenEQAudioProcessor restored;
+    auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& restored = *restoredOwner;
     restored.setStateInformation (state.getData(), (int) state.getSize());
 
     const float frequencyError = std::abs (rawValue (restored, Params::bandFreqID (7)) - rawValue (original, Params::bandFreqID (7)));
@@ -934,7 +969,8 @@ static void checkCurveRequestIsolation()
 
 static void checkGraphPaint()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     EQCurveComponent curve (processor);
     curve.setBounds (0, 0, 900, 420);
     juce::Image image (juce::Image::ARGB, 900, 420, true);
@@ -1055,7 +1091,8 @@ static void checkSteadyStateAllocations()
     };
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 6.0f, 0.7f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -1066,7 +1103,8 @@ static void checkSteadyStateAllocations()
 
     {
         // Split: the separator and the second band chain run on the audio thread.
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 0.7f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandSplitOnID (0), 1.0f);
@@ -1078,7 +1116,8 @@ static void checkSteadyStateAllocations()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -1162,7 +1201,9 @@ static void checkRoadmap()
         require (juce::Decibels::gainToDecibels (high) > juce::Decibels::gainToDecibels (low) + 2.0,
                  "Tilt shelf did not lift the highs above the lows");
 
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::TiltShelf, 1000.0f, 6.0f, 0.7f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -1173,7 +1214,8 @@ static void checkRoadmap()
         const auto dryLow = copyBuffer (lowTone);
         const auto dryHigh = copyBuffer (highTone);
         process (processor, lowTone);
-        OpenEQAudioProcessor highProcessor;
+        auto highProcessorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& highProcessor = *highProcessorOwner;
         silenceBands (highProcessor);
         configureBand (highProcessor, 0, FilterType::TiltShelf, 1000.0f, 6.0f, 0.7f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (highProcessor, 48000.0, 512);
@@ -1218,7 +1260,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -1237,8 +1280,10 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor wide;
-        OpenEQAudioProcessor narrow;
+        auto wideOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& wide = *wideOwner;
+        auto narrowOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& narrow = *narrowOwner;
         auto arm = [] (OpenEQAudioProcessor& processor)
         {
             silenceBands (processor);
@@ -1271,7 +1316,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -1290,7 +1336,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         const float original = rawValue (processor, Params::bandFreqID (0));
         processor.beginEdit ("Frequency");
         processor.setRawFromUI (Params::bandFreqID (0), 1000.0f);
@@ -1306,7 +1353,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         setRaw (processor.apvts, Params::bandGainID (0), 5.0f);
         processor.switchAB();
         const float other = rawValue (processor, Params::bandGainID (0));
@@ -1318,7 +1366,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         setRaw (processor.apvts, Params::bandFreqID (3), 4321.0f);
         auto file = juce::File::getSpecialLocation (juce::File::tempDirectory).getChildFile ("openeq-roadmap-preset.xml");
         require (processor.savePresetFile (file), "Preset file was not written");
@@ -1331,12 +1380,14 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         processor.setMonitorMode (3);
         processor.setAudition (true, 2);
         juce::MemoryBlock state;
         processor.getStateInformation (state);
-        OpenEQAudioProcessor restored;
+        auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& restored = *restoredOwner;
         restored.setStateInformation (state.getData(), (int) state.getSize());
         std::cout << "  restored_monitor " << restored.getMonitorMode()
                   << " restored_audition " << (restored.isAuditioning() ? 1 : 0) << "\n";
@@ -1372,7 +1423,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         setRaw (processor.apvts, "spectralAmount", 1.0f);
         prepareStereo (processor, 48000.0, 512);
@@ -1385,7 +1437,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         setRaw (processor.apvts, "drive", 0.4f);
         prepareStereo (processor, 48000.0, 512);
@@ -1398,7 +1451,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -1409,7 +1463,9 @@ static void checkRoadmap()
         process (processor, dirty);
         require (allFinite (dirty), "Non-finite input survived the scrub");
 
-        OpenEQAudioProcessor wide;
+        auto wideOwner = std::make_unique<OpenEQAudioProcessor>();
+
+        auto& wide = *wideOwner;
         silenceBands (wide);
         configureBand (wide, 0, FilterType::Bell, 1000.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         wide.setRateAndBufferSizeDetails (48000.0, 512);
@@ -1434,7 +1490,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         setRaw (processor.apvts, "processingMode", 1.0f);
         setRaw (processor.apvts, "linearPhaseQuality", 0.0f);
@@ -1468,7 +1525,8 @@ static void checkRoadmap()
 
     auto renderLinearPhaseImpulse = [] (float quality, double sampleRate, int reported)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         setRaw (processor.apvts, "processingMode", 1.0f);
         setRaw (processor.apvts, "linearPhaseQuality", quality);
@@ -1503,7 +1561,8 @@ static void checkRoadmap()
     renderLinearPhaseImpulse (0.0f, 44100.0, 1024);
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         setRaw (processor.apvts, "bypass", 1.0f);
         setRaw (processor.apvts, "processingMode", 1.0f);
@@ -1530,7 +1589,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 0.5f, 1, (int) StereoMode::Left, true);
         setRaw (processor.apvts, "processingMode", 1.0f);
@@ -1566,7 +1626,8 @@ static void checkRoadmap()
     }
 
     {
-        OpenEQAudioProcessor loudSide;
+        auto loudSideOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& loudSide = *loudSideOwner;
         juce::AudioProcessor::BusesLayout layout;
         layout.inputBuses.add (juce::AudioChannelSet::stereo());
         layout.inputBuses.add (juce::AudioChannelSet::stereo());
@@ -1580,7 +1641,9 @@ static void checkRoadmap()
         setRaw (loudSide.apvts, Params::bandDynAttackID (0), 1.0f);
         prepareStereo (loudSide, 48000.0, 512);
 
-        OpenEQAudioProcessor quietSide;
+        auto quietSideOwner = std::make_unique<OpenEQAudioProcessor>();
+
+        auto& quietSide = *quietSideOwner;
         require (quietSide.setBusesLayout (layout), "Processor rejected a stereo sidechain layout");
         silenceBands (quietSide);
         configureBand (quietSide, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
@@ -1737,7 +1800,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         prepareStereo (processor, 48000.0, 512);
         juce::AudioBuffer<float> warmup (2, 4096);
@@ -1760,7 +1824,8 @@ static void checkPlanCoverage()
     {
         auto renderTail = [] (bool compensate)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
             if (compensate)
@@ -1782,7 +1847,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -1804,7 +1870,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         prepareStereo (processor, 48000.0, 512);
         juce::AudioBuffer<float> tone (2, 512);
@@ -1833,7 +1900,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         prepareStereo (processor, 48000.0, 512);
         juce::AudioBuffer<float> warmup (2, 2048);
@@ -1855,7 +1923,8 @@ static void checkPlanCoverage()
     {
         auto settledRms = [] (float knee, int action, float relative, float amplitude, float threshold)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
             setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -1887,7 +1956,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor quiet;
+        auto quietOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& quiet = *quietOwner;
         silenceBands (quiet);
         configureBand (quiet, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (quiet.apvts, Params::bandDynOnID (0), 1.0f);
@@ -1907,7 +1977,8 @@ static void checkPlanCoverage()
     {
         auto burst = [] (float aheadMs)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
             setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -1936,7 +2007,8 @@ static void checkPlanCoverage()
     {
         auto linearImpulse = [] (FilterType type, bool dynamic)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, type, 1000.0f, 12.0f, 0.5f, 1, (int) StereoMode::Stereo, true);
             if (dynamic)
@@ -1993,7 +2065,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         const int id = processor.getInstanceId();
         InstanceRegistry::get().publish (id, 440.0f, -12.0f);
         bool found = false;
@@ -2005,7 +2078,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         EQCurveComponent curve (processor);
         curve.setSize (900, 420);
         for (int i = 0; i < OpenEQAudioProcessor::numBands; ++i)
@@ -2034,7 +2108,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         EQCurveComponent curve (processor);
         curve.setSize (900, 420);
         setRaw (processor.apvts, Params::bandFreqID (0), 2222.0f);
@@ -2051,12 +2126,14 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         processor.setDisplayTiltDbPerOctave (4.5f);
         processor.setSpectrumSource (2);
         juce::MemoryBlock state;
         processor.getStateInformation (state);
-        OpenEQAudioProcessor restored;
+        auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& restored = *restoredOwner;
         restored.setStateInformation (state.getData(), (int) state.getSize());
         std::cout << "  restored_tilt " << restored.getDisplayTiltDbPerOctave()
                   << " restored_source " << restored.getSpectrumSource() << "\n";
@@ -2065,7 +2142,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor side;
+        auto sideOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& side = *sideOwner;
         juce::AudioProcessor::BusesLayout layout;
         layout.inputBuses.add (juce::AudioChannelSet::stereo());
         layout.inputBuses.add (juce::AudioChannelSet::stereo());
@@ -2099,7 +2177,8 @@ static void checkPlanCoverage()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -2117,7 +2196,8 @@ static void checkPlanCoverage()
     {
         auto render = [] (bool asDouble)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, FilterType::Bell, 1000.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
             prepareStereo (processor, 48000.0, 512);
@@ -2184,7 +2264,9 @@ static void checkLinearPhaseCrossfade()
         return worst;
     };
 
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     setRaw (processor.apvts, "processingMode", 1.0f);
@@ -2262,7 +2344,8 @@ static void checkTransientDetector()
 {
     auto onsetRms = [] (float weight)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -2286,7 +2369,8 @@ static void checkTransientDetector()
 
     auto settledRms = [] (float weight)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -2312,7 +2396,8 @@ static void checkTransientDetector()
 
     auto autoTail = [] (bool automatic)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -2343,7 +2428,8 @@ static void checkTransientDetector()
     require (std::get<2> (automatic) > -12.0f, "Automatic threshold did not rise with the broadband level");
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -2364,7 +2450,8 @@ static void checkTransientDetector()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, 48000.0, 512);
@@ -2390,7 +2477,8 @@ static void checkTransientDetector()
 
     auto detectorCase = [] (bool unlink, float detectorHz, float detectorQ, float bandHz)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, bandHz, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -2414,7 +2502,8 @@ static void checkTransientDetector()
                                                   processor.getDynamicGainDb (0));
     };
     {
-        OpenEQAudioProcessor defaults;
+        auto defaultsOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& defaults = *defaultsOwner;
         require (rawValue (defaults, Params::bandDynDetLinkID (0)) > 0.5f, "Detector link does not default on");
     }
     const auto linked = detectorCase (false, 1000.0f, 1.0f, 1000.0f);
@@ -2434,7 +2523,8 @@ static void checkTransientDetector()
     require (std::get<2> (retargeted) < -8.0f, "Independent detector did not cut from its own frequency");
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 200.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynDetLinkID (0), 0.0f);
@@ -2457,7 +2547,8 @@ static void checkTransientDetector()
     }
 
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandDynOnID (0), 1.0f);
@@ -2585,7 +2676,8 @@ static void checkBrickwallAndTypes()
     requireMsg (highDb (2000.0) < -120.0, "brickwall HC stopband too shallow: " + std::to_string (highDb (2000.0)));
 
     // The processor reports the fixed slope for brickwall bands regardless of the slope control.
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     prepareStereo (processor, sampleRate, 512);
     configureBand (processor, 2, FilterType::BrickwallHighCut, 5000.0f, 0.0f, 1.0f, 0, (int) StereoMode::Stereo, true);
     const auto state = processor.readBandParameter (2);
@@ -2719,7 +2811,8 @@ static void checkFilterTypes()
                         "250 LS should ignore the Q control");
 
     // The control list the processor exposes matches the type count.
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     auto* typeParameter = dynamic_cast<juce::AudioParameterChoice*> (processor.apvts.getParameter (Params::bandTypeID (0)));
     require (typeParameter != nullptr, "type parameter missing");
     require (typeParameter->choices.size() == filterTypeCount, "type choices should match filterTypeCount");
@@ -2729,7 +2822,8 @@ static void checkFilterTypes()
 
 static void checkBandOperations()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     prepareStereo (processor, 48000.0, 512);
     silenceBands (processor);
 
@@ -3010,14 +3104,16 @@ static juce::MemoryBlock makeLegacyDynamicsState (OpenEQAudioProcessor& processo
 static void checkLegacyDynamicsMigration()
 {
     // A band saved with the old single action comes back with the matching panel switched on.
-    OpenEQAudioProcessor original;
+    auto originalOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& original = *originalOwner;
     prepareStereo (original, 48000.0, 512);
     setRaw (original.apvts, Params::bandDynOnID (4), 1.0f);
     setRaw (original.apvts, Params::bandDynActionID (4), 1.0f);
     setRaw (original.apvts, Params::bandDynRangeID (4), 9.0f);
 
     const juce::MemoryBlock state = makeLegacyDynamicsState (original);
-    OpenEQAudioProcessor restored;
+    auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& restored = *restoredOwner;
     restored.setStateInformation (state.getData(), (int) state.getSize());
 
     require (rawValue (restored, Params::bandDynBelowOnID (4)) > 0.5f, "legacy below action should switch Below on");
@@ -3032,7 +3128,8 @@ static void checkCurrentDynamicsStatePreserved()
 {
     // A current state with both panels deliberately off must survive recall unchanged. The legacy
     // migration used to rewrite it because it read the panel enable values instead of the saved schema.
-    OpenEQAudioProcessor original;
+    auto originalOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& original = *originalOwner;
     prepareStereo (original, 48000.0, 512);
     setRaw (original.apvts, Params::bandDynOnID (0), 1.0f);
     setRaw (original.apvts, Params::bandDynBelowOnID (0), 0.0f);
@@ -3043,7 +3140,8 @@ static void checkCurrentDynamicsStatePreserved()
 
     juce::MemoryBlock state;
     original.getStateInformation (state);
-    OpenEQAudioProcessor restored;
+    auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& restored = *restoredOwner;
     restored.setStateInformation (state.getData(), (int) state.getSize());
 
     require (rawValue (restored, Params::bandDynBelowOnID (0)) < 0.5f, "recall must not switch Below on");
@@ -3057,7 +3155,8 @@ static void checkCurrentDynamicsStatePreserved()
 
 static float meterPeakAfterDecay (int blockSize)
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     prepareStereo (processor, 48000.0, blockSize);
     constexpr int total = 4800; // 100 ms at 48 kHz
@@ -3089,7 +3188,8 @@ static void checkMeterBallistics()
     require (std::abs (ratio - 1.0f) < 0.05f, "peak release must not depend on the host block size");
 
     // Clip acknowledgement clears the processor latch and it stays clear until a new overload.
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     prepareStereo (processor, 48000.0, 512);
     juce::AudioBuffer<float> loud (2, 512);
@@ -3113,7 +3213,8 @@ static void checkNonFiniteGuard()
 {
     // 32 overlapping +30 dB bells are absurd but legal. Their product exceeds float range,
     // and the processor must recover rather than pass inf/NaN to the host.
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     prepareStereo (processor, 48000.0, 512);
     for (int band = 0; band < 32; ++band)
         configureBand (processor, band, FilterType::Bell, 1000.0f, 30.0f, 20.0f, 1, (int) StereoMode::Stereo, true);
@@ -3184,7 +3285,8 @@ static void fillStereo (juce::AudioBuffer<float>& buffer, double sampleRate, dou
 
 static juce::AudioBuffer<float> runBand (StereoMode mode, float pan, float leftIn, float rightIn, int blocks)
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     prepareStereo (processor, 48000.0, 512);
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 1000.0f, 12.0f, 1.0f, 1, (int) mode, true);
@@ -3249,7 +3351,8 @@ static void checkStereoPanAndMidSide()
 static void checkGlobalLookahead()
 {
     // With the global lookahead on, the plugin reports a fixed 20 ms latency, even at 0 ms lookahead.
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     prepareStereo (processor, 48000.0, 512);
     silenceBands (processor);
     setRaw (processor.apvts, "lookaheadOn", 1.0f);
@@ -3275,7 +3378,8 @@ static void checkUltraPrecision()
     const double sampleRate = 48000.0;
     auto render = [&] (bool ultra, FilterType type, float frequency, float gain, float q)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         prepareStereo (processor, sampleRate, 512);
         silenceBands (processor);
         configureBand (processor, 0, type, frequency, gain, q, 1, (int) StereoMode::Stereo, true);
@@ -3328,7 +3432,8 @@ static void checkOversampling()
     const double sampleRate = 48000.0;
     auto render = [&] (bool oversample, double& latencyOut, double& rmsOut)
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, "oversample2x", oversample ? 1.0f : 0.0f);
@@ -3363,11 +3468,13 @@ static void checkPresetFiles()
     // Save a preset to a temporary file, load it into a fresh processor, and check the band survived.
     const auto file = juce::File::createTempFile ("openeq-test.opeq");
     {
-        OpenEQAudioProcessor original;
+        auto originalOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& original = *originalOwner;
         configureBand (original, 4, FilterType::HighShelf, 3333.0f, -4.5f, 1.2f, 1, (int) StereoMode::Mid, true);
         require (original.savePresetFile (file), "preset should save to a temporary file");
     }
-    OpenEQAudioProcessor restored;
+    auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& restored = *restoredOwner;
     require (restored.loadPresetFile (file), "preset should load back");
     require (std::abs (rawValue (restored, Params::bandFreqID (4)) - 3333.0f) < 1.0e-2f, "preset frequency did not round-trip");
     require (rawValue (restored, Params::bandTypeID (4)) == (float) FilterType::HighShelf, "preset type did not round-trip");
@@ -3381,7 +3488,8 @@ static void checkPresetFiles()
 static std::vector<float> settledImpulseForMode (int mode, FilterType type, float frequency, float gainDb, int crossoverIndex = 1,
                                                  int placement = (int) StereoMode::Stereo)
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, type, frequency, gainDb, 1.0f, 1, placement, true);
     setRaw (processor.apvts, "processingMode", (float) mode);
@@ -3479,7 +3587,9 @@ static void checkThirtyTwoBands()
     require (ResponseModel::graphBandCount == 32, "graphBandCount should be 32");
     require (Params::numBands == 32, "Params::numBands should be 32");
 
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& processor = *processorOwner;
     require (processor.apvts.getParameter ("b31_freq") != nullptr, "b31_freq missing");
     require (processor.apvts.getParameter ("b31_dynDetQ") != nullptr, "b31_dynDetQ missing");
     require (rawValue (processor, "b31_active") < 0.5f, "new band slots must start inactive");
@@ -3490,7 +3600,8 @@ static void checkThirtyTwoBands()
 
 static void checkGlobalControls()
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     const double sampleRate = 48000.0;
     prepareStereo (processor, sampleRate, 512);
     silenceBands (processor);
@@ -3671,7 +3782,9 @@ static void checkPresetImport()
         "Master Vol.": "5.000000000e-01", "Phase Mode": "0.000000000e+00"
     })");
 
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+
+    auto& processor = *processorOwner;
     const auto result = PresetImport::importPreset (processor, file);
     auto raw = [&processor] (const juce::String& id) { return processor.apvts.getRawParameterValue (id)->load(); };
 
@@ -3701,7 +3814,8 @@ static void checkPresetImport()
     const auto noteFile = juce::File::getSpecialLocation (juce::File::tempDirectory).getChildFile ("openeq_import_note.json");
     noteFile.replaceWithText (R"({ "Band1 Used": "1.0", "Band1 Enabled": "1.0", "Band1 Type": "5.774647887e-01",
                                   "Band1 Freq.": "0.5", "Phase Mode": "1.0" })");
-    OpenEQAudioProcessor approx;
+    auto approxOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& approx = *approxOwner;
     const auto approxResult = PresetImport::importPreset (approx, noteFile);
     bool noted = false;
     for (const auto& note : approxResult.notes)
@@ -3716,7 +3830,8 @@ static void checkPresetImport()
     const auto cleanBass = juce::File (__FILE__).getParentDirectory().getChildFile ("fixtures/import-bass.json");
     require (cleanBass.existsAsFile(), "the synthetic bass import fixture must be available");
     {
-        OpenEQAudioProcessor bass;
+        auto bassOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& bass = *bassOwner;
         PresetImport::importPreset (bass, cleanBass);
         auto bassRaw = [&bass] (const juce::String& id) { return bass.apvts.getRawParameterValue (id)->load(); };
         require (bassRaw (Params::bandTypeID (0)) == (float) Params::filterTypeNames.indexOf ("High Pass"),
@@ -3761,8 +3876,10 @@ static void checkCrossInstance()
 
     // Relay: two processors mirror each other in both directions while linked.
     {
-        OpenEQAudioProcessor a;
-        OpenEQAudioProcessor b;
+        auto aOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& a = *aOwner;
+        auto bOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& b = *bOwner;
         require (a.getRemoteTarget() == nullptr, "no target before linking");
         a.setRemoteTarget (&b);
         require (a.getRemoteTarget() == &b, "the target should be set");
@@ -3780,7 +3897,8 @@ static void checkCrossInstance()
 
     // Destroying the target drops the mirror on the next change.
     {
-        OpenEQAudioProcessor a;
+        auto aOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& a = *aOwner;
         {
             auto b = std::make_unique<OpenEQAudioProcessor>();
             a.setRemoteTarget (b.get());
@@ -3833,7 +3951,8 @@ static void checkDynamicsClickRebuild()
     // With the editor open, D on the EQ field and then DYNAMICS used to delete the DYNAMICS attachment from
     // inside its own click: the D toggle follows the parameter synchronously, its handler asked the editor to
     // rebuild the dynamics attachments, and the click then finished on freed memory.
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     setRaw (processor.apvts, Params::bandShownID (0), 1.0f);
@@ -3917,7 +4036,8 @@ static void checkBandSelectionWritesNothing()
 {
     // Selecting a band used to bind the new band before releasing the old attachments, so the old ones wrote
     // the new band's values into the previous band (Dynamic On, Below On and Auto went off).
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 800.0f, 4.0f, 1.2f, 1, (int) StereoMode::Stereo, true);
     configureBand (processor, 1, FilterType::Bell, 3000.0f, -2.0f, 0.8f, 1, (int) StereoMode::Stereo, true);
@@ -4058,7 +4178,8 @@ static void checkRelayAddressReuse()
 
 static std::vector<float> settledImpulseForPhase (float bandPhase, int mode = 1)
 {
-    OpenEQAudioProcessor processor;
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *processorOwner;
     silenceBands (processor);
     configureBand (processor, 0, FilterType::Bell, 300.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
     setRaw (processor.apvts, Params::bandPhaseID (0), bandPhase);
@@ -4086,7 +4207,8 @@ static void checkPhaseModes()
 
     // Zero-latency analogue: no reported latency, causal impulse (energy arrives at the start).
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 300.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, "processingMode", 4.0f);
@@ -4163,7 +4285,8 @@ static void checkPhaseModes()
 
     // Window shape and parameter: the design completes and keeps the magnitude within tolerance.
     {
-        OpenEQAudioProcessor kaiser;
+        auto kaiserOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& kaiser = *kaiserOwner;
         silenceBands (kaiser);
         configureBand (kaiser, 0, FilterType::Bell, 300.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (kaiser.apvts, "processingMode", 1.0f);
@@ -4193,7 +4316,8 @@ static void checkPhaseModes()
     {
         auto runPadding = [&] (int padding)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, FilterType::Bell, 300.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
             setRaw (processor.apvts, "processingMode", 1.0f);
@@ -4281,7 +4405,8 @@ static void checkPhaseModes()
 
     // Render DSP: the render quality overrides the realtime quality only while rendering offline.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         setRaw (processor.apvts, "linearPhaseQuality", 1.0f); // Medium realtime
         setRaw (processor.apvts, "renderQuality", 4.0f);      // Maximum offline
         require (processor.effectiveLinearPhaseQuality() == 1, "realtime should use the realtime quality");
@@ -4339,7 +4464,8 @@ static void checkSplitMode()
     // Latency: split reports the separator delay, and nothing without a split band.
     int latency = 0;
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         makeSplit (processor, 0.0f, 0.0f, 0.0f, 0);
         auto input = makeInput (true, true);
         process (processor, input);
@@ -4390,7 +4516,8 @@ static void checkSplitMode()
 
     // Turning Split on and off while audio plays changes the latency. The output fades around the change.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, sampleRate, 256);
@@ -4416,7 +4543,8 @@ static void checkSplitMode()
     // A/B: with Split in one slot only, both slots keep the split latency, so switching does not change the
     // latency, does not drop out, and does not click.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (processor, sampleRate, 256);
@@ -4445,11 +4573,13 @@ static void checkSplitMode()
 
     // Null test: a split band with both stream gains at 0 dB is the plain band, late by the latency.
     {
-        OpenEQAudioProcessor plain;
+        auto plainOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& plain = *plainOwner;
         silenceBands (plain);
         configureBand (plain, 0, FilterType::Bell, 1000.0f, 6.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
         prepareStereo (plain, sampleRate, 512);
-        OpenEQAudioProcessor split;
+        auto splitOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& split = *splitOwner;
         makeSplit (split, 6.0f, 0.0f, 0.0f, 0);
 
         auto inA = makeInput (true, true);
@@ -4471,7 +4601,8 @@ static void checkSplitMode()
     {
         auto runSolo = [&] (int solo)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             makeSplit (processor, 0.0f, 0.0f, 0.0f, solo);
             auto input = makeInput (true, true);
             process (processor, input);
@@ -4499,7 +4630,8 @@ static void checkSplitMode()
     {
         auto run = [&] (float transDb, float tailDb, bool tone, bool clicks)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             makeSplit (processor, 0.0f, transDb, tailDb, 0);
             auto input = makeInput (tone, clicks);
             process (processor, input);
@@ -4522,13 +4654,15 @@ static void checkSplitMode()
 
     // State round trip keeps the split settings.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         setRaw (processor.apvts, Params::bandSplitOnID (3), 1.0f);
         setRaw (processor.apvts, Params::bandSplitTransID (3), 4.5f);
         setRaw (processor.apvts, Params::bandSplitTailID (3), -7.0f);
         juce::MemoryBlock state;
         processor.getStateInformation (state);
-        OpenEQAudioProcessor restored;
+        auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& restored = *restoredOwner;
         restored.setStateInformation (state.getData(), (int) state.getSize());
         require (rawValue (restored, Params::bandSplitOnID (3)) == 1.0f, "split on must survive state round trip");
         requireMsg (std::abs (rawValue (restored, Params::bandSplitTransID (3)) - 4.5f) < 0.01f, "transient gain must round trip");
@@ -4537,7 +4671,8 @@ static void checkSplitMode()
 
     // Out of band: stream gains at 1 kHz must not change a 100 Hz tone.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 2.0f, 1, (int) StereoMode::Stereo, true);
         setRaw (processor.apvts, Params::bandSplitOnID (0), 1.0f);
@@ -4558,7 +4693,8 @@ static void checkSplitMode()
 
     // Mid/Side and mono: the streams still add back to the input.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         silenceBands (processor);
         configureBand (processor, 0, FilterType::Bell, 1000.0f, 0.0f, 1.0f, 1, (int) StereoMode::Side, true);
         setRaw (processor.apvts, Params::bandSplitOnID (0), 1.0f);
@@ -4586,7 +4722,8 @@ static void checkSplitMode()
                                     { "analog_zl", "processingMode", 4.0f, 0.0f } };
         for (const auto& item : switches)
         {
-            OpenEQAudioProcessor processor;
+            auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+            auto& processor = *processorOwner;
             silenceBands (processor);
             configureBand (processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
             setRaw (processor.apvts, "spectralThresh", 0.0f);
@@ -5049,7 +5186,8 @@ static void checkResonanceSuppressor()
 
     // Through the plug-in: switching it on reports the latency and stays finite.
     {
-        OpenEQAudioProcessor processor;
+        auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& processor = *processorOwner;
         processor.prepareToPlay (sr, 512);
         setRaw (processor.apvts, "spectralAmount", 0.8f);
         juce::AudioBuffer<float> buffer (2, 512);
@@ -5070,8 +5208,580 @@ static void checkResonanceSuppressor()
     std::cout << "PASS: resonance suppressor reconstruction, selectivity, level independence, controls, focus, stereo, sidechain, timing and delta\n";
 }
 
+// ---------------------------------------------------------------------------------------------------------
+// Settings, preset loading, instance link threads, instance names, the instance menu and editor switching.
+
+/** The settings file the plug-in uses when nothing redirects it. The test runner must never touch it. */
+static juce::File realSettingsFile()
+{
+    juce::PropertiesFile::Options options;
+    options.applicationName = "OpenEQ";
+    options.filenameSuffix = ".xml";
+    options.osxLibrarySubFolder = "Application Support";
+    options.folderName = "OpenEQ";
+    options.storageFormat = juce::PropertiesFile::storeAsXML;
+    options.commonToAllUsers = false;
+    return options.getDefaultFile();
+}
+
+static juce::File testStorageFolder;
+
+static void checkSettingsIsolation()
+{
+    // AppSettings follows the override folder the runner set before first use; presets and the saved
+    // default follow it too, so the suite never writes the user's own files.
+    const auto file = AppSettings::get().settingsFile();
+    std::cout << "  settings_file " << file.getFullPathName() << "\n";
+    require (file.getParentDirectory() == testStorageFolder, "Settings file is not in the test folder");
+    require (file != realSettingsFile(), "Settings file is the user's real file");
+    const bool wheel = AppSettings::get().reverseWheel();
+    AppSettings::get().setReverseWheel (! wheel);
+    require (AppSettings::get().reverseWheel() == ! wheel, "Setting did not change");
+    require (file.existsAsFile(), "Settings were not saved to the redirected file");
+    AppSettings::get().setReverseWheel (wheel);
+
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    require (processorOwner->defaultPresetFile().getParentDirectory() == testStorageFolder,
+             "The saved default is not in the redirected folder");
+    require (processorOwner->userPresetDirectory().getParentDirectory() == testStorageFolder,
+             "The user preset folder is not in the redirected folder");
+
+    // A separate PropertiesFile with the same inter-process lock name reads what the singleton saved.
+    juce::InterProcessLock lock ("OpenEQSettings");
+    juce::PropertiesFile::Options options;
+    options.storageFormat = juce::PropertiesFile::storeAsXML;
+    options.processLock = &lock;
+    AppSettings::get().setKnobWheelSpeed (150.0f);
+    juce::PropertiesFile reader (file, options);
+    require (std::abs (reader.getDoubleValue ("knobWheelSpeed", 0.0) - 150.0) < 1.0e-6, "Locked reader did not see the saved value");
+    AppSettings::get().setKnobWheelSpeed (100.0f);
+    std::cout << "PASS: settings, presets and the saved default use the redirected folder\n";
+}
+
+static void checkPresetLoadFailure()
+{
+    // loadPresetFile used to return true for a broken file. It now reports whether a state was applied.
+    const auto folder = testStorageFolder.getChildFile ("preset-failure");
+    folder.createDirectory();
+    const auto good = folder.getChildFile ("good.opeq");
+    const auto truncated = folder.getChildFile ("truncated.opeq");
+    const auto garbage = folder.getChildFile ("garbage.opeq");
+    const auto empty = folder.getChildFile ("empty.opeq");
+    const auto foreign = folder.getChildFile ("foreign.opeq");
+    {
+        auto sourceOwner = std::make_unique<OpenEQAudioProcessor>();
+        configureBand (*sourceOwner, 3, FilterType::Bell, 2222.0f, 5.5f, 1.4f, 1, (int) StereoMode::Stereo, true);
+        require (sourceOwner->savePresetFile (good), "Preset did not save");
+    }
+    const auto text = good.loadFileAsString();
+    require (text.length() > 200, "Saved preset is unexpectedly short");
+    require (truncated.replaceWithText (text.substring (0, text.length() / 2)), "Could not write the truncated file");
+    juce::MemoryBlock noise;
+    juce::Random random (5);
+    for (int i = 0; i < 4096; ++i)
+    {
+        const auto byte = (juce::uint8) random.nextInt (256);
+        noise.append (&byte, 1);
+    }
+    require (garbage.replaceWithData (noise.getData(), noise.getSize()), "Could not write the garbage file");
+    require (empty.replaceWithText (""), "Could not write the empty file");
+    require (foreign.replaceWithText ("<?xml version=\"1.0\"?>\n<SOMETHING_ELSE a=\"1\"/>\n"), "Could not write the foreign file");
+
+    auto targetOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& target = *targetOwner;
+    setRaw (target.apvts, Params::bandFreqID (3), 777.0f);
+    const auto before = target.apvts.copyState().toXmlString();
+    for (const auto& broken : { truncated, garbage, empty, foreign, folder.getChildFile ("missing.opeq") })
+    {
+        const bool loaded = target.loadPresetFile (broken);
+        std::cout << "  load_" << broken.getFileNameWithoutExtension() << " " << (loaded ? 1 : 0) << "\n";
+        requireMsg (! loaded, "A broken preset reported success: " + broken.getFileName().toStdString());
+        require (target.apvts.copyState().toXmlString() == before, "A broken preset changed the state");
+    }
+    require (target.loadPresetFile (good), "A good preset should load");
+    require (std::abs (rawValue (target, Params::bandFreqID (3)) - 2222.0f) < 0.05f, "The good preset did not apply");
+
+    // A damaged saved default is ignored: new instances start from the parameter defaults.
+    const auto defaultFile = target.defaultPresetFile();
+    require (defaultFile.getParentDirectory() == testStorageFolder, "Default preset is outside the test folder");
+    require (truncated.copyFileTo (defaultFile), "Could not place the damaged default");
+    {
+        auto freshOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto* parameter = freshOwner->apvts.getParameter (Params::bandFreqID (3));
+        require (parameter != nullptr && std::abs (parameter->getValue() - parameter->getDefaultValue()) < 1.0e-6f,
+                 "A damaged default changed a new instance");
+    }
+    require (good.copyFileTo (defaultFile), "Could not place the good default");
+    {
+        auto freshOwner = std::make_unique<OpenEQAudioProcessor>();
+        require (std::abs (rawValue (*freshOwner, Params::bandFreqID (3)) - 2222.0f) < 0.05f, "A good default did not apply");
+    }
+    defaultFile.deleteFile();
+    folder.deleteRecursively();
+    std::cout << "PASS: broken preset files load nothing and report failure; a damaged default is ignored\n";
+}
+
+namespace
+{
+    struct NoOpListener final : juce::AudioProcessorValueTreeState::Listener
+    {
+        void parameterChanged (const juce::String&, float) override {}
+    };
+}
+
+static void checkRelayThreads()
+{
+    // Off the message thread the relay only marks a slot; the message thread writes it. No lock, allocation,
+    // delete or access to the other instance happens on the changing thread, and teardown is message-thread only.
+    auto aOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto bOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& a = *aOwner;
+    auto& b = *bOwner;
+    a.setRemoteTarget (&b);
+    pumpMessages (10);
+
+    const auto onWorker = [] (auto&& fn) { std::thread worker (fn); worker.join(); };
+    onWorker ([&] { setRaw (a.apvts, Params::bandGainID (1), 4.0f); });
+    require (std::abs (rawValue (b, Params::bandGainID (1))) < 1.0e-6f, "A worker-thread change reached the target without the message thread");
+    pumpMessages (80);
+    require (std::abs (rawValue (b, Params::bandGainID (1)) - 4.0f) < 0.01f, "A worker-thread change on A did not reach B");
+    onWorker ([&] { setRaw (b.apvts, Params::bandFreqID (1), 2345.0f); });
+    pumpMessages (80);
+    require (std::abs (rawValue (a, Params::bandFreqID (1)) - 2345.0f) < 0.5f, "A worker-thread change on B did not reach A");
+
+    // Allocation count on the changing thread, linked against a no-op listener baseline on an unlinked instance.
+    const auto countAllocations = [&] (OpenEQAudioProcessor& processor)
+    {
+        long long total = 0;
+        onWorker ([&]
+        {
+            auto* parameter = processor.apvts.getParameter (Params::bandGainID (2));
+            parameter->setValueNotifyingHost (0.3f); // warm up
+            openeqAllocReset();
+            openeqAllocSetArmed (1);
+            for (int i = 0; i < 200; ++i)
+                parameter->setValueNotifyingHost ((float) (i % 50) / 50.0f);
+            openeqAllocSetArmed (0);
+            long long m = 0, c = 0, r = 0;
+            readAlloc (m, c, r);
+            total = m + c + r;
+        });
+        return total;
+    };
+    auto loneOwner = std::make_unique<OpenEQAudioProcessor>();
+    NoOpListener noOp;
+    loneOwner->apvts.addParameterListener (Params::bandGainID (2), &noOp);
+    const long long baseline = countAllocations (*loneOwner);
+    const long long linked = countAllocations (a);
+    loneOwner->apvts.removeParameterListener (Params::bandGainID (2), &noOp);
+    std::cout << "  relay_worker_allocations " << linked << " baseline " << baseline << "\n";
+    require (linked <= baseline, "The relay allocated on the changing thread");
+    pumpMessages (60);
+
+    // Destroying the target while a worker keeps changing A: the worker never touches B, and the message
+    // thread drops the link.
+    std::atomic<bool> stop { false };
+    std::thread automation ([&]
+    {
+        juce::Random random (3);
+        while (! stop.load())
+            setRaw (a.apvts, Params::bandGainID (3), random.nextFloat() * 10.0f - 5.0f);
+    });
+    pumpMessages (30);
+    bOwner.reset();
+    pumpMessages (60);
+    stop = true;
+    automation.join();
+    pumpMessages (30);
+    require (a.getRemoteTarget() == nullptr && a.getRemoteTargetId() == 0, "The message thread did not drop the destroyed link");
+
+    // Stress: link, unlink and destroy targets on the message thread while a worker automates A.
+    int foreign = 0;
+    stop = false;
+    std::thread fuzz ([&]
+    {
+        juce::Random random (11);
+        while (! stop.load())
+            setRaw (a.apvts, Params::bandGainID (4), random.nextFloat() * 6.0f);
+    });
+    for (int round = 0; round < 60; ++round)
+    {
+        auto target = std::make_unique<OpenEQAudioProcessor>();
+        a.setRemoteTarget (target.get());
+        pumpMessages (3);
+        if (round % 3 == 0)
+            a.setRemoteTarget (nullptr);
+        target.reset();
+        // Often created at the destroyed target's address; it must never receive A's edits.
+        auto stranger = std::make_unique<OpenEQAudioProcessor>();
+        const float before = rawValue (*stranger, Params::bandGainID (4));
+        pumpMessages (3);
+        if (std::abs (rawValue (*stranger, Params::bandGainID (4)) - before) > 1.0e-6f)
+            ++foreign;
+    }
+    stop = true;
+    fuzz.join();
+    pumpMessages (30);
+    std::cout << "  relay_stress_rounds 60 foreign_edits " << foreign << "\n";
+    require (foreign == 0, "An unlinked instance received relayed edits");
+    require (a.getRemoteTarget() == nullptr, "Link to a destroyed target survived");
+    std::cout << "PASS: relays off the message thread are written by the message thread; teardown stays there\n";
+}
+
+static OpenEQAudioProcessor::TrackProperties trackNamed (const juce::String& name)
+{
+    OpenEQAudioProcessor::TrackProperties properties;
+    properties.name = name;
+    return properties;
+}
+
+static void checkInstanceNames()
+{
+    // The naming rule on its own.
+    {
+        std::vector<InstanceRegistry::Summary> list (4);
+        for (int i = 0; i < 4; ++i)
+        {
+            list[(size_t) i].id = i + 1;
+            list[(size_t) i].fallbackName = "Instance " + juce::String (i + 1);
+        }
+        list[0].trackName = "Vocals";
+        list[1].trackName = "Vocals";
+        list[3].trackName = "Vocals";
+        InstanceRegistry::assignDisplayNames (list);
+        require (list[0].name == "Vocals" && list[1].name == "Vocals (2)" && list[3].name == "Vocals (3)",
+                 "Duplicate track names should get (2), (3)");
+        require (list[2].name == "Instance 3", "An empty track name should show the fallback");
+    }
+
+    auto aOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto bOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto cOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& a = *aOwner;
+    auto& b = *bOwner;
+    auto& c = *cOwner;
+    require (a.getInstanceName().startsWith ("Instance "), "An unnamed instance should use the fallback");
+    const auto fallbackA = a.getInstanceName();
+
+    const auto generation = InstanceRegistry::get().getGeneration();
+    a.updateTrackProperties (trackNamed ("Bass"));
+    require (InstanceRegistry::get().getGeneration() != generation, "A rename should change the registry generation");
+    require (a.getInstanceName() == "Bass", "The track name should become the instance name");
+    b.updateTrackProperties (trackNamed ("Bass"));
+    require (a.getInstanceName() == "Bass" && b.getInstanceName() == "Bass (2)", "The second Bass should be Bass (2)");
+    require (c.getInstanceName().startsWith ("Instance "), "An instance without a track name keeps its fallback");
+
+    // Rename: A moves to another track, so B is the only Bass left.
+    a.updateTrackProperties (trackNamed ("Drums"));
+    require (a.getInstanceName() == "Drums" && b.getInstanceName() == "Bass", "A rename should update the names");
+
+    // Colour, and an empty name returning to the fallback.
+    OpenEQAudioProcessor::TrackProperties coloured;
+    coloured.name = "  Keys  ";
+    coloured.colour = juce::Colour (0xff3366cc);
+    c.updateTrackProperties (coloured);
+    bool sawColour = false;
+    for (const auto& entry : InstanceRegistry::get().snapshot())
+        if (entry.id == c.getInstanceId())
+            sawColour = entry.hasTrackColour && entry.trackColour == 0xff3366cc && entry.name == "Keys";
+    require (sawColour, "The track colour and trimmed name should be stored");
+    a.updateTrackProperties (OpenEQAudioProcessor::TrackProperties {});
+    require (a.getInstanceName() == fallbackA, "An empty track name should return to the fallback");
+    const auto unchanged = InstanceRegistry::get().getGeneration();
+    a.updateTrackProperties (OpenEQAudioProcessor::TrackProperties {});
+    require (InstanceRegistry::get().getGeneration() == unchanged, "Repeating the same properties should not count as a change");
+
+    // Fallbacks come from the id, so they never repeat after an instance closes.
+    require (c.getInstanceName() == "Keys" && fallbackA == "Instance " + juce::String (a.getInstanceId()),
+             "The fallback should be Instance <id>");
+
+    // Typed name: wins over the track name, survives the session round trip, stays out of A/B and presets.
+    a.updateTrackProperties (trackNamed ("Drums"));
+    a.setUserInstanceName ("  Kick  ");
+    require (a.getInstanceName() == "Kick", "The typed name should win over the track name");
+    juce::MemoryBlock session;
+    a.getStateInformation (session);
+    {
+        auto restoredOwner = std::make_unique<OpenEQAudioProcessor>();
+        restoredOwner->setStateInformation (session.getData(), (int) session.getSize());
+        require (restoredOwner->getUserInstanceName() == "Kick", "The typed name should load with the session");
+        require (! restoredOwner->apvts.state.hasProperty ("instanceName"), "The typed name must not enter the parameter tree");
+        restoredOwner->switchAB();
+        restoredOwner->switchAB();
+        require (! restoredOwner->apvts.state.hasProperty ("instanceName") && restoredOwner->getUserInstanceName() == "Kick",
+                 "A/B switching must not touch the typed name");
+        // A state without the property (older session, preset) leaves the name alone.
+        juce::MemoryBlock older;
+        auto plainOwner = std::make_unique<OpenEQAudioProcessor>();
+        plainOwner->getStateInformation (older);
+        restoredOwner->setStateInformation (older.getData(), (int) older.getSize());
+        require (restoredOwner->getUserInstanceName() == "Kick", "A session without a name should not clear it");
+        const auto presetFile = testStorageFolder.getChildFile ("named.opeq");
+        require (a.savePresetFile (presetFile) && ! presetFile.loadFileAsString().contains ("instanceName"),
+                 "Presets must not carry the instance name");
+        presetFile.deleteFile();
+    }
+    a.setUserInstanceName ({});
+    require (a.getInstanceName() == "Drums", "Clearing the typed name should return to the track name");
+
+    // Suffixes loop until unused: Vox, Vox, Vox (2) give three different rows.
+    {
+        std::vector<InstanceRegistry::Summary> list (3);
+        for (int i = 0; i < 3; ++i)
+            list[(size_t) i].id = i + 1;
+        list[0].trackName = "Vox";
+        list[1].trackName = "Vox";
+        list[2].trackName = "Vox (2)";
+        InstanceRegistry::assignDisplayNames (list);
+        require (list[0].name != list[1].name && list[1].name != list[2].name && list[0].name != list[2].name,
+                 "Display names must be unique");
+        std::cout << "  vox_names " << list[0].name << " | " << list[1].name << " | " << list[2].name << "\n";
+    }
+
+    // Closing B removes it from the list.
+    const int bId = b.getInstanceId();
+    bOwner.reset();
+    require (InstanceRegistry::get().displayName (bId).isEmpty() && InstanceRegistry::get().processorFor (bId) == nullptr,
+             "A closed instance should leave the registry");
+    std::cout << "PASS: instance names follow the host track name, fall back to Instance N and number duplicates\n";
+}
+
+static void checkInstanceMenuModel()
+{
+    std::vector<InstanceRegistry::Summary> entries (3);
+    entries[0].id = 5; entries[0].fallbackName = "Instance 1"; entries[0].trackName = "Bass";
+    entries[1].id = 7; entries[1].fallbackName = "Instance 2"; entries[1].trackName = "Lead";
+    entries[1].hasTrackColour = true; entries[1].trackColour = 0xffaa2200;
+    entries[2].id = 9; entries[2].fallbackName = "Instance 3";
+    InstanceRegistry::assignDisplayNames (entries);
+
+    const auto model = InstanceMenu::build (entries, 5, 7, 9);
+    require (model.rows.size() == 3 && model.emptyNote.isEmpty(), "Every instance should be listed");
+    require (model.rows[0].label == "Bass" && model.rows[0].isOwn && ! model.rows[0].isControlled, "Own row");
+    require (model.rows[1].label == "Lead" && model.rows[1].isControlled && model.rows[1].hasColour
+             && model.rows[1].colour == juce::Colour (0xffaa2200), "Controlled row with colour");
+    require (model.rows[2].label == "Instance 3" && model.rows[2].isLinked && ! model.rows[2].hasColour, "Linked row");
+    require (InstanceMenu::switchLabel (model.rows[0]).contains ("this plug-in")
+             && InstanceMenu::switchLabel (model.rows[1]) == "Lead", "Switch labels");
+
+    using Kind = InstanceMenu::Choice::Kind;
+    const auto sw = InstanceMenu::decode (model, InstanceMenu::switchItemBase + 1);
+    require (sw.kind == Kind::Switch && sw.instanceId == 7, "Switch item should decode to its id");
+    const auto own = InstanceMenu::decode (model, InstanceMenu::switchItemBase + 0);
+    require (own.kind == Kind::Switch && own.instanceId == 5, "Own row should switch back");
+    const auto link = InstanceMenu::decode (model, InstanceMenu::linkItemBase + 2);
+    require (link.kind == Kind::Link && link.instanceId == 9, "Link item should decode to its id");
+    require (InstanceMenu::decode (model, InstanceMenu::linkItemBase + 0).kind == Kind::None, "Linking to itself is not offered");
+    require (InstanceMenu::decode (model, InstanceMenu::unlinkItem).kind == Kind::Unlink, "Unlink item");
+    require (InstanceMenu::decode (model, 0).kind == Kind::None, "Dismissed menu");
+    require (InstanceMenu::decode (model, InstanceMenu::switchItemBase + 3).kind == Kind::None, "Out of range");
+
+    const auto rename = InstanceMenu::decode (model, InstanceMenu::renameItem);
+    require (rename.kind == Kind::Rename && rename.instanceId == 7, "Rename should target the controlled instance");
+
+    const auto alone = InstanceMenu::build ({ entries[0] }, 5, 5, 0);
+    require (alone.rows.size() == 1 && alone.emptyNote.contains ("own process"), "Alone: empty-state note about isolated hosts");
+    std::cout << "PASS: instance menu model lists every instance by name and decodes ids\n";
+}
+
+static void checkInstanceSwitching()
+{
+    auto aOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto bOwner = std::make_unique<OpenEQAudioProcessor>();
+    auto& a = *aOwner;
+    auto& b = *bOwner;
+    for (auto* processor : { &a, &b })
+    {
+        silenceBands (*processor);
+        configureBand (*processor, 0, FilterType::Bell, 1000.0f, 3.0f, 1.0f, 1, (int) StereoMode::Stereo, true);
+        setRaw (processor->apvts, Params::bandShownID (0), 1.0f);
+        setRaw (processor->apvts, Params::bandDynOnID (0), 0.0f);
+    }
+    a.updateTrackProperties (trackNamed ("Drums"));
+    b.updateTrackProperties (trackNamed ("Lead"));
+
+    auto editor = std::make_unique<OpenEQAudioProcessorEditor> (a);
+    editor->setSize (1500, 860);
+    pumpMessages (60);
+    require (editor->getControlledInstanceId() == a.getInstanceId(), "The editor should start on its own instance");
+    require (editor->getView()->getBadgeText() == "Drums", "The badge should show the track name");
+
+    // Switch through the menu path: decode, apply, and nothing happens until the message loop runs.
+    const auto model = InstanceMenu::build (InstanceRegistry::get().snapshot(), a.getInstanceId(), a.getInstanceId(), 0);
+    int bRow = -1;
+    for (size_t i = 0; i < model.rows.size(); ++i)
+        if (model.rows[i].instanceId == b.getInstanceId())
+            bRow = (int) i;
+    require (bRow >= 0 && model.rows[(size_t) bRow].label == "Lead", "B should be listed as Lead");
+    editor->applyInstanceChoice (InstanceMenu::decode (model, InstanceMenu::switchItemBase + bRow));
+    require (editor->getControlledInstanceId() == a.getInstanceId() && editor->getViewRebuilds() == 0,
+             "The switch must not run inside the menu callback");
+    pumpMessages (40);
+    require (editor->getControlledInstanceId() == b.getInstanceId() && editor->isControllingOtherInstance(), "The editor should control B");
+    require (editor->getView()->getBadgeText() == "EDITING Lead", "The badge should name the edited instance");
+
+    // Edits from this window go to B, not A.
+    auto* bandPanel = findDescendant<BandControlPanel> (*editor);
+    require (bandPanel != nullptr, "Band panel missing after the switch");
+    auto* dToggle = findButtonByText (*bandPanel, "D");
+    require (dToggle != nullptr, "D toggle missing after the switch");
+    dToggle->triggerClick();
+    pumpMessages (40);
+    require (rawValue (b, Params::bandDynOnID (0)) > 0.5f, "A click in the switched window should edit B");
+    require (rawValue (a, Params::bandDynOnID (0)) < 0.5f, "A click in the switched window must not edit A");
+
+    // The old view is gone: changing every A parameter, here and from another thread, reaches no stale listener.
+    const auto savedA = a.apvts.copyState();
+    for (const auto& id : Params::bandParameterIDs (0))
+        if (auto* parameter = a.apvts.getParameter (id))
+            parameter->setValueNotifyingHost (1.0f - parameter->getValue());
+    std::thread automation ([&]
+    {
+        for (int round = 0; round < 20; ++round)
+            for (const auto& id : Params::bandParameterIDs (1))
+                if (auto* parameter = a.apvts.getParameter (id))
+                    parameter->setValueNotifyingHost ((float) (round % 7) / 7.0f);
+    });
+    automation.join();
+    pumpMessages (40);
+    a.apvts.replaceState (savedA);
+    pumpMessages (20);
+
+    // A rename reaches the badge through the view's timer.
+    b.updateTrackProperties (trackNamed ("Keys"));
+    pumpMessages (300);
+    require (editor->getView()->getBadgeText() == "EDITING Keys", "The badge should follow a rename");
+
+    // Back to the own instance.
+    editor->showInstance (a.getInstanceId());
+    pumpMessages (40);
+    require (editor->getControlledInstanceId() == a.getInstanceId() && ! editor->isControllingOtherInstance(), "Switch back failed");
+    require (editor->getView()->getBadgeText() == "Drums", "The badge should show the own name again");
+
+    // Closing the controlled instance while it is selected: the window returns to its own instance at once.
+    editor->showInstance (b.getInstanceId());
+    pumpMessages (40);
+    require (editor->getControlledInstanceId() == b.getInstanceId(), "Second switch to B failed");
+    const int bId = b.getInstanceId();
+    bOwner.reset();
+    // Inside B's destructor the window only dropped its view; it rebuilds its own view on a later turn.
+    require (editor->getControlledInstanceId() == a.getInstanceId(), "Closing the controlled instance should return the window to its own");
+    require (editor->getView() == nullptr, "The closing path must not build a view inside the destructor");
+    pumpMessages (40);
+    require (editor->getView() != nullptr && &editor->getView()->getProcessor() == &a, "The own view should be rebuilt later");
+    bandPanel = findDescendant<BandControlPanel> (*editor);
+    dToggle = bandPanel != nullptr ? findButtonByText (*bandPanel, "D") : nullptr;
+    require (dToggle != nullptr, "Band panel missing after the return");
+    const bool before = rawValue (a, Params::bandDynOnID (0)) > 0.5f;
+    dToggle->triggerClick();
+    pumpMessages (40);
+    require ((rawValue (a, Params::bandDynOnID (0)) > 0.5f) != before, "The returned window should edit A");
+
+    // A closed instance chosen from a menu built before it closed is ignored.
+    const int rebuilds = editor->getViewRebuilds();
+    InstanceMenu::Choice stale;
+    stale.kind = InstanceMenu::Choice::Kind::Switch;
+    stale.instanceId = bId;
+    editor->applyInstanceChoice (stale);
+    pumpMessages (40);
+    require (editor->getControlledInstanceId() == a.getInstanceId() && editor->getViewRebuilds() == rebuilds,
+             "A closed instance should not be selectable");
+    // The same for a switch requested just before the target closes.
+    {
+        auto cOwner = std::make_unique<OpenEQAudioProcessor>();
+        editor->showInstance (cOwner->getInstanceId());
+        cOwner.reset();
+        pumpMessages (40);
+        require (editor->getControlledInstanceId() == a.getInstanceId(), "A switch to an instance that closed first should do nothing");
+    }
+
+    // A window whose own instance is B-like (C) visits A and returns, then A is destroyed while C's window lives.
+    {
+        auto cOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto other = std::make_unique<OpenEQAudioProcessorEditor> (*cOwner);
+        other->setSize (1500, 860);
+        auto spareOwner = std::make_unique<OpenEQAudioProcessor>();
+        other->showInstance (spareOwner->getInstanceId());
+        pumpMessages (40);
+        require (other->getControlledInstanceId() == spareOwner->getInstanceId(), "C's window should control the spare instance");
+        other->showInstance (cOwner->getInstanceId());
+        pumpMessages (40);
+        spareOwner.reset();
+        pumpMessages (40);
+        other.reset();
+        pumpMessages (20);
+    }
+
+    // Destroyed on a worker thread while this window shows it, as some hosts do.
+    {
+        auto workerOwned = std::make_unique<OpenEQAudioProcessor>();
+        editor->showInstance (workerOwned->getInstanceId());
+        pumpMessages (40);
+        require (editor->getControlledInstanceId() == workerOwned->getInstanceId(), "Switch to the worker-owned instance failed");
+        std::atomic<bool> done { false };
+        std::thread destroyer ([&] { workerOwned.reset(); done = true; });
+        while (! done.load())
+            pumpMessages (5); // the destructor waits for the message manager lock
+        destroyer.join();
+        require (editor->getControlledInstanceId() == a.getInstanceId(), "Worker destruction should return the window to its own");
+        pumpMessages (40);
+        require (editor->getView() != nullptr && &editor->getView()->getProcessor() == &a, "Own view missing after worker destruction");
+        bandPanel = findDescendant<BandControlPanel> (*editor);
+        dToggle = bandPanel != nullptr ? findButtonByText (*bandPanel, "D") : nullptr;
+        require (dToggle != nullptr, "Band panel missing after worker destruction");
+        const bool was = rawValue (a, Params::bandDynOnID (0)) > 0.5f;
+        dToggle->triggerClick();
+        pumpMessages (40);
+        require ((rawValue (a, Params::bandDynOnID (0)) > 0.5f) != was, "The window should edit A after worker destruction");
+    }
+
+    // Shared monitoring state is reset only when the last view of a processor closes.
+    {
+        auto sharedOwner = std::make_unique<OpenEQAudioProcessor>();
+        auto& shared = *sharedOwner;
+        auto ownWindow = std::make_unique<OpenEQAudioProcessorEditor> (shared);
+        ownWindow->setSize (1500, 860);
+        editor->showInstance (shared.getInstanceId());
+        pumpMessages (40);
+        require (shared.getOpenViewCount() == 2, "Two views should be open on the shared processor");
+        shared.setMonitorMode (2);
+        editor->showInstance (a.getInstanceId());
+        pumpMessages (40);
+        require (shared.getOpenViewCount() == 1 && shared.getMonitorMode() == 2, "Closing one of two views must not reset monitoring");
+        ownWindow.reset();
+        require (shared.getOpenViewCount() == 0 && shared.getMonitorMode() == 0, "The last view should reset monitoring");
+    }
+
+    // Rename through the editor: the typed name wins over the track name.
+    require (editor->renameInstance (a.getInstanceId(), "My Drums") && a.getInstanceName() == "My Drums", "Rename failed");
+    pumpMessages (300);
+    require (editor->getView()->getBadgeText() == "My Drums", "The badge should show the typed name");
+    require (! editor->renameInstance (bId, "Gone"), "Renaming a closed instance should fail");
+    a.setUserInstanceName ({});
+
+    std::cout << "  instance_switch_rebuilds " << editor->getViewRebuilds() << "\n";
+    editor.reset();
+    pumpMessages (20);
+    std::cout << "PASS: the editor switches to another instance by id, edits it, follows renames and survives its closing\n";
+}
+
 int main (int argc, char** argv)
 {
+    // Before anything uses AppSettings or creates a processor: the suite keeps its settings, presets and
+    // saved default in a temporary folder and must leave the user's real settings file alone.
+    testStorageFolder = juce::File::getSpecialLocation (juce::File::tempDirectory)
+                            .getChildFile ("OpenEQTests-" + juce::String (juce::Time::getHighResolutionTicks()));
+    testStorageFolder.createDirectory();
+    AppSettings::setStorageFolderOverride (testStorageFolder);
+    const auto realFile = realSettingsFile();
+    const auto realState = [&realFile]
+    {
+        return realFile.existsAsFile()
+                   ? juce::String (realFile.getSize()) + ":" + juce::String (realFile.getLastModificationTime().toMilliseconds())
+                         + ":" + juce::String (realFile.loadFileAsString().hashCode64())
+                   : juce::String ("absent");
+    };
+    const auto realBefore = realState();
     juce::ScopedJuceInitialiser_GUI initialise;
     std::cout << std::setprecision (8);
     std::cout << "MEASUREMENTS\n";
@@ -5142,6 +5852,21 @@ int main (int argc, char** argv)
     run ("dynamics-click-rebuild", checkDynamicsClickRebuild);
     run ("band-select-no-writes", checkBandSelectionWritesNothing);
     run ("phase-modes", checkPhaseModes);
+    run ("settings-isolation", checkSettingsIsolation);
+    run ("preset-load-failure", checkPresetLoadFailure);
+    run ("relay-threads", checkRelayThreads);
+    run ("instance-names", checkInstanceNames);
+    run ("instance-menu", checkInstanceMenuModel);
+    run ("instance-switch", checkInstanceSwitching);
+
+    // The user's settings file must be exactly as it was.
+    const auto realAfter = realState();
+    if (realAfter != realBefore)
+    {
+        std::cerr << "FAIL: settings-isolation: the real settings file changed (" << realBefore << " -> " << realAfter << ")\n";
+        ++failures;
+    }
+    testStorageFolder.deleteRecursively();
 
     if (failures != 0)
     {
