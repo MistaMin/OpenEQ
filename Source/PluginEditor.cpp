@@ -306,22 +306,15 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
                                                 processorRef.getInstanceId(), own.getRemoteTargetId());
         juce::PopupMenu menu;
         menu.addSectionHeader ("Edit in this window");
-        const auto swatch = [] (juce::Colour colour)
-        {
-            auto drawable = std::make_unique<juce::DrawableRectangle>();
-            drawable->setRectangle (juce::Parallelogram<float> (juce::Rectangle<float> (0.0f, 0.0f, 12.0f, 12.0f)));
-            drawable->setCornerSize ({ 2.0f, 2.0f });
-            drawable->setFill (juce::FillType (colour));
-            return drawable;
-        };
+        // The popup draws with the default look and feel, so its tick colour comes from there.
+        const auto tickColour = juce::LookAndFeel::getDefaultLookAndFeel().findColour (juce::PopupMenu::textColourId);
         for (size_t i = 0; i < model.rows.size(); ++i)
         {
             const auto& row = model.rows[i];
             juce::PopupMenu::Item item (InstanceMenu::switchLabel (row));
             item.itemID = InstanceMenu::switchItemBase + (int) i;
             item.isTicked = row.isControlled;
-            if (row.hasColour)
-                item.image = swatch (row.colour);
+            item.image = InstanceMenu::rowIcon (row, tickColour);
             menu.addItem (std::move (item));
         }
         menu.addSeparator();
@@ -818,8 +811,8 @@ void OpenEQEditorView::applyGuiScale (float newScale)
 
 void OpenEQEditorView::resized()
 {
-    // The stage keeps the window's full size and draws at the GUI scale. Layout below uses unscaled coordinates.
-    stage.setBounds (getLocalBounds());
+    // The stage has the unscaled size; its scale transform makes it fill the window. Layout below is unscaled.
+    stage.setBounds (logicalBounds());
     stage.setTransform (juce::AffineTransform::scale (guiScale));
     auto bounds = logicalBounds();
     if (settingsPanel != nullptr && settingsPanel->isVisible())

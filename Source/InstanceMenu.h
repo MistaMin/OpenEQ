@@ -73,6 +73,33 @@ namespace InstanceMenu
         return row.isOwn ? row.label + "  (this plug-in)" : row.label;
     }
 
+    /** Leading icon of a row in the "edit in this window" list: the host's track colour, after a tick on the
+        edited row. The menu draws an icon in place of its tick, so the tick is part of the icon. Null without
+        a track colour (the menu then draws its own tick). */
+    inline std::unique_ptr<juce::Drawable> rowIcon (const Row& row, juce::Colour tickColour)
+    {
+        if (! row.hasColour)
+            return nullptr;
+        auto icon = std::make_unique<juce::DrawableComposite>();
+        float x = 0.0f;
+        if (row.isControlled)
+        {
+            auto tickPath = juce::LookAndFeel::getDefaultLookAndFeel().getTickShape (1.0f);
+            tickPath.applyTransform (tickPath.getTransformToScaleToFit ({ 0.0f, 0.0f, 12.0f, 12.0f }, true));
+            auto* tick = new juce::DrawablePath();
+            tick->setPath (tickPath);
+            tick->setFill (juce::FillType (tickColour));
+            icon->addAndMakeVisible (tick);
+            x = 15.0f;
+        }
+        auto* swatch = new juce::DrawableRectangle();
+        swatch->setRectangle (juce::Parallelogram<float> (juce::Rectangle<float> (x, 0.0f, 12.0f, 12.0f)));
+        swatch->setCornerSize ({ 2.0f, 2.0f });
+        swatch->setFill (juce::FillType (row.colour));
+        icon->addAndMakeVisible (swatch);
+        return icon;
+    }
+
     struct Choice
     {
         enum class Kind { None, Switch, Link, Unlink, Rename };

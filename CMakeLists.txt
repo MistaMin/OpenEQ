@@ -18,6 +18,18 @@ FetchContent_MakeAvailable(JUCE)
 set(GOODLOOKINUI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/third_party/GoodLookinUI")
 add_subdirectory("${GOODLOOKINUI_ROOT}" "${CMAKE_CURRENT_BINARY_DIR}/goodlookinui")
 
+# Optional AAX: the SDK sits next to the repository and is never committed. The build does not install the
+# AAX bundle (Pro Tools needs it PACE-signed first); it is copied to the build tree only.
+set(OPENEQ_AAX_SDK "${CMAKE_CURRENT_SOURCE_DIR}/../aax-sdk-2-8-1" CACHE PATH "Optional AAX SDK")
+option(OPENEQ_BUILD_AAX "Build the AAX format when the SDK is available" OFF)
+set(OPENEQ_FORMATS AU VST3 Standalone)
+if(OPENEQ_BUILD_AAX AND (APPLE OR WIN32) AND EXISTS "${OPENEQ_AAX_SDK}/Interfaces/AAX.h")
+    juce_set_aax_sdk_path("${OPENEQ_AAX_SDK}")
+    list(APPEND OPENEQ_FORMATS AAX)
+elseif(OPENEQ_BUILD_AAX)
+    message(WARNING "OPENEQ_BUILD_AAX is ON but no AAX SDK was found at ${OPENEQ_AAX_SDK}; AAX is not built")
+endif()
+
 juce_add_plugin(OpenEQ
     COMPANY_NAME "OpenEQ"
     IS_SYNTH FALSE
@@ -28,7 +40,9 @@ juce_add_plugin(OpenEQ
     COPY_PLUGIN_AFTER_BUILD TRUE
     PLUGIN_MANUFACTURER_CODE Opeq
     PLUGIN_CODE Opq1
-    FORMATS AU VST3 Standalone
+    FORMATS ${OPENEQ_FORMATS}
+    AAX_CATEGORY AAX_ePlugInCategory_EQ
+    AAX_COPY_DIR "${CMAKE_CURRENT_BINARY_DIR}/AAX-not-installed"
     PRODUCT_NAME "OpenEQ")
 
 juce_generate_juce_header(OpenEQ)

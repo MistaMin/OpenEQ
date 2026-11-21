@@ -5584,6 +5584,97 @@ static void checkInstanceMenuModel()
     std::cout << "PASS: instance menu model lists every instance by name and decodes ids\n";
 }
 
+static void checkInstanceMenuTick()
+{
+    // A host track colour used to replace the tick of the edited row: the menu draws an icon in the tick's place.
+    juce::LookAndFeel_V4 lookAndFeel;
+    const auto tickColour = lookAndFeel.findColour (juce::PopupMenu::textColourId);
+    const juce::Colour swatchColour (0xff00c040);
+    const auto drawRow = [&] (const InstanceMenu::Row& row, int& tickPixels, int& swatchPixels)
+    {
+        juce::Image image (juce::Image::ARGB, 240, 24, true);
+        {
+            juce::Graphics g (image);
+            g.fillAll (juce::Colours::black);
+            const auto icon = InstanceMenu::rowIcon (row, tickColour);
+            lookAndFeel.drawPopupMenuItem (g, image.getBounds(), false, true, false, row.isControlled, false,
+                                           row.label, {}, icon.get(), &tickColour);
+        }
+        const auto near = [] (juce::Colour a, juce::Colour b)
+        {
+            return std::abs (a.getRed() - b.getRed()) < 40 && std::abs (a.getGreen() - b.getGreen()) < 40
+                && std::abs (a.getBlue() - b.getBlue()) < 40;
+        };
+        tickPixels = swatchPixels = 0;
+        for (int y = 0; y < image.getHeight(); ++y)
+            for (int x = 0; x < 30; ++x) // the icon or tick slot, left of the text
+            {
+                const auto pixel = image.getPixelAt (x, y);
+                tickPixels += near (pixel, tickColour) ? 1 : 0;
+                swatchPixels += near (pixel, swatchColour) ? 1 : 0;
+            }
+    };
+    InstanceMenu::Row row;
+    row.label = "Vocal Main";
+    row.hasColour = true;
+    row.colour = swatchColour;
+    row.isControlled = true;
+    int tick = 0, swatch = 0;
+    drawRow (row, tick, swatch);
+    std::cout << "  inst_menu_edited_coloured tick_px " << tick << " swatch_px " << swatch << "\n";
+    require (tick >= 4 && swatch >= 20, "The edited row with a track colour should show the tick and the swatch");
+    row.isControlled = false;
+    drawRow (row, tick, swatch);
+    require (tick == 0 && swatch >= 20, "Other coloured rows show only the swatch");
+    row.hasColour = false;
+    row.isControlled = true;
+    drawRow (row, tick, swatch);
+    require (tick >= 4 && swatch == 0, "The edited row without a colour shows the menu's own tick");
+    std::cout << "PASS: the instance menu ticks the edited row with or without a track colour\n";
+}
+
+static void checkGuiScaleFillsWindow()
+{
+    // At 80% and 90% the stage kept the window's size, so its scaled drawing covered only part of the window
+    // and the controls beyond the stage's edge (output column, BYPASS, Full, Settings) were cut off.
+    auto& settings = AppSettings::get();
+    const int scaleBefore = settings.guiScalePercent();
+    auto processorOwner = std::make_unique<OpenEQAudioProcessor>();
+    for (const int percent : { 80, 90, 100, 110, 125, 150 })
+    {
+        settings.setGuiScalePercent (percent);
+        auto editor = std::make_unique<OpenEQAudioProcessorEditor> (*processorOwner);
+        pumpMessages (40);
+        const auto window = editor->getLocalBounds();
+        auto* stage = findDescendant<EditorStage> (*editor);
+        auto* settingsButton = findButtonByText (*editor, "Settings");
+        auto* output = findDescendant<OutputColumn> (*editor);
+        require (stage != nullptr && settingsButton != nullptr && output != nullptr, "Editor parts missing");
+        const auto drawn = editor->getLocalArea (stage, stage->getLocalBounds());
+        const auto settingsArea = editor->getLocalArea (settingsButton, settingsButton->getLocalBounds());
+        const auto outputArea = editor->getLocalArea (output, output->getLocalBounds());
+        std::cout << "  gui_scale " << percent << " window " << window.toString() << " stage_drawn " << drawn.toString()
+                  << " settings " << settingsArea.toString() << " output " << outputArea.toString() << "\n";
+        requireMsg (std::abs (drawn.getWidth() - window.getWidth()) <= 1 && std::abs (drawn.getHeight() - window.getHeight()) <= 1,
+                    "The scaled stage should fill the window at " + std::to_string (percent) + "%");
+        for (auto* part : { static_cast<juce::Component*> (settingsButton), static_cast<juce::Component*> (output) })
+            requireMsg (stage->getLocalBounds().contains (part->getBounds()) && window.contains (editor->getLocalArea (part, part->getLocalBounds())),
+                        "Settings and the output column should be inside the window at " + std::to_string (percent) + "%");
+
+        // The editor's own rendering: the right edge of the window shows the output column, not bare background.
+        const auto snapshot = editor->createComponentSnapshot (window, true, 1.0f);
+        int drawnPixels = 0, strip = 0;
+        for (int y = 0; y < snapshot.getHeight(); y += 2)
+            for (int x = snapshot.getWidth() - 60; x < snapshot.getWidth(); x += 2, ++strip)
+                drawnPixels += snapshot.getPixelAt (x, y) != Theme::chassisBottom ? 1 : 0;
+        requireMsg (drawnPixels * 10 > strip, "The right edge should be drawn at " + std::to_string (percent) + "%");
+        editor.reset();
+        pumpMessages (10);
+    }
+    settings.setGuiScalePercent (scaleBefore);
+    std::cout << "PASS: every GUI scale fills the window and keeps Settings and the output column inside it\n";
+}
+
 static void checkInstanceSwitching()
 {
     auto aOwner = std::make_unique<OpenEQAudioProcessor>();
@@ -5858,6 +5949,8 @@ int main (int argc, char** argv)
     run ("instance-names", checkInstanceNames);
     run ("instance-menu", checkInstanceMenuModel);
     run ("instance-switch", checkInstanceSwitching);
+    run ("instance-menu-tick", checkInstanceMenuTick);
+    run ("gui-scale", checkGuiScaleFillsWindow);
 
     // The user's settings file must be exactly as it was.
     const auto realAfter = realState();
