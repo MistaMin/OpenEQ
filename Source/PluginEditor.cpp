@@ -183,10 +183,13 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
 
     oversampleButton.setTooltip ("2x oversampling: the processing runs at twice the rate. Reports its latency. Costs more CPU.");
     oversampleButton.setClickingTogglesState (true);
-    oversampleButton.setToggleState (p.isOversampling2x(), juce::dontSendNotification);
     oversampleButton.setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xff1d9fc6));
     oversampleButton.setColour (juce::TextButton::buttonColourId, juce::Colour (0xff232b30));
     oversampleButton.onClick = [this] { processorRef.setOversampling2x (oversampleButton.getToggleState()); };
+    // Follows the parameter when the host changes it (automation, session load, undo).
+    oversampleAttachment = std::make_unique<juce::ParameterAttachment> (*p.apvts.getParameter ("oversample2x"),
+        [this] (float value) { oversampleButton.setToggleState (value > 0.5f, juce::dontSendNotification); });
+    oversampleAttachment->sendInitialUpdate();
     stage.addAndMakeVisible (oversampleButton);
 
     settingsButton.setTooltip ("Global settings: wheel direction, knob speed, floating controller, refresh rate, favourites.");

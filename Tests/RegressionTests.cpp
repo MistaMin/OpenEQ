@@ -5675,6 +5675,23 @@ static void checkGuiScaleFillsWindow()
     std::cout << "PASS: every GUI scale fills the window and keeps Settings and the output column inside it\n";
 }
 
+static void checkOversampleButtonFollowsParameter()
+{
+    auto owner = std::make_unique<OpenEQAudioProcessor>();
+    auto editor = std::make_unique<OpenEQAudioProcessorEditor> (*owner);
+    pumpMessages (40);
+    auto* button = findButtonByText (*editor, "2x OVERSAMPLE");
+    require (button != nullptr, "The oversample button is missing");
+    require (! button->getToggleState(), "Oversampling starts off");
+    setRaw (owner->apvts, "oversample2x", 1.0f); // what a host does on automation or session load
+    pumpMessages (40);
+    require (button->getToggleState(), "The button should follow the parameter when it is switched on");
+    setRaw (owner->apvts, "oversample2x", 0.0f);
+    pumpMessages (40);
+    require (! button->getToggleState(), "The button should follow the parameter when it is switched off");
+    std::cout << "PASS: the 2x oversample button follows its parameter\n";
+}
+
 static void checkInstanceSwitching()
 {
     auto aOwner = std::make_unique<OpenEQAudioProcessor>();
@@ -5950,6 +5967,7 @@ int main (int argc, char** argv)
     run ("instance-menu", checkInstanceMenuModel);
     run ("instance-switch", checkInstanceSwitching);
     run ("instance-menu-tick", checkInstanceMenuTick);
+    run ("oversample-button", checkOversampleButtonFollowsParameter);
     run ("gui-scale", checkGuiScaleFillsWindow);
 
     // The user's settings file must be exactly as it was.

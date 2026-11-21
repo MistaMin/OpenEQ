@@ -22,7 +22,7 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## Checks this release passed
 
-- Regression suite: 55 of 55, exit 0, repeated runs in Release and one in Debug.
+- Regression suite: 58 of 58, exit 0, repeated runs in Release and one in Debug.
 - Audio Unit validation (`auval`).
 - VST3 and Audio Unit validators at strictness 10, including their editor tests.
 
@@ -43,7 +43,6 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 - Some tooltips do not match the control ranges; default Output Gain can read "-0.0".
 - The RMS and input level bars depend on the host buffer size.
 - Automated validators can time out under heavy machine load; raise their time limit.
-- At GUI scale 80% or 90% the editor is drawn at full size in the smaller window and is cut off: the output column and the Settings button are not reachable. The scale is shared by all instances. If it happens, delete `OpenEQ.xml` in `~/Library/Application Support/OpenEQ/` to return to 100%. 100%, 110% and 125% are fine.
 - The mirror (link) part of the instance menu, other hosts' track-name behaviour, native popups with a real mouse, the Standalone launch and old projects in a real host were not covered by testing. Where a host sends no track names, use Rename.
 
 ## Installing

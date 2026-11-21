@@ -90,6 +90,7 @@ private:
     juce::TextButton ultraButton { "117-BIT" };
     juce::TextButton oversampleButton { "2x OVERSAMPLE" };
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> ultraAttachment;
+    std::unique_ptr<juce::ParameterAttachment> oversampleAttachment;
     juce::TextButton fullButton { "Full" };
     juce::TextButton settingsButton { "Settings" };
     std::unique_ptr<SettingsPanel> settingsPanel;

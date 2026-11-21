@@ -19,7 +19,7 @@ set(GOODLOOKINUI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/third_party/GoodLookinUI")
 add_subdirectory("${GOODLOOKINUI_ROOT}" "${CMAKE_CURRENT_BINARY_DIR}/goodlookinui")
 
 # Optional AAX: the SDK sits next to the repository and is never committed. The build does not install the
-# AAX bundle (Pro Tools needs it PACE-signed first); it is copied to the build tree only.
+# AAX bundle (the host needs it PACE-signed first); it is copied to the build tree only.
 set(OPENEQ_AAX_SDK "${CMAKE_CURRENT_SOURCE_DIR}/../aax-sdk-2-8-1" CACHE PATH "Optional AAX SDK")
 option(OPENEQ_BUILD_AAX "Build the AAX format when the SDK is available" OFF)
 set(OPENEQ_FORMATS AU VST3 Standalone)

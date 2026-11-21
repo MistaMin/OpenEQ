@@ -466,7 +466,6 @@ These are known in OpenEQ 1.0 Beta (the same list as the release notes, plus one
 - The DRIVE readout rounds the value to "0%" or "1%" instead of showing 0% to 100%. The control itself works over its full range.
 - The RMS and input level bars depend on the host buffer size.
 - Automated validators can time out under heavy machine load; raise their time limit.
-- At GUI scale 80% or 90% the editor is drawn at full size in the smaller window and is cut off: the output column and the Settings button are not reachable. The scale is shared by all instances. If it happens, delete `OpenEQ.xml` in `~/Library/Application Support/OpenEQ/` to return to 100%. 100%, 110% and 125% are fine.
 - The mirror (link) part of the instance menu, other hosts' track-name behaviour, native popups with a real mouse, the Standalone launch and old projects in a real host were not covered by testing. Where a host sends no track names, use Rename.
 - Nobody has yet listened to the newer audio paths in a long session.
 
