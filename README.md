@@ -1,8 +1,32 @@
 # OpenEQ
 
-Version **1.0 Beta** — beta software under active development.
+**A 32-band parametric, dynamic and linear-phase equalizer with a transient/tonal split and a resonance suppressor.** by OpenGrid
 
-OpenEQ is a parametric and dynamic audio equalizer built with C++20, JUCE, and GoodLookinUI. It builds as VST3, Audio Unit, and a standalone application.
+![OpenEQ editor](docs/images/editor.png)
+
+| | | |
+|---|---|---|
+| ![Dynamics inspector](docs/images/inspector-dyn.png) | ![Transient/tonal split](docs/images/inspector-split.png) | ![Resonance suppressor](docs/images/inspector-reso.png) |
+| ![Waterfall view](docs/images/view-water.png) | ![Spectrogram view](docs/images/view-spectrogram.png) | ![Instance menu](docs/images/instance-menu.png) |
+
+## Version 1.0 Beta
+
+- Transient/tonal split with per-band stream gains, and a resonance suppressor.
+- Six analyzer views, Input Trim, one shared input/output meter with peak hold.
+- An INST menu that lists the other OpenEQ instances in the same host process by track name and edits any of them from one window.
+- Beta software: see the known issues in [RELEASE_NOTES.md](RELEASE_NOTES.md).
+
+## Download
+
+[OpenEQ-1.0.0-macos.pkg](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.0/OpenEQ-1.0.0-macos.pkg) (macOS 15 or later, universal arm64 + x86_64). SHA-256 and the manifest are on the [release page](https://github.com/MistaMin/OpenEQ/releases/tag/v1.0.0).
+
+The installer offers **Audio Unit** and **VST3**. It is signed with a Developer ID and notarized by Apple.
+
+Not in this release: Windows, Linux, AAX, CLAP, LV2, and the Standalone app (it has no icon yet). It has been tested in two hosts on macOS; other hosts are untested.
+
+## User guide
+
+[User manual](docs/USER_MANUAL.md) · [Changelog](CHANGELOG.md) · [Release notes](RELEASE_NOTES.md)
 
 ## Features
 
@@ -41,6 +65,12 @@ The measurement tools `response_probe`, `response_compare` and `plugin_probe` (s
 
 The regression suite keeps its settings and presets in a temporary folder.
 
-## Licensing
+## Repository layout
 
-OpenEQ's own source code is available under the [MIT License](LICENSE). JUCE 8.0.6 is separately licensed under AGPLv3 or a JUCE licence; users building or distributing OpenEQ must comply with the JUCE licence applicable to them. OpenGrid uses a commercial JUCE licence. GoodLookinUI retains its MIT licence and copyright notices.
+`Source/` plug-in code, `Source/UI/` controls, `Tests/` regression tests, `Tools/` measurement tools and the manual builder, `docs/` manual and engineering notes, `third_party/` GoodLookinUI.
+
+## License
+
+OpenEQ's own source code is available under the [MIT License](LICENSE), copyright Marcos Quirino Deida. The official binaries are freeware under [BINARY_LICENSE.txt](BINARY_LICENSE.txt). JUCE 8.0.6 is separately licensed under AGPLv3 or a JUCE licence; OpenGrid builds the official binaries under its commercial JUCE licence, and anyone building from source must comply with the JUCE licence that applies to them. GoodLookinUI retains its MIT licence and copyright notices. See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
+
+VST is a trademark of Steinberg Media Technologies GmbH. Audio Units is a trademark of Apple Inc.

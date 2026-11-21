@@ -26,7 +26,9 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 - Audio Unit validation (`auval`).
 - VST3 and Audio Unit validators at strictness 10, including their editor tests.
 
-See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session, and host sweeps in a real DAW were run on an earlier build and have not been repeated for the instance switcher, which was tested in code only (see below).
+- Host checks on this build: load, render, state save and reopen, 10 editor open/close cycles, and every parameter set with the editor open, in two hosts, with the Audio Unit and the VST3. In one host the instance menu, switching to another track's instance and the Rename dialog were driven and worked, and a rename survived saving the project.
+
+See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session.
 
 ## Known issues
 
@@ -41,8 +43,8 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 - Some tooltips do not match the control ranges; default Output Gain can read "-0.0".
 - The RMS and input level bars depend on the host buffer size.
 - Automated validators can time out under heavy machine load; raise their time limit.
-- The instance menu and its Rename dialog have not been clicked in a real host; Audio Unit hosts may not report track names, so use Rename there.
-- Native menus, real-display mouse interaction, the Standalone launch and old projects in a real host were not covered by testing.
+- At GUI scale 80% or 90% the editor is drawn at full size in the smaller window and is cut off: the output column and the Settings button are not reachable. The scale is shared by all instances. If it happens, delete `OpenEQ.xml` in `~/Library/Application Support/OpenEQ/` to return to 100%. 100%, 110% and 125% are fine.
+- The mirror (link) part of the instance menu, other hosts' track-name behaviour, native popups with a real mouse, the Standalone launch and old projects in a real host were not covered by testing. Where a host sends no track names, use Rename.
 
 ## Installing
 

@@ -1,0 +1,38 @@
+OpenEQ Binary Freeware License
+Copyright (c) 2026 Marcos Quirino Deida
+
+Scope
+This license applies to the official compiled OpenEQ plug-ins and installers
+distributed by Marcos Quirino Deida. OpenEQ source code is separately available
+under the MIT License (see LICENSE).
+
+Permission to use
+You may download, install, and use the official binaries free of charge,
+for personal or commercial purposes, including professional audio production.
+The official binaries are distributed as proprietary freeware, not under an
+open-source license. Freeware describes their price and permission to use;
+it does not place the complete binaries in the public domain or grant the
+MIT source license over third-party code incorporated into them.
+
+Third-party components
+The official binaries are built using the publisher's JUCE commercial
+license. End users do not need a JUCE developer license to install or use
+these binaries. The publisher's JUCE license is not transferred to anyone
+building or distributing their own versions from source.
+OpenEQ's MIT-licensed source and the MIT-licensed GoodLookinUI components
+retain their respective MIT permissions. See THIRD_PARTY_LICENSES.md. These
+freeware terms do not restrict rights granted by those component licenses.
+External components retain their own licenses; no license to JUCE is granted
+by this document.
+
+Warranty
+THE BINARIES ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. TO THE EXTENT PERMITTED BY APPLICABLE LAW,
+THE COPYRIGHT HOLDER IS NOT LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY
+ARISING FROM THE BINARIES OR THEIR USE.
+
+Independent project
+OpenEQ is an independent OpenGrid audio project. No affiliation, sponsorship
+or endorsement by any other maker is claimed. Third-party format names appear
+for required attribution or compatibility only.

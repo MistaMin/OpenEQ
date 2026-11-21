@@ -10,3 +10,4 @@ qa/
 
 # Local measurement data and notes; not part of the source distribution.
 research/
+/output
