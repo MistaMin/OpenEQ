@@ -19,7 +19,7 @@ public:
           scaleKnob ("SCALE", KnobValueType::Level, juce::Colour (0xff38bdf8)),
           stereoWidthKnob ("WIDTH", KnobValueType::Level, juce::Colour (0xffa78bfa)),
           panKnob ("PAN", KnobValueType::Pan, juce::Colour (0xff34d399)),
-          driveKnob ("DRIVE", KnobValueType::Level, juce::Colour (0xfff59e0b)),
+          driveKnob ("DRIVE", KnobValueType::Attenuation, juce::Colour (0xfff59e0b)),
           sideKnob ("SIDE", KnobValueType::SideDb, juce::Colour (0xffec4899)),
           autoGainToggle ("AUTO", Theme::outputCol)
     {

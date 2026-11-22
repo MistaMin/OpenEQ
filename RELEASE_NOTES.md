@@ -1,4 +1,4 @@
-# OpenEQ 1.0 Beta
+# OpenEQ 1.0.1 Beta
 
 A parametric and dynamic equalizer: 32 bands, per-band routing, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
 
@@ -6,11 +6,13 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## Formats and requirements
 
-- Audio Unit and VST3 for macOS, universal arm64 + x86_64, in a signed and notarized installer package.
+- Audio Unit, VST3 and AAX (Pro Tools) for macOS, universal arm64 + x86_64, in a signed and notarized installer package. The AAX is signed for Pro Tools.
 - The Standalone application is built from source but not shipped in this release (it has no application icon yet).
-- No AAX, CLAP or LV2 build, and no Windows or Linux build, in this release.
+- No CLAP or LV2 build, and no Windows or Linux build, in this release.
 
 ## What is in this release
+
+- 1.0.1: DRIVE now reads 0 to 100%, the top bar follows the theme and reads clearly in Graphite, Light and High contrast, and an AAX build is added.
 
 - Transient/tonal split with per-band stream gains (about 37 ms latency at 48 kHz while a band is split; Zero Latency mode only).
 - Resonance suppressor (about 43 ms latency at 48 kHz while on).
@@ -39,7 +41,9 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 - Auto Gain can step by several dB within a few samples when a band gain changes.
 - The WATER and SPEC 3D views can take longer to draw than the display update interval at large window sizes.
 - With split or lookahead on, the suppressor's sidechain key runs slightly early.
-- Light theme: some value readouts, the notice line and graph labels are hard to read.
+- DRIVE is gentle: at 100% a -20 dBFS sine is about 2 dB lower with mild saturation.
+- Pro Tools: tested with one mono track only (insert, editor, output, bypass, save and reopen, reset). Automation, bounce, stereo tracks, other sample rates and GUI scales were not tested. One reopen restored OUTPUT at -24 dB and was not reproduced.
+- The AAX has no page tables (the AAX validator reports that test as failed); control surfaces map parameters by default order.
 - Some tooltips do not match the control ranges; default Output Gain can read "-0.0".
 - The RMS and input level bars depend on the host buffer size.
 - Automated validators can time out under heavy machine load; raise their time limit.
@@ -47,4 +51,4 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 ## Installing
 
-Run `OpenEQ-1.0.0-macos.pkg` and choose the formats you want. They install to `/Library/Audio/Plug-Ins/Components` and `/Library/Audio/Plug-Ins/VST3`.
+Run `OpenEQ-1.0.1-macos.pkg` and choose the formats you want. They install to `/Library/Audio/Plug-Ins/Components`, `/Library/Audio/Plug-Ins/VST3` and `/Library/Application Support/Avid/Audio/Plug-Ins`.

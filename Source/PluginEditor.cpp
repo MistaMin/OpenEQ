@@ -48,13 +48,11 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
 
     titleLabel.setText ("OpenEQ", juce::dontSendNotification);
     titleLabel.setFont (juce::FontOptions (22.0f, juce::Font::bold));
-    titleLabel.setColour (juce::Label::textColourId, juce::Colours::white);
     stage.addAndMakeVisible (titleLabel);
 
     subtitleLabel.setText (OPENEQ_VERSION_STRING, juce::dontSendNotification);
     subtitleLabel.setFont (juce::FontOptions (8.5f, juce::Font::bold));
     subtitleLabel.setJustificationType (juce::Justification::centredLeft);
-    subtitleLabel.setColour (juce::Label::textColourId, juce::Colour (0xff8a949b));
     stage.addAndMakeVisible (subtitleLabel);
 
     stage.addAndMakeVisible (processingModeCycle);
@@ -176,15 +174,11 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
 
     ultraButton.setTooltip ("117-bit ultra-high precision: double-double filter state. Costs more CPU. Saved with the session.");
     ultraButton.setClickingTogglesState (true);
-    ultraButton.setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xff1d9fc6));
-    ultraButton.setColour (juce::TextButton::buttonColourId, juce::Colour (0xff232b30));
     ultraAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment> (p.apvts, "ultraPrecision", ultraButton);
     stage.addAndMakeVisible (ultraButton);
 
     oversampleButton.setTooltip ("2x oversampling: the processing runs at twice the rate. Reports its latency. Costs more CPU.");
     oversampleButton.setClickingTogglesState (true);
-    oversampleButton.setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xff1d9fc6));
-    oversampleButton.setColour (juce::TextButton::buttonColourId, juce::Colour (0xff232b30));
     oversampleButton.onClick = [this] { processorRef.setOversampling2x (oversampleButton.getToggleState()); };
     // Follows the parameter when the host changes it (automation, session load, undo).
     oversampleAttachment = std::make_unique<juce::ParameterAttachment> (*p.apvts.getParameter ("oversample2x"),
@@ -221,6 +215,7 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
                 AppSettings::get().setCustomThemeFile ({});
                 Theme::applyTheme (index);
                 refreshThemeRecursive (*this);
+                applyBarTheme();
                 repaint();
                 settingsPanel->repaint();
             };
@@ -291,6 +286,7 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
         button->setColour (juce::TextButton::textColourOnId, juce::Colours::white);
         stage.addAndMakeVisible (button);
     }
+    applyBarTheme(); // the top bar's keys and text follow the theme; the buttons on the graph stay dark
     undoButton.onClick = [this] { processorRef.undo(); };
     redoButton.onClick = [this] { processorRef.redo(); };
     undoButton.setTooltip ("Undo the last graph edit");
@@ -456,7 +452,6 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
         static const char* names[] = { "POST", "PRE", "SIDE", "WATER", "SPECTRO", "SPEC 3D" };
         spectrumSourceButton.setButtonText (names[next]);
     };
-    noticeLabel.setColour (juce::Label::textColourId, juce::Colours::white);
     noticeLabel.setFont (juce::FontOptions (11.0f, juce::Font::bold));
     noticeLabel.setJustificationType (juce::Justification::centredLeft);
     stage.addAndMakeVisible (noticeLabel);
@@ -632,6 +627,8 @@ void OpenEQEditorView::timerCallback()
 {
     refreshInstanceBadge();
     noticeLabel.setText (processorRef.restrictionNotice(), juce::dontSendNotification);
+    // It sits on the graph: dark ink on the light scope, white on the dark waterfall and spectrogram wells.
+    noticeLabel.setColour (juce::Label::textColourId, Theme::lightTheme && processorRef.getSpectrumSource() < 3 ? Theme::scopeInk : juce::Colours::white);
     const bool slotA = processorRef.getAudibleABSlot() == 0;
     slotAButton.setToggleState (slotA, juce::dontSendNotification);
     slotBButton.setToggleState (! slotA, juce::dontSendNotification);
@@ -683,6 +680,22 @@ void OpenEQEditorView::timerCallback()
     floatingInspector.setAccent (splitOn ? Theme::splitTransCol : (dynOn ? juce::Colour (0xff35c6f0) : Theme::stereoCol));
 }
 
+void OpenEQEditorView::applyBarTheme()
+{
+    titleLabel.setColour (juce::Label::textColourId, Theme::barText);
+    subtitleLabel.setColour (juce::Label::textColourId, Theme::barTextDim);
+    for (auto* button : { &undoButton, &redoButton, &slotAButton, &slotBButton, &presetButton, &instButton, &fullButton, &settingsButton, &ultraButton, &oversampleButton })
+    {
+        button->setColour (juce::TextButton::buttonColourId, Theme::barKey);
+        button->setColour (juce::TextButton::buttonOnColourId, Theme::barKeyOn);
+        button->setColour (juce::TextButton::textColourOffId, Theme::barKeyText);
+        button->setColour (juce::TextButton::textColourOnId, juce::Colours::white);
+        button->repaint();
+    }
+    monitorButton.refreshTheme();
+    repaint();
+}
+
 void OpenEQEditorView::paint (juce::Graphics& g)
 {
     g.fillAll (Theme::chassisBottom);
@@ -711,8 +724,8 @@ void OpenEQEditorView::paintStage (juce::Graphics& g)
 
     // Top console bar: beveled gradient + hairline.
     auto topBar = logicalBounds().removeFromTop (70).toFloat().reduced (1.0f);
-    g.setGradientFill (juce::ColourGradient (juce::Colour (0xff2b3338), 0.0f, topBar.getY(),
-                                             juce::Colour (0xff171d21), 0.0f, topBar.getBottom(), false));
+    g.setGradientFill (juce::ColourGradient (Theme::barTop, 0.0f, topBar.getY(),
+                                             Theme::barBottom, 0.0f, topBar.getBottom(), false));
     g.fillRoundedRectangle (topBar, 4.0f);
     g.setColour (Theme::panelEdge);
     g.drawRoundedRectangle (topBar, 4.0f, 1.0f);
@@ -828,7 +841,7 @@ void OpenEQEditorView::resized()
 
     // Row 1: Left (Title + INST cross-instance badge)
     titleLabel.setBounds (row1.removeFromLeft (90).withHeight (28));
-    // The beta channel label stays visible: this build is 1.0 Beta, not a finished release.
+    // The beta channel label stays visible: this build is 1.0.1 Beta, not a finished release.
     subtitleLabel.setBounds (row1.removeFromLeft (58).withSizeKeepingCentre (58, 16));
     row1.removeFromLeft (4);
     badgeSwatch = row1.removeFromLeft (10).withSizeKeepingCentre (8, 16);

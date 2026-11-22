@@ -260,7 +260,7 @@ public:
         g.fillRoundedRectangle (readout, 8.0f);
         g.setColour (hot ? accent.withAlpha (0.8f) : Theme::readoutEdge.withMultipliedAlpha (0.6f));
         g.drawRoundedRectangle (readout, 8.0f, 1.0f);
-        g.setColour (lit ? (hot ? accent.interpolatedWith (juce::Colours::white, 0.6f) : Theme::readoutText) : Theme::knobTextInactive);
+        g.setColour (lit ? (hot ? accent.interpolatedWith (juce::Colours::white, 0.6f) : Theme::readoutText) : Theme::readoutTextDim);
         const float fontSize = (plateW < 48.0f) ? 9.0f : 10.5f;
         g.setFont (juce::FontOptions (fontSize, juce::Font::bold));
         g.drawText (formattedValue(), readout, juce::Justification::centred);

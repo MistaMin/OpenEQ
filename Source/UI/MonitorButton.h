@@ -14,7 +14,7 @@ public:
         label.setText ("MONITOR", juce::dontSendNotification);
         label.setJustificationType (juce::Justification::centred);
         label.setFont (juce::FontOptions (9.0f, juce::Font::bold));
-        label.setColour (juce::Label::textColourId, Theme::textMid);
+        label.setColour (juce::Label::textColourId, Theme::barTextDim);
         label.setInterceptsMouseClicks (false, false);
         addAndMakeVisible (label);
 
@@ -22,7 +22,7 @@ public:
         button.setLookAndFeel (&lnf);
         button.setColour (juce::TextButton::buttonColourId, juce::Colour (0xff2c3439));
         button.setColour (juce::TextButton::buttonOnColourId, juce::Colour (0xff35c6f0));
-        button.setColour (juce::TextButton::textColourOffId, juce::Colours::white);
+        button.setColour (juce::TextButton::textColourOffId, Theme::barKeyText);
         button.setColour (juce::TextButton::textColourOnId, juce::Colours::white);
         button.setClickingTogglesState (true);
         button.onClick = [this] { cycle(); };
@@ -44,6 +44,13 @@ public:
             onModeChanged (mode);
     }
 
+    void refreshTheme()
+    {
+        label.setColour (juce::Label::textColourId, Theme::barTextDim);
+        button.setColour (juce::TextButton::textColourOffId, Theme::barKeyText);
+        button.repaint();
+    }
+
     int getMonitorMode() const { return mode; }
 
     std::function<void(int)> onModeChanged;
@@ -63,7 +70,7 @@ private:
             auto r = b.getLocalBounds().toFloat().reduced (1.5f);
             const bool on = b.getToggleState();
 
-            juce::Colour base = on ? juce::Colour (0xff35c6f0) : juce::Colour (0xff2c3439);
+            juce::Colour base = on ? Theme::barKeyOn : Theme::barKey;
             if (! on && over) base = base.brighter (0.08f);
             if (down) base = base.darker (0.1f);
 
@@ -78,7 +85,7 @@ private:
             }
 
             // Outline.
-            g.setColour (on ? juce::Colour (0xff5ad4f5) : juce::Colour (0xff151a1d));
+            g.setColour (on ? Theme::barKeyOn.brighter (0.4f) : Theme::buttonOutline);
             g.drawRoundedRectangle (r, 4.0f, 1.0f);
         }
 

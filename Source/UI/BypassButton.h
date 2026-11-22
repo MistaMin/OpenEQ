@@ -21,7 +21,7 @@ public:
         auto b = getLocalBounds().toFloat().reduced(2);
         const bool on = getToggleState();
 
-        juce::Colour base = on ? accentColour : juce::Colour(0xff2c3439);
+        juce::Colour base = on ? accentColour : Theme::barKey;
         if (shouldDrawButtonAsHighlighted && ! on) base = base.brighter(0.08f);
         if (shouldDrawButtonAsDown) base = base.darker(0.1f);
 
@@ -34,10 +34,10 @@ public:
             g.drawHorizontalLine(juce::roundToInt(b.getY()) + 1, b.getX() + 3, b.getRight() - 3);
         }
 
-        g.setColour(on ? accentColour.brighter(0.3f) : juce::Colour(0xff151a1d));
+        g.setColour(on ? accentColour.brighter(0.3f) : Theme::buttonOutline);
         g.drawRoundedRectangle(b, 4.0f, 1.0f);
 
-        g.setColour(juce::Colours::white.withAlpha(on ? 1.0f : 0.85f));
+        g.setColour(on ? juce::Colours::white : Theme::barKeyText);
         g.setFont(juce::FontOptions(label.length() > 1 ? 10.0f : 12.0f, juce::Font::bold));
         g.drawText(label, b, juce::Justification::centred);
     }

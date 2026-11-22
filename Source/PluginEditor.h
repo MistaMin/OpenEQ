@@ -86,6 +86,7 @@ private:
     juce::TextButton spectrumSourceButton { "POST" };
     juce::TextButton rangeButton { "30 dB" };
     juce::TextButton fftButton { "FFT" };
+    void applyBarTheme();
     juce::TextButton keysButton { "Keys" };
     juce::TextButton ultraButton { "117-BIT" };
     juce::TextButton oversampleButton { "2x OVERSAMPLE" };

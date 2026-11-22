@@ -252,7 +252,7 @@ private:
 
         const float fontSize = juce::jlimit (9.0f, 10.5f, bounds.getWidth() * 0.10f);
         g.setFont (juce::FontOptions (fontSize, juce::Font::bold));
-        g.setColour (isEnabled() ? Theme::readoutText : Theme::textDim);
+        g.setColour (isEnabled() ? Theme::readoutText : Theme::readoutTextDim);
         g.drawText (formatValue (getValue()), badgeRect, juce::Justification::centred, false);
     }
 
@@ -349,7 +349,7 @@ private:
 
         const float fontSize = juce::jlimit (9.0f, 10.5f, bounds.getHeight() * 0.12f + 7.0f);
         g.setFont (juce::FontOptions (fontSize, juce::Font::bold));
-        g.setColour (isEnabled() ? Theme::readoutText : Theme::textDim);
+        g.setColour (isEnabled() ? Theme::readoutText : Theme::readoutTextDim);
         g.drawText (formatValue (getValue()), badgeRect, juce::Justification::centred, false);
     }
 

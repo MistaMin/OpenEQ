@@ -5675,6 +5675,72 @@ static void checkGuiScaleFillsWindow()
     std::cout << "PASS: every GUI scale fills the window and keeps Settings and the output column inside it\n";
 }
 
+static void captureThemes()
+{
+    // Only with OPENEQ_UI_CAPTURE_DIR set: pictures of the editor per built-in theme (inspector tabs and analyser views), to look at the colours.
+    const auto* dir = std::getenv ("OPENEQ_UI_CAPTURE_DIR");
+    if (dir == nullptr)
+        return;
+    const auto save = [dir] (juce::Component& editor, const juce::String& name)
+    {
+        const auto snapshot = editor.createComponentSnapshot (editor.getLocalBounds(), true, 1.0f);
+        const auto file = juce::File (dir).getChildFile (name + ".png");
+        file.deleteFile(); // an output stream appends to an existing file
+        auto stream = file.createOutputStream();
+        juce::PNGImageFormat png;
+        require (stream != nullptr && png.writeImageToStream (snapshot, *stream), "Could not write theme picture");
+    };
+    for (const int theme : { 0, 1, 2 })
+    {
+        Theme::applyTheme (theme);
+        auto owner = std::make_unique<OpenEQAudioProcessor>();
+        prepareStereo (*owner, 48000.0, 512);
+        auto editor = std::make_unique<OpenEQAudioProcessorEditor> (*owner);
+        const auto feed = [&] (int blocks)
+        {
+            juce::AudioBuffer<float> buffer (2, 512);
+            juce::Random random (7);
+            static double phase = 0.0;
+            for (int b = 0; b < blocks; ++b)
+            {
+                for (int n = 0; n < 512; ++n, phase += 0.0587)
+                    for (int c = 0; c < 2; ++c)
+                        buffer.setSample (c, n, 0.2f * (float) std::sin (phase) + 0.05f * (random.nextFloat() - 0.5f));
+                process (*owner, buffer);
+                if (b % 8 == 0)
+                    pumpMessages (30);
+            }
+        };
+        feed (120);
+        const auto tag = "theme" + juce::String (theme);
+        save (*editor, tag + "-main");
+        auto* inspector = findDescendant<FloatingInspector> (*editor);
+        require (inspector != nullptr, "Inspector missing");
+        for (const char* tab : { "DYN", "SPLIT", "RESO" })
+        {
+            juce::Button* button = nullptr; // a direct child of the header: the band panel inside the body has its own SPLIT toggle, and the key's text gains a dot when the band splits
+            for (auto* child : inspector->getChildren())
+                if (auto* candidate = dynamic_cast<juce::Button*> (child); candidate != nullptr && candidate->getButtonText().startsWith (tab))
+                    button = candidate;
+            require (button != nullptr, "Inspector tab missing");
+            button->triggerClick();
+            pumpMessages (80);
+            save (*editor, tag + "-tab-" + tab);
+        }
+        if (auto* button = findButtonByText (*inspector, "EQ"))
+            button->triggerClick();
+        static const char* views[] = { "pre", "side", "water", "spectro", "spec3d" };
+        for (int source = 1; source <= 5; ++source)
+        {
+            owner->setSpectrumSource (source);
+            feed (160);
+            save (*editor, tag + "-view-" + views[source - 1]);
+        }
+    }
+    Theme::applyTheme (0);
+    std::cout << "PASS: theme pictures written\n";
+}
+
 static void checkOversampleButtonFollowsParameter()
 {
     auto owner = std::make_unique<OpenEQAudioProcessor>();
@@ -5969,6 +6035,7 @@ int main (int argc, char** argv)
     run ("instance-menu-tick", checkInstanceMenuTick);
     run ("oversample-button", checkOversampleButtonFollowsParameter);
     run ("gui-scale", checkGuiScaleFillsWindow);
+    run ("theme-shots", captureThemes);
 
     // The user's settings file must be exactly as it was.
     const auto realAfter = realState();

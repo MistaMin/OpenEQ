@@ -18,5 +18,9 @@ alternative. See the official licence at https://juce.com. The publisher's comme
 transferred with the MIT source.
 
 VST is a trademark of Steinberg Media Technologies GmbH. Audio Units is a trademark of Apple Inc.
-Other format names are used only to describe compatibility. OpenEQ ships no AAX build, so no AAX SDK
-is used.
+AAX and Pro Tools are trademarks of Avid Technology, Inc. Other format names are used only to describe
+compatibility.
+
+| Component | Use | Licence |
+|---|---|---|
+| AAX SDK (Avid) | AAX format, build time only; not part of this repository | Avid AAX Developer Agreement / SDK License |

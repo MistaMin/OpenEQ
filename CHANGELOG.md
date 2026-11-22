@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1 Beta
+
+- The DRIVE readout showed 1% at full drive; it now reads 0 to 100%, and typing 100 or 100% sets full drive.
+- The top bar, buttons and graph labels follow the theme and read clearly in Graphite, Light and High contrast.
+- Adds an AAX build for Pro Tools, installed with the new installer. No audio or parameter changes.
+- Drive is gentle by design: at full drive a -20 dBFS sine comes out about 2 dB lower with mild saturation.
+
 ## 1.0 Beta
 
 First numbered beta release (numeric version 1.0.0). Builds on the 0.3.0-beta source.
@@ -19,7 +26,7 @@ First numbered beta release (numeric version 1.0.0). Builds on the 0.3.0-beta so
 - Fixed a crash when a linked instance outlived the instance it was linked to, and a link that could be taken over by a new instance created at the same memory address.
 - Fixed a crash when clicking the DYNAMICS key with the editor open.
 - Selecting another band no longer switches off the previous band's dynamics settings.
-- The release label now reads "1.0 Beta".
+- The release label now reads "1.0.1 Beta".
 
 Known issues are listed in [RELEASE_NOTES.md](RELEASE_NOTES.md).
 

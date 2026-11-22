@@ -12,7 +12,7 @@ class CycleButtonLNF final : public juce::LookAndFeel_V4 {
 public:
     void drawButtonBackground(juce::Graphics& g, juce::Button& b, const juce::Colour&, bool over, bool down) override {
         auto r = b.getLocalBounds().toFloat().reduced(1.5f);
-        juce::Colour base = juce::Colour(0xff2c3439);
+        juce::Colour base = b.findColour(juce::TextButton::buttonColourId);
         if (over) base = base.brighter(0.08f);
         if (down) base = base.darker(0.1f);
 
@@ -22,7 +22,7 @@ public:
         g.setColour(juce::Colours::white.withAlpha(0.08f));
         g.drawHorizontalLine(juce::roundToInt(r.getY()) + 1, r.getX() + 3, r.getRight() - 3);
 
-        g.setColour(juce::Colour(0xff151a1d));
+        g.setColour(Theme::buttonOutline);
         g.drawRoundedRectangle(r, 4.0f, 1.0f);
     }
     juce::Font getTextButtonFont(juce::TextButton&, int) override

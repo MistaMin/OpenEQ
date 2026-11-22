@@ -343,14 +343,14 @@ void SpectrumAnalyzer::paint (juce::Graphics& g)
     }
     else
     {
-        g.setColour (juce::Colours::white.withAlpha (0.8f));
+        g.setColour (Theme::scopeInk.withAlpha (0.8f));
         g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
         g.drawText (source == 1 ? "PRE" : "SIDECHAIN", 8.0f, 8.0f, 90.0f, 14.0f, juce::Justification::centredLeft);
     }
 
     if (std::abs (processor.getDisplayTiltDbPerOctave()) > 0.05f)
     {
-        g.setColour (juce::Colours::white.withAlpha (0.8f));
+        g.setColour (Theme::scopeInk.withAlpha (0.8f));
         g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
         g.drawText ("TILT " + juce::String (processor.getDisplayTiltDbPerOctave(), 1),
                     8.0f, 24.0f, 110.0f, 14.0f, juce::Justification::centredLeft);
@@ -361,7 +361,7 @@ void SpectrumAnalyzer::paint (juce::Graphics& g)
         float peakHz = 0.0f;
         float peakDb = minDb;
         dominantPeak (peakHz, peakDb);
-        g.setColour (juce::Colours::white.withAlpha (0.85f));
+        g.setColour (Theme::scopeInk.withAlpha (0.85f));
         g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
         g.drawText ("FROZEN", bounds.getWidth() - 78.0f, 8.0f, 70.0f, 14.0f, juce::Justification::centredRight);
         if (peakHz > 0.0f)
@@ -460,7 +460,7 @@ void SpectrumAnalyzer::paintSpectrogram (juce::Graphics& g)
     g.fillAll (Theme::graphBackground);
     if (spectrogramCount == 0)
     {
-        g.setColour (Theme::textDim);
+        g.setColour (juce::Colour (0xff8a949b));
         g.setFont (juce::FontOptions (12.0f));
         g.drawText ("Waiting for audio...", bounds, juce::Justification::centred, false);
         return;
@@ -480,7 +480,7 @@ void SpectrumAnalyzer::paintSpectrogram (juce::Graphics& g)
         const float y = bounds.getY() + bounds.getHeight() * sec / seconds;
         g.setColour (juce::Colours::white.withAlpha (0.07f));
         g.drawHorizontalLine (juce::roundToInt (y), bounds.getX(), bounds.getRight());
-        g.setColour (Theme::textDim);
+        g.setColour (juce::Colour (0xff8a949b));
         g.drawText ("-" + juce::String ((int) sec) + " s", juce::Rectangle<float> (bounds.getRight() - 40.0f, y - 12.0f, 34.0f, 11.0f),
                     juce::Justification::centredRight, false);
     }
@@ -492,7 +492,7 @@ void SpectrumAnalyzer::paintSpectrogram3D (juce::Graphics& g)
     g.fillAll (Theme::graphBackground);
     if (spectrogramCount == 0)
     {
-        g.setColour (Theme::textDim);
+        g.setColour (juce::Colour (0xff8a949b));
         g.setFont (juce::FontOptions (12.0f));
         g.drawText ("Waiting for audio...", bounds, juce::Justification::centred, false);
         return;
@@ -541,7 +541,7 @@ void SpectrumAnalyzer::paintSpectrogram3D (juce::Graphics& g)
             g.drawLine (l, b, l + w, b, 1.0f);
             if (labelled)
             {
-                g.setColour (Theme::textDim);
+                g.setColour (juce::Colour (0xff8a949b));
                 g.drawText ("-" + juce::String ((int) sec) + " s", juce::Rectangle<float> (l + w + 4.0f, b - 6.0f, 30.0f, 12.0f),
                             juce::Justification::centredLeft, false);
             }
@@ -618,7 +618,7 @@ void SpectrumAnalyzer::paintSpectrogram3D (juce::Graphics& g)
     g.setColour (juce::Colours::white.withAlpha (0.22f));
     g.drawLine (bounds.getX(), frontBase, bounds.getRight(), frontBase, 1.0f);
     g.setFont (juce::FontOptions (9.0f));
-    g.setColour (Theme::textDim);
+    g.setColour (juce::Colour (0xff8a949b));
     g.drawText ("now", juce::Rectangle<float> (bounds.getRight() - 40.0f, frontBase + 3.0f, 34.0f, 12.0f),
                 juce::Justification::centredRight, false);
 }
@@ -630,7 +630,7 @@ void SpectrumAnalyzer::paintWaterfall (juce::Graphics& g)
 
     if (waterfallCount == 0)
     {
-        g.setColour (Theme::textDim);
+        g.setColour (juce::Colour (0xff8a949b));
         g.setFont (juce::FontOptions (12.0f));
         g.drawText ("Waiting for audio...", bounds, juce::Justification::centred, false);
         return;
@@ -685,7 +685,7 @@ void SpectrumAnalyzer::paintWaterfall (juce::Graphics& g)
             g.drawLine (l, b, l + w, b, 1.0f);
             if (whole)
             {
-                g.setColour (Theme::textDim);
+                g.setColour (juce::Colour (0xff8a949b));
                 g.drawText ("-" + juce::String ((int) std::round (sec)) + " s",
                             juce::Rectangle<float> (l + w + 4.0f, b - 6.0f, 30.0f, 12.0f), juce::Justification::centredLeft, false);
             }
@@ -752,7 +752,7 @@ void SpectrumAnalyzer::paintWaterfall (juce::Graphics& g)
     g.setColour (juce::Colours::white.withAlpha (0.22f));
     g.drawLine (bounds.getX(), frontBase, bounds.getRight(), frontBase, 1.0f);
     g.setFont (juce::FontOptions (9.0f));
-    g.setColour (Theme::textDim);
+    g.setColour (juce::Colour (0xff8a949b));
     g.drawText ("now", juce::Rectangle<float> (bounds.getRight() - 40.0f, frontBase + 3.0f, 34.0f, 12.0f),
                 juce::Justification::centredRight, false);
     for (float db : { 0.0f, -30.0f, -60.0f })

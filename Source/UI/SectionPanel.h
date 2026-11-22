@@ -117,10 +117,10 @@ public:
             const float dotX = 20.0f + titleW + 5.0f;
             g.setColour (accent.withAlpha (0.4f));
             g.fillEllipse (dotX, 9.5f, 5.0f, 5.0f);
-            g.setColour (accent.brighter (0.3f));
+            g.setColour (Theme::accentText (accent, 0.3f));
             g.fillEllipse (dotX + 1.0f, 10.5f, 3.0f, 3.0f);
 
-            g.setColour (hasPlate ? plate[3] : accent.brighter (0.25f));
+            g.setColour (hasPlate ? plate[3] : Theme::accentText (accent, 0.25f));
             g.setFont (juce::FontOptions (9.0f, juce::Font::bold));
             const float subX = dotX + 9.0f;
             g.drawText (subtitle, (int) subX, 4, getWidth() - (int) subX - 8, 16, juce::Justification::centredLeft);

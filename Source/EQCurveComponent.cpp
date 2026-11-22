@@ -240,7 +240,11 @@ void EQCurveComponent::paint (juce::Graphics& g)
     const float w = bounds.getWidth();
     const float h = bounds.getHeight();
 
-    const juce::Colour gridCol = juce::Colour (0xff8faab3);
+    // The waterfall and both spectrograms keep a dark well in every theme, so the light theme's dark ink is only for the other views.
+    const bool darkWell = processor.getSpectrumSource() >= 3;
+    const bool darkInk = Theme::lightTheme && ! darkWell;
+    const juce::Colour ink = darkInk ? Theme::scopeInk : juce::Colours::white;
+    const juce::Colour gridCol = darkInk ? juce::Colour (0xff2c363c) : juce::Colour (0xff8faab3);
 
     // Frequency grid: every step of each decade. The decades are brightest, then the 2 and 5 steps.
     for (int decade = 10; decade <= 10000; decade *= 10)
@@ -623,7 +627,7 @@ void EQCurveComponent::paint (juce::Graphics& g)
             g.drawEllipse (orb, 1.0f);
             if (selected)
             {
-                g.setColour (juce::Colours::white.withAlpha (0.95f));
+                g.setColour (ink.withAlpha (0.95f));
                 g.drawEllipse (orb.expanded (2.5f), 1.5f);
             }
         }
@@ -658,7 +662,7 @@ void EQCurveComponent::paint (juce::Graphics& g)
                 g.drawLine (pos.x, pos.y, pos.x, y, 1.0f);
                 g.drawEllipse (pos.x - 4.0f, y - 4.0f, 8.0f, 8.0f, 1.2f);
             }
-            g.setColour (juce::Colours::white.withAlpha (0.88f));
+            g.setColour (ink.withAlpha (0.88f));
             g.setFont (juce::FontOptions (10.0f, juce::Font::bold));
             g.drawText ("E " + juce::String (env, 1)
                             + "  T " + juce::String (threshold, 1)
@@ -700,7 +704,7 @@ void EQCurveComponent::paint (juce::Graphics& g)
     {
         const float x = frequencyToX (previewHz, w);
         const float y = dbToY (previewDb, h);
-        g.setColour (juce::Colours::white.withAlpha (0.92f));
+        g.setColour (ink.withAlpha (0.92f));
         g.drawEllipse (x - 8.0f, y - 8.0f, 16.0f, 16.0f, 1.5f);
         g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
         g.drawText (ValueFormat::frequencyWithNote (previewHz) + "  " + ValueFormat::gainDB (previewDb),
@@ -718,7 +722,7 @@ void EQCurveComponent::paint (juce::Graphics& g)
         juce::String text = ValueFormat::frequencyWithNote (live.frequency);
         if (ResponseModel::usesGain (live.type))
             text += "  " + ValueFormat::gainDB (live.gainDb) + " dB";
-        g.setColour (juce::Colours::white.withAlpha (0.9f));
+        g.setColour (ink.withAlpha (0.9f));
         g.setFont (juce::FontOptions (10.5f, juce::Font::bold));
         g.drawText (text, (int) pos.x + 12, (int) pos.y + 8, 200, 14, juce::Justification::centredLeft);
     }
@@ -726,12 +730,12 @@ void EQCurveComponent::paint (juce::Graphics& g)
     // Cursor axes: crosshair lines through the pointer, with its frequency and gain (cursor axes).
     if (AppSettings::get().showCursorAxes() && cursorInside && draggingBand < 0)
     {
-        g.setColour (juce::Colours::white.withAlpha (0.22f));
+        g.setColour (ink.withAlpha (0.22f));
         g.drawVerticalLine ((int) cursorPos.x, 0.0f, h);
         g.drawHorizontalLine ((int) cursorPos.y, 0.0f, w);
         const float freq = xToFrequency (cursorPos.x, w);
         const float db = yToDb (cursorPos.y, h);
-        g.setColour (juce::Colours::white.withAlpha (0.8f));
+        g.setColour (ink.withAlpha (0.8f));
         g.setFont (juce::FontOptions (10.0f, juce::Font::bold));
         g.drawText (ValueFormat::frequencyWithNote (freq) + "  " + ValueFormat::gainDB (db) + " dB",
                     (int) cursorPos.x + 10, (int) cursorPos.y - 18, 200, 14, juce::Justification::centredLeft);
@@ -745,14 +749,14 @@ void EQCurveComponent::paint (juce::Graphics& g)
         juce::String text = ValueFormat::frequencyWithNote (dragFrequency);
         if (ResponseModel::usesGain (bandView[(size_t) draggingBand].type))
             text += "  " + ValueFormat::gainDB (dragGain) + " dB";
-        g.setColour (juce::Colours::white.withAlpha (0.92f));
+        g.setColour (ink.withAlpha (0.92f));
         g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
         g.drawText (text, (int) x + 12, (int) y - 24, 200, 14, juce::Justification::centredLeft);
     }
 
     if (processor.linearPhaseOmitsDynamics() || processor.linearPhaseOmitsAllPass() || processor.getMonitorMode() != 0)
     {
-        g.setColour (juce::Colours::white.withAlpha (0.8f));
+        g.setColour (ink.withAlpha (0.8f));
         g.setFont (juce::FontOptions (11.0f, juce::Font::bold));
         g.drawText (processor.restrictionNotice(), 38, 22, (int) w - 76, 16, juce::Justification::centredLeft);
     }

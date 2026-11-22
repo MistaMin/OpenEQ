@@ -72,6 +72,7 @@ inline juce::Colour valueText     = juce::Colour (0xffeef2f4);
 inline juce::Colour readoutFill = juce::Colour (0xff090c0e);
 inline juce::Colour readoutEdge = juce::Colour (0x28ffffff);
 inline juce::Colour readoutText = juce::Colour (0xffeef2f4);
+inline juce::Colour readoutTextDim = juce::Colour (0xff7d878d); // a disabled readout, on the same dark plate
 
 // ---- control hardware ----
 inline juce::Colour bezelHi       = juce::Colour (0xff6a7479);
@@ -91,6 +92,21 @@ inline juce::Colour gridMinor     = juce::Colour (0x14aab6bd);
 inline juce::Colour gridMajor     = juce::Colour (0x28aab6bd);
 inline juce::Colour zeroLine      = juce::Colour (0x3fc4d4da);
 inline juce::Colour curveCol      = juce::Colour (0xff35c6f0);
+
+// ---- top bar: it follows the theme, so keys and text on it use these ----
+inline juce::Colour barTop      = juce::Colour (0xff2b3338);
+inline juce::Colour barBottom   = juce::Colour (0xff171d21);
+inline juce::Colour barKey      = juce::Colour (0xff232b30);
+inline juce::Colour barKeyOn    = juce::Colour (0xff1d9fc6);
+inline juce::Colour barKeyText  = juce::Colour (0xffe6edf0);
+inline juce::Colour barText     = juce::Colour (0xffffffff);
+inline juce::Colour barTextDim  = juce::Colour (0xff8a949b);
+
+// Text and lines drawn over the curve scope: white on the dark scopes, near black on the light one.
+inline juce::Colour scopeInk = juce::Colours::white;
+inline bool lightTheme = false;
+/** An accent colour used as text on a panel: lifted on dark panels, darkened on the light one. */
+inline juce::Colour accentText (juce::Colour c, float lift) { return lightTheme ? c.darker (0.55f) : c.brighter (lift); }
 
 inline int finish = 0;
 
@@ -129,12 +145,14 @@ inline std::array<juce::Colour, 32> bandColourOverride {};
 inline void applyTheme (int index)
 {
     bandColourOverride.fill (juce::Colour());
+    lightTheme = (index == 1);
+    scopeInk = lightTheme ? juce::Colour (0xff10161a) : juce::Colours::white;
     if (index == 1)
     {
         chassisTop = juce::Colour (0xffe6e9ec);  chassisBottom = juce::Colour (0xffd3d8dc);  chassisRim = juce::Colour (0xffb9c0c6);
         panelTop = juce::Colour (0xfff5f7f9);    panelBottom = juce::Colour (0xffe2e6ea);    panelEdge = juce::Colour (0xffb3bcc4);
         panelHeavy = juce::Colour (0xffeef1f4);  wellFill = juce::Colour (0xffdfe4e8);      wellEdge = juce::Colour (0xffc4ccd3);
-        textBright = juce::Colour (0xff1c2327);  textStd = juce::Colour (0xff3d474e);       textDim = juce::Colour (0xff6c777f);
+        textBright = juce::Colour (0xff1c2327);  textStd = juce::Colour (0xff3d474e);       textDim = juce::Colour (0xff4f5a62);
         labelColour = juce::Colour (0xff2a3237); valueText = juce::Colour (0xff10161a);
         bezelHi = juce::Colour (0xffd0d6db);     bezelLo = juce::Colour (0xff9aa3a9);
         bodyHi = juce::Colour (0xffe0e5e9);      bodyLo = juce::Colour (0xffb8c0c6);
@@ -144,9 +162,12 @@ inline void applyTheme (int index)
         gridMinor = juce::Colour (0x14000000);   gridMajor = juce::Colour (0x28000000);     zeroLine = juce::Colour (0x3f000000);
         buttonTop = juce::Colour (0xffe9edf0);   buttonBottom = juce::Colour (0xffd4dadf);  buttonOutline = juce::Colour (0xff9aa3aa);
         buttonText = juce::Colour (0xff1c2327);  buttonInactiveTop = juce::Colour (0xffd6dbdf); buttonInactiveBottom = juce::Colour (0xffc8ced4);
-        buttonTextInactive = juce::Colour (0xff8c959b); knobRim = juce::Colour (0xffb3bcc3);
-        knobTextInactive = juce::Colour (0xff9aa2a8); axisText = juce::Colour (0x88000000);
+        buttonTextInactive = juce::Colour (0xff66717a); knobRim = juce::Colour (0xffb3bcc3);
+        knobTextInactive = juce::Colour (0xff6a747b); axisText = juce::Colour (0xb4000000);
         curveMuted = juce::Colour (0xffa9b3b9);
+        barTop = juce::Colour (0xffe4e8ec); barBottom = juce::Colour (0xffcfd5da);
+        barKey = juce::Colour (0xfff4f6f8); barKeyOn = juce::Colour (0xff0b6f93); barKeyText = juce::Colour (0xff1c2327);
+        barText = juce::Colour (0xff10161a); barTextDim = juce::Colour (0xff4f5a62);
     }
     else if (index == 2)
     {
@@ -166,6 +187,9 @@ inline void applyTheme (int index)
         buttonTextInactive = juce::Colour (0xff909090); knobRim = juce::Colour (0xffffffff);
         knobTextInactive = juce::Colour (0xff909090); axisText = juce::Colour (0xccffffff);
         curveMuted = juce::Colour (0xff808080);
+        barTop = juce::Colour (0xff000000); barBottom = juce::Colour (0xff000000);
+        barKey = juce::Colour (0xff202020); barKeyOn = juce::Colour (0xff1d9fc6); barKeyText = juce::Colour (0xffffffff);
+        barText = juce::Colour (0xffffffff); barTextDim = juce::Colour (0xffc0c0c0);
     }
     else
     {
@@ -186,6 +210,9 @@ inline void applyTheme (int index)
         buttonTextInactive = juce::Colour (0xff767c80); knobRim = juce::Colour (0xff3b454a);
         knobTextInactive = juce::Colour (0xff5f6569); axisText = juce::Colour (0x66ffffff);
         curveMuted = juce::Colour (0xff5d6a70);
+        barTop = juce::Colour (0xff2b3338); barBottom = juce::Colour (0xff171d21);
+        barKey = juce::Colour (0xff232b30); barKeyOn = juce::Colour (0xff1d9fc6); barKeyText = juce::Colour (0xffe6edf0);
+        barText = juce::Colour (0xffffffff); barTextDim = juce::Colour (0xff8a949b);
     }
 
     // Aliases copy the base values above.
