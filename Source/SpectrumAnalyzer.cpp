@@ -229,6 +229,12 @@ void SpectrumAnalyzer::dominantPeak (float& freqHz, float& db) const
 
 void SpectrumAnalyzer::timerCallback()
 {
+    bool moved = true;
+    const auto beforePre = preMagnitudes;
+    const auto beforePost = postMagnitudes;
+    const auto beforeSide = sideMagnitudes;
+    const auto beforeTrans = transientMagnitudes;
+    const auto beforeTonal = tonalMagnitudes;
     if (! frozen)
     {
         // Speed sets how far each frame moves toward the new spectrum.
@@ -277,7 +283,17 @@ void SpectrumAnalyzer::timerCallback()
     float peakDb = minDb;
     dominantPeak (peakHz, peakDb);
     InstanceRegistry::get().publish (processor.getInstanceId(), peakHz, peakDb);
-    repaint();
+
+    // The line views only change with the spectrum; the waterfall and spectrograms scroll every frame.
+    const int source = processor.getSpectrumSource();
+    moved = source >= 3 || source != paintedSource || preMagnitudes != beforePre || postMagnitudes != beforePost
+            || sideMagnitudes != beforeSide || transientMagnitudes != beforeTrans || tonalMagnitudes != beforeTonal;
+    paintedSource = source;
+    if (moved || ++quietTicks >= 30) // the once-a-second repaint covers anything else that changes the picture
+    {
+        quietTicks = 0;
+        repaint();
+    }
 }
 
 void SpectrumAnalyzer::paint (juce::Graphics& g)

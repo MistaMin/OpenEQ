@@ -55,6 +55,7 @@ struct BandParameterState
     float splitTransDb = 0.0f; // transient-path gain
     float splitTailDb = 0.0f;  // tail-path gain
     float phase = 0.0f;        // free phase: -1 inverse, 0 linear, +1 minimum (kernel modes)
+    bool operator== (const BandParameterState&) const = default;
 };
 
 class OpenEQAudioProcessor : public juce::AudioProcessor

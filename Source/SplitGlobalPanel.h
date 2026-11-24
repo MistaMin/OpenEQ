@@ -112,10 +112,14 @@ private:
         const float t = processor.getSplitTransientMeter();
         const float s = processor.getSplitTonalMeter();
         const float r = processor.getSplitRatioMeter();
+        const float before[3] = { smoothedTrans, smoothedTonal, smoothedRatio };
         smoothedTrans += (t - smoothedTrans) * 0.35f;
         smoothedTonal += (s - smoothedTonal) * 0.35f;
         smoothedRatio += (r - smoothedRatio) * 0.25f;
-        repaint();
+        // Skip the repaint while the bars have settled.
+        if (std::abs (before[0] - smoothedTrans) > 1.0e-4f || std::abs (before[1] - smoothedTonal) > 1.0e-4f
+            || std::abs (before[2] - smoothedRatio) > 1.0e-4f)
+            repaint();
     }
 
     OpenEQAudioProcessor& processor;

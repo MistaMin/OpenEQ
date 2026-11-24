@@ -285,6 +285,7 @@ namespace ResponseModel
     {
         int order = 0;
         float c[5] = {};
+        bool operator== (const NormalizedStage&) const = default;
     };
 
     /** A designed band. T is the arithmetic type of the coefficients: float for the graph, double for the audio path. */
@@ -878,12 +879,14 @@ namespace ResponseModel
         std::array<NormalizedStage, maxStages> stages {};
         /** Split bands only: the tonal path (gain + tonal gain). It has the same stage count as `stages`. */
         std::array<NormalizedStage, maxStages> tailStages {};
+        bool operator== (const GraphBand&) const = default;
     };
 
     struct GraphSnapshot
     {
         double sampleRate = 44100.0;
         std::array<GraphBand, graphBandCount> bands {};
+        bool operator== (const GraphSnapshot&) const = default;
     };
 
     inline bool hasSplitBands (const GraphSnapshot& snapshot) noexcept

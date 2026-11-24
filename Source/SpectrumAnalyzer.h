@@ -90,6 +90,7 @@ private:
     std::array<float, AnalyzerRing::size / 2> sideMagnitudes {};
     std::array<float, AnalyzerRing::size / 2> transientMagnitudes {};
     std::array<float, AnalyzerRing::size / 2> tonalMagnitudes {};
+    int paintedSource = -1, quietTicks = 0;
 
     /** Waterfall history: 3D spectral slices receding into depth (newest at the front). */
     static constexpr int waterfallColumns = 160;     // log-spaced 20 Hz .. 20 kHz

@@ -28,9 +28,14 @@ public:
 
     void timerCallback() override
     {
-        meter.update (processor.getInputMeterPeak (0), processor.getInputMeterPeak (1),
-                      processor.getInputMeterRms (0), processor.getInputMeterRms (1));
-        repaint();
+        const bool moved = meter.update (processor.getInputMeterPeak (0), processor.getInputMeterPeak (1),
+                                         processor.getInputMeterRms (0), processor.getInputMeterRms (1));
+        const float maxPeak = processor.getInputMeterMaxPeak();
+        if (moved || maxPeak != shownMax)
+        {
+            shownMax = maxPeak;
+            repaint (meterBounds); // only the meter changes; the knob and panel are left alone
+        }
     }
 
     void mouseDown (const juce::MouseEvent& e) override
@@ -81,6 +86,7 @@ private:
     RotaryKnob trimKnob;
     juce::Rectangle<int> meterBounds;
     LevelMeter meter;
+    float shownMax = 0.0f;
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     std::unique_ptr<SliderAttachment> trimAttachment;

@@ -1,6 +1,7 @@
 #pragma once
 #include <juce_gui_basics/juce_gui_basics.h>
 #include <juce_audio_basics/juce_audio_basics.h>
+#include <cstring>
 #include "Theme.h"
 
 /** Stereo peak and RMS meter shared by the input and output columns, so both read the same way: two bars
@@ -12,9 +13,11 @@ public:
     static constexpr int width = 48;
     static constexpr int readoutHeight = 16;
 
-    /** Call at the owner's timer rate with linear levels. */
-    void update (float peakL, float peakR, float rmsL, float rmsR, float decay = 0.88f) noexcept
+    /** Call at the owner's timer rate with linear levels. Returns true when anything drawn changed,
+        so the owner can skip the repaint while the meter is at rest. */
+    bool update (float peakL, float peakR, float rmsL, float rmsR, float decay = 0.88f) noexcept
     {
+        const float before[6] = { shownPeak[0], shownPeak[1], shownRms[0], shownRms[1], held[0], held[1] };
         shownPeak[0] = juce::jmax (peakL, shownPeak[0] * decay);
         shownPeak[1] = juce::jmax (peakR, shownPeak[1] * decay);
         shownRms[0]  = juce::jmax (rmsL, shownRms[0] * decay);
@@ -27,6 +30,9 @@ public:
             if (peaks[ch] >= held[ch]) { held[ch] = peaks[ch]; holdAge[ch] = 0; }
             else if (++holdAge[ch] > 45) held[ch] *= 0.94f;
         }
+
+        const float after[6] = { shownPeak[0], shownPeak[1], shownRms[0], shownRms[1], held[0], held[1] };
+        return std::memcmp (before, after, sizeof before) != 0;
     }
 
     /** The clickable readout for a meter painted into `bounds`. */

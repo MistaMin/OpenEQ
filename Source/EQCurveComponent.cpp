@@ -113,7 +113,8 @@ void EQCurveComponent::timerCallback()
     processor.serviceIdleGraph();
     refreshBandView();
     stepNodeMotion();
-    repaint();
+    if (graphNeedsPaint())
+        repaint();
 
     // 30 frames a second is enough for the idle graph; run at 60 while something is easing.
     const int wanted = (nodeMotionActive || curveMotionActive) ? 60 : 30;
@@ -122,6 +123,36 @@ void EQCurveComponent::timerCallback()
         timerRateHz = wanted;
         startTimerHz (wanted);
     }
+}
+
+bool EQCurveComponent::graphNeedsPaint()
+{
+    std::array<float, 3 * OpenEQAudioProcessor::numBands> dynamics {};
+    for (int i = 0; i < OpenEQAudioProcessor::numBands; ++i)
+    {
+        dynamics[(size_t) (3 * i)] = processor.getDynamicGainDb (i);
+        dynamics[(size_t) (3 * i + 1)] = processor.getDynamicEnvelopeDb (i);
+        dynamics[(size_t) (3 * i + 2)] = processor.getDynamicThresholdDb (i);
+    }
+    const auto snapshot = processor.getGraphSnapshot();
+    const int source = processor.getSpectrumSource(), monitor = (int) processor.getMonitorMode();
+    const float tilt = processor.getDisplayTiltDbPerOctave();
+
+    const bool same = bandView == paintedBandView && snapshot == paintedSnapshot && dynamics == paintedDynamics
+                      && source == paintedSource && monitor == paintedMonitor && tilt == paintedTilt
+                      && ! nodeMotionActive && ! curveMotionActive;
+    // shortcut: the once-a-second repaint covers settings or theme changes that this check does not see; list them here if it must be faster.
+    if (same && ++quietTicks < 30)
+        return false;
+
+    quietTicks = 0;
+    paintedBandView = bandView;
+    paintedSnapshot = snapshot;
+    paintedDynamics = dynamics;
+    paintedSource = source;
+    paintedMonitor = monitor;
+    paintedTilt = tilt;
+    return true;
 }
 
 void EQCurveComponent::stepNodeMotion()
@@ -610,7 +641,7 @@ void EQCurveComponent::paint (juce::Graphics& g)
             // change its dynamics are applying right now, so a working band is visible at a glance.
             float glow = motion.hover * 0.25f;
             if (selected)
-                glow += 0.18f * (0.5f + 0.5f * (float) std::sin (juce::Time::getMillisecondCounterHiRes() * 0.0026));
+                glow += 0.09f; // steady: a pulse would keep the graph repainting at rest
             if (live.dynamic && isBandAudible (i) && ResponseModel::supportsDynamics (live.type))
                 glow += juce::jmin (1.2f, std::abs (processor.getDynamicGainDb (i)) / 6.0f);
             for (int ring = 3; ring >= 1; --ring)

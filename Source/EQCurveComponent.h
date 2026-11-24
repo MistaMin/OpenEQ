@@ -111,6 +111,14 @@ private:
     bool curvePrimed = false, rightCurveShown = false, splitCurvesShown = false;
     double lastNodeStepMs = 0.0, lastCurveStepMs = 0.0;
     bool nodeMotionActive = false, curveMotionActive = false;
+
+    // What the last painted frame was built from. The timer repaints only when this differs (or once a second as a safety net).
+    std::array<BandParameterState, OpenEQAudioProcessor::numBands> paintedBandView {};
+    ResponseModel::GraphSnapshot paintedSnapshot;
+    std::array<float, 3 * OpenEQAudioProcessor::numBands> paintedDynamics {};
+    int paintedSource = -1, paintedMonitor = -1, quietTicks = 0;
+    float paintedTilt = 0.0f;
+    bool graphNeedsPaint();
     int timerRateHz = 30;
     bool anySoloView = false;
     int selectedBand = 0;

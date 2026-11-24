@@ -60,9 +60,16 @@ public:
 
     void timerCallback() override
     {
-        meter.update (processor.getMeterPeak (0), processor.getMeterPeak (1),
-                      processor.getMeterRms (0), processor.getMeterRms (1));
-        repaint();
+        const bool moved = meter.update (processor.getMeterPeak (0), processor.getMeterPeak (1),
+                                         processor.getMeterRms (0), processor.getMeterRms (1));
+        const float maxPeak = processor.getMeterMaxPeak();
+        const bool clipped = processor.getMeterClipped();
+        if (moved || maxPeak != shownMax || clipped != shownClip)
+        {
+            shownMax = maxPeak;
+            shownClip = clipped;
+            repaint (meterBounds); // only the meter changes; the knobs and panel are left alone
+        }
     }
 
     void mouseDown (const juce::MouseEvent& e) override
@@ -162,6 +169,8 @@ private:
     std::unique_ptr<ButtonAttachment> autoGainAttachment;
 
     LevelMeter meter;
+    float shownMax = 0.0f;
+    bool shownClip = false;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OutputColumn)
 };
