@@ -1,8 +1,8 @@
 # OpenEQ User Manual
 
-OpenEQ 1.0.1 Beta, by OpenGrid. A parametric and dynamic equalizer with 32 bands, per-band stereo placement, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
+OpenEQ 1.0.2 Beta, by OpenGrid. A parametric and dynamic equalizer with 32 bands, per-band stereo placement, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
 
-This manual describes the 1.0.1 Beta build. Every name, range and default below is taken from the source code of that build (the parameter layout in `Source/Parameters.h` and the editor in `Source/`). OpenEQ is a beta: save your sessions often and read Known issues before you rely on it.
+This manual describes the 1.0.2 Beta build. Every name, range and default below is taken from the source code of that build (the parameter layout in `Source/Parameters.h` and the editor in `Source/`). OpenEQ is a beta: save your sessions often and read Known issues before you rely on it.
 
 ![OpenEQ main window](images/editor.png)
 
@@ -25,7 +25,7 @@ This manual describes the 1.0.1 Beta build. Every name, range and default below 
 
 ## Installing and formats
 
-OpenEQ 1.0.1 Beta ships for macOS as a signed and notarized installer package, `OpenEQ-1.0.1-macos.pkg`, with universal (arm64 and x86_64) plug-ins in three formats:
+OpenEQ 1.0.2 Beta ships for macOS as a signed and notarized installer package, `OpenEQ-1.0.2-macos.pkg`, with universal (arm64 and x86_64) plug-ins in three formats:
 
 | Format | Installed to |
 |---|---|
@@ -39,7 +39,7 @@ OpenEQ has a stereo main input and output and an optional stereo (or mono) sidec
 
 ## The window at a glance
 
-- **Top bar, first row:** the OpenEQ title and the "1.0.1 Beta" label, the instance button (INST), Undo and Redo, the A and B slots, Preset, then MONITOR, Ø INVERT, BYPASS, Full and Settings.
+- **Top bar, first row:** the OpenEQ title and the "1.0.2 Beta" label, the instance button (INST), Undo and Redo, the A and B slots, Preset, then MONITOR, Ø INVERT, BYPASS, Full and Settings.
 - **Top bar, second row:** MODE, QUALITY, XOVER on the left; 117-BIT and 2x OVERSAMPLE on the right.
 - **Left column (INPUT):** input meter and TRIM.
 - **Centre:** the graph with the analyzer behind it. Its top-right corner holds List, Grab, Keys, FFT, the graph range button and the analyzer view button. A notice line at the top left of the graph explains anything temporary or restricted (see below). A piano keyboard runs along the bottom of the graph.
@@ -453,7 +453,7 @@ Not parameters, and not saved: MONITOR, frequency audition, detector LISTEN, the
 
 ## Known issues
 
-These are known in OpenEQ 1.0.1 Beta (the same list as the release notes, plus one display fault found while writing this manual):
+These are known in OpenEQ 1.0.2 Beta (the same list as the release notes, plus one display fault found while writing this manual):
 
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the FLOOR control is reset.

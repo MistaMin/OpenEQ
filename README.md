@@ -9,7 +9,7 @@
 | ![Dynamics inspector](docs/images/inspector-dyn.png) | ![Transient/tonal split](docs/images/inspector-split.png) | ![Resonance suppressor](docs/images/inspector-reso.png) |
 | ![Waterfall view](docs/images/view-water.png) | ![Spectrogram view](docs/images/view-spectrogram.png) | ![Instance menu](docs/images/instance-menu.png) |
 
-## Version 1.0.1 Beta
+## Version 1.0.2 Beta
 
 - Transient/tonal split with per-band stream gains, and a resonance suppressor.
 - Six analyzer views, Input Trim, one shared input/output meter with peak hold.
@@ -18,7 +18,7 @@
 
 ## Download
 
-[OpenEQ-1.0.1-macos.pkg](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.1/OpenEQ-1.0.1-macos.pkg) (macOS 15 or later, universal arm64 + x86_64). SHA-256 and the manifest are on the [release page](https://github.com/MistaMin/OpenEQ/releases/tag/v1.0.1).
+[OpenEQ-1.0.2-macos.pkg](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.2/OpenEQ-1.0.2-macos.pkg) (macOS 15 or later, universal arm64 + x86_64). SHA-256 and the manifest are on the [release page](https://github.com/MistaMin/OpenEQ/releases/tag/v1.0.2).
 
 The installer offers **Audio Unit**, **VST3** and **AAX** (signed for Pro Tools). It is signed with a Developer ID and notarized by Apple.
 

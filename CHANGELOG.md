@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 Beta
+
+- The editor uses much less CPU while nothing is changing: the graph, spectrum, meters and split display repaint only when something moves (and the graph at least once a second). In the Standalone, idle with no signal, this went from about 35% of one core to about 9%. With audio playing the saving is much smaller.
+- The glow on the selected band is now steady instead of pulsing.
+- A change made in Settings or the theme can take up to a second to show on the graph.
+- No audio or parameter changes.
+
 ## 1.0.1 Beta
 
 - The DRIVE readout showed 1% at full drive; it now reads 0 to 100%, and typing 100 or 100% sets full drive.

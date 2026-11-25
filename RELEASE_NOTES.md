@@ -1,4 +1,4 @@
-# OpenEQ 1.0.1 Beta
+# OpenEQ 1.0.2 Beta
 
 A parametric and dynamic equalizer: 32 bands, per-band routing, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
 
@@ -12,6 +12,7 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## What is in this release
 
+- 1.0.2: the editor uses much less CPU while nothing is changing (Standalone, idle, no signal: about 35% of one core down to about 9%; with audio playing the saving is much smaller). The selected-band glow is steady.
 - 1.0.1: DRIVE now reads 0 to 100%, the top bar follows the theme and reads clearly in Graphite, Light and High contrast, and an AAX build is added.
 
 - Transient/tonal split with per-band stream gains (about 37 ms latency at 48 kHz while a band is split; Zero Latency mode only).
@@ -24,16 +25,18 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## Checks this release passed
 
-- Regression suite: 58 of 58, exit 0, repeated runs in Release and one in Debug.
+- Regression suite: 58 of 58, three runs in Release and one in Debug.
 - Audio Unit validation (`auval`).
 - VST3 and Audio Unit validators at strictness 10, including their editor tests.
-
-- Host checks on this build: load, render, state save and reopen, 10 editor open/close cycles, and every parameter set with the editor open, in two hosts, with the Audio Unit and the VST3. In one host the instance menu, switching to another track's instance and the Rename dialog were driven and worked, and a rename survived saving the project.
+- AAX validator: 5 of 6 tests (see the page-table item under Known issues).
+- Two hosts: load, render, state save and reopen with the Audio Unit and the VST3; editor open/close cycles in one; parameter sweeps (VST3 audio sweep in one host, parameter sweep and recall in the other).
+- Not repeated for 1.0.2: the on-screen visual sweep and the instance menu tests in a host.
 
 See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session.
 
 ## Known issues
 
+- Settings and theme changes can take up to a second to show on the graph.
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the Floor control is reset.
 - Impulse Padding, Dyn Knee (with the Above/Below panels) and the 2x Oversampling control have no effect while playing; oversampling is read only when playback starts.
@@ -51,4 +54,4 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 ## Installing
 
-Run `OpenEQ-1.0.1-macos.pkg` and choose the formats you want. They install to `/Library/Audio/Plug-Ins/Components`, `/Library/Audio/Plug-Ins/VST3` and `/Library/Application Support/Avid/Audio/Plug-Ins`.
+Run `OpenEQ-1.0.2-macos.pkg` and choose the formats you want. They install to `/Library/Audio/Plug-Ins/Components`, `/Library/Audio/Plug-Ins/VST3` and `/Library/Application Support/Avid/Audio/Plug-Ins`.

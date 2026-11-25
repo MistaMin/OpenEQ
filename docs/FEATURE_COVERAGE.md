@@ -1,6 +1,6 @@
 # OpenEQ beta feature coverage
 
-Version **1.0.1 Beta**. This inventory describes implemented areas; beta validation remains ongoing.
+Version **1.0.2 Beta**. This inventory describes implemented areas; beta validation remains ongoing.
 
 | Area | Implementation | Validation |
 |---|---|---|
