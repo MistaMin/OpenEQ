@@ -136,7 +136,7 @@ def build():
     def footer(canvas, doc):
         canvas.setFont("Helvetica", 8)
         canvas.setFillColor(GREY)
-        canvas.drawString(18 * mm, 10 * mm, "OpenEQ 1.0.2 Beta User Manual")
+        canvas.drawString(18 * mm, 10 * mm, "OpenEQ 1.0.3 Beta User Manual")
         canvas.drawRightString(A4[0] - 18 * mm, 10 * mm, str(doc.page))
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

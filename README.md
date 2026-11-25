@@ -9,7 +9,7 @@
 | ![Dynamics inspector](docs/images/inspector-dyn.png) | ![Transient/tonal split](docs/images/inspector-split.png) | ![Resonance suppressor](docs/images/inspector-reso.png) |
 | ![Waterfall view](docs/images/view-water.png) | ![Spectrogram view](docs/images/view-spectrogram.png) | ![Instance menu](docs/images/instance-menu.png) |
 
-## Version 1.0.2 Beta
+## Version 1.0.3 Beta
 
 - Transient/tonal split with per-band stream gains, and a resonance suppressor.
 - Six analyzer views, Input Trim, one shared input/output meter with peak hold.
@@ -18,11 +18,17 @@
 
 ## Download
 
-[OpenEQ-1.0.2-macos.pkg](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.2/OpenEQ-1.0.2-macos.pkg) (macOS 15 or later, universal arm64 + x86_64). SHA-256 and the manifest are on the [release page](https://github.com/MistaMin/OpenEQ/releases/tag/v1.0.2).
+| Platform | Download | Formats |
+|---|---|---|
+| macOS 15 or later, universal arm64 + x86_64 | [OpenEQ-1.0.3-macos.pkg](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.3/OpenEQ-1.0.3-macos.pkg) | Audio Unit, VST3, CLAP, LV2, AAX |
+| Windows 10 or later, x64 | [OpenEQ-1.0.3-windows-x64-setup.exe](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.3/OpenEQ-1.0.3-windows-x64-setup.exe) | VST3, CLAP, LV2 |
+| Linux x86_64 (built on Ubuntu 22.04) | [OpenEQ-1.0.3-linux-x86_64.tar.gz](https://github.com/MistaMin/OpenEQ/releases/download/v1.0.3/OpenEQ-1.0.3-linux-x86_64.tar.gz) | VST3, CLAP, LV2 |
 
-The installer offers **Audio Unit**, **VST3** and **AAX** (signed for Pro Tools). It is signed with a Developer ID and notarized by Apple.
+SHA-256 files and the manifest are on the [release page](https://github.com/MistaMin/OpenEQ/releases/tag/v1.0.3).
 
-Not in this release: Windows, Linux, CLAP, LV2, and the Standalone app (it has no icon yet). It has been tested in two hosts on macOS and, for AAX, on one mono track in Pro Tools; other hosts are untested.
+The macOS installer is signed with a Developer ID and notarized by Apple; its AAX is signed for Pro Tools. The Windows installer is **not code-signed**, so Windows may warn before running it. On Linux, unpack the archive from `/` or copy the plug-in folders to `~/.vst3`, `~/.clap` and `~/.lv2`.
+
+Not in this release: the Standalone app (it has no icon yet). On macOS it has been tested in two hosts and, for AAX, on one mono track in Pro Tools. The Windows and Linux builds are new: they passed automated plug-in validators only and have not been tried in a host.
 
 ## User guide
 
@@ -59,7 +65,7 @@ cmake --build build --config Release -j
 ctest --test-dir build --output-on-failure
 ```
 
-Build outputs are in `build/OpenEQ_artefacts/Release/{VST3,AU,Standalone}/`. Plugin copying after build is enabled; the configured JUCE destinations receive the AU and VST3 bundles.
+Build outputs are in `build/OpenEQ_artefacts/Release/{VST3,AU,CLAP,LV2,Standalone}/` (AU on macOS only). Plugin copying after build is on by default; `-DOPENEQ_COPY_PLUGINS=OFF` turns it off. The regression suite builds on macOS only. Windows and Linux release builds run from `.github/workflows/native-builds.yml`.
 
 The measurement tools `response_probe`, `response_compare` and `plugin_probe` (sources in `Tools/`) are not built by default. Configure with `-DOPENEQ_BUILD_PROBES=ON` to build them. `response_probe` requires an explicit `--plugin <VST3 path>` argument.
 

@@ -21,7 +21,8 @@ jobs:
       - name: Fetch validators
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
-          mkdir tools && cd tools
+          mkdir validators
+          cd validators
           gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Windows.zip
           gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-windows.zip'
           for z in *.zip; do 7z x -y "$z" >/dev/null; done
@@ -29,7 +30,7 @@ jobs:
           find . -name '*.exe'
       - name: pluginval (VST3, strictness 10)
         run: |
-          pv=$(find tools -name pluginval.exe -print -quit)
+          pv=$(find validators -name pluginval.exe -print -quit)
           "$pv" --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
       # Excluded, both single-precision rounding on skewed frequency parameters, not wrong values:
       #   state-reproducibility-binary: a restored value can differ in the last digits, so the saved bytes differ.
@@ -37,7 +38,7 @@ jobs:
       # --in-process removes the validator's 45 s limit, which the random-parameter test exceeds.
       - name: clap-validator
         run: |
-          v=$(find tools -type f -name 'clap-validator.exe' | head -1)
+          v=$(find validators -type f -name 'clap-validator.exe' | head -1)
           "$v" validate --in-process -x 'state-reproducibility-binary|param-conversions' build/OpenEQ_artefacts/Release/CLAP/OpenEQ.clap
       - name: Installer
         run: |
@@ -65,16 +66,17 @@ jobs:
       - name: Fetch validators
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
-          mkdir tools && cd tools
+          mkdir validators
+          cd validators
           gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Linux.zip
           gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-ubuntu-22.04.zip'
           for z in *.zip; do unzip -oq "$z"; done
           for t in *.tar.gz; do [ -e "$t" ] && tar -xzf "$t"; done
       - name: pluginval (VST3, strictness 10)
-        run: xvfb-run -a tools/pluginval --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
+        run: xvfb-run -a validators/pluginval --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
       - name: clap-validator
         run: |
-          v=$(find tools -type f -name clap-validator | head -1); chmod +x "$v"
+          v=$(find validators -type f -name clap-validator | head -1); chmod +x "$v"
           xvfb-run -a "$v" validate --in-process -x 'state-reproducibility-binary|param-conversions' build/OpenEQ_artefacts/Release/CLAP/OpenEQ.clap
       - name: Package
         run: |

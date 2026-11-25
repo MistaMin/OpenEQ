@@ -1,8 +1,8 @@
 # OpenEQ User Manual
 
-OpenEQ 1.0.2 Beta, by OpenGrid. A parametric and dynamic equalizer with 32 bands, per-band stereo placement, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
+OpenEQ 1.0.3 Beta, by OpenGrid. A parametric and dynamic equalizer with 32 bands, per-band stereo placement, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
 
-This manual describes the 1.0.2 Beta build. Every name, range and default below is taken from the source code of that build (the parameter layout in `Source/Parameters.h` and the editor in `Source/`). OpenEQ is a beta: save your sessions often and read Known issues before you rely on it.
+This manual describes the 1.0.3 Beta build. Every name, range and default below is taken from the source code of that build (the parameter layout in `Source/Parameters.h` and the editor in `Source/`). OpenEQ is a beta: save your sessions often and read Known issues before you rely on it.
 
 ![OpenEQ main window](images/editor.png)
 
@@ -25,21 +25,29 @@ This manual describes the 1.0.2 Beta build. Every name, range and default below 
 
 ## Installing and formats
 
-OpenEQ 1.0.2 Beta ships for macOS as a signed and notarized installer package, `OpenEQ-1.0.2-macos.pkg`, with universal (arm64 and x86_64) plug-ins in three formats:
+OpenEQ 1.0.3 Beta ships for macOS, Windows and Linux. On macOS it comes as a signed and notarized installer package, `OpenEQ-1.0.3-macos.pkg`, with universal (arm64 and x86_64) plug-ins in five formats:
 
 | Format | Installed to |
 |---|---|
 | Audio Unit (AU) | `/Library/Audio/Plug-Ins/Components/OpenEQ.component` |
 | VST3 | `/Library/Audio/Plug-Ins/VST3/OpenEQ.vst3` |
+| CLAP | `/Library/Audio/Plug-Ins/CLAP/OpenEQ.clap` |
+| LV2 | `/Library/Audio/Plug-Ins/LV2/OpenEQ.lv2` |
 | AAX (Pro Tools) | `/Library/Application Support/Avid/Audio/Plug-Ins/OpenEQ.aaxplugin` |
 
-Run the installer and choose the formats you want. There is no Standalone application in this release (it can be built from source but has no application icon yet), and there is no CLAP or LV2 and no Windows or Linux builds.
+Run the installer and choose the formats you want. There is no Standalone application in this release (it can be built from source but has no application icon yet), 
+
+**Windows** (10 or later, x64): run `OpenEQ-1.0.3-windows-x64-setup.exe`. It installs VST3, CLAP and LV2 under `C:\Program Files\Common Files`. The installer is not code-signed.
+
+**Linux** (x86_64): `OpenEQ-1.0.3-linux-x86_64.tar.gz` holds VST3, CLAP and LV2 under `usr/lib`. Unpack it from `/`, or copy the folders to `~/.vst3`, `~/.clap` and `~/.lv2`.
+
+The Windows and Linux builds have been checked with automated validators only.
 
 OpenEQ has a stereo main input and output and an optional stereo (or mono) sidechain input named "Sidechain". The sidechain feeds the External detector and relative sources of the dynamics, the SC switch of the resonance suppressor, and the SIDE analyzer view.
 
 ## The window at a glance
 
-- **Top bar, first row:** the OpenEQ title and the "1.0.2 Beta" label, the instance button (INST), Undo and Redo, the A and B slots, Preset, then MONITOR, Ø INVERT, BYPASS, Full and Settings.
+- **Top bar, first row:** the OpenEQ title and the "1.0.3 Beta" label, the instance button (INST), Undo and Redo, the A and B slots, Preset, then MONITOR, Ø INVERT, BYPASS, Full and Settings.
 - **Top bar, second row:** MODE, QUALITY, XOVER on the left; 117-BIT and 2x OVERSAMPLE on the right.
 - **Left column (INPUT):** input meter and TRIM.
 - **Centre:** the graph with the analyzer behind it. Its top-right corner holds List, Grab, Keys, FFT, the graph range button and the analyzer view button. A notice line at the top left of the graph explains anything temporary or restricted (see below). A piano keyboard runs along the bottom of the graph.
@@ -453,7 +461,7 @@ Not parameters, and not saved: MONITOR, frequency audition, detector LISTEN, the
 
 ## Known issues
 
-These are known in OpenEQ 1.0.2 Beta (the same list as the release notes, plus one display fault found while writing this manual):
+These are known in OpenEQ 1.0.3 Beta (the same list as the release notes, plus one display fault found while writing this manual):
 
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the FLOOR control is reset.

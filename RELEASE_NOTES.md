@@ -1,4 +1,4 @@
-# OpenEQ 1.0.2 Beta
+# OpenEQ 1.0.3 Beta
 
 A parametric and dynamic equalizer: 32 bands, per-band routing, above/below dynamics, a transient/tonal split, a resonance suppressor, and zero-latency, linear-phase, analogue and mixed-phase processing modes.
 
@@ -6,12 +6,15 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## Formats and requirements
 
-- Audio Unit, VST3 and AAX (Pro Tools) for macOS, universal arm64 + x86_64, in a signed and notarized installer package. The AAX is signed for Pro Tools.
+- macOS 15 or later, universal arm64 + x86_64: Audio Unit, VST3, CLAP, LV2 and AAX (Pro Tools) in a signed and notarized installer package. The AAX is signed for Pro Tools.
+- Windows 10 or later, x64: VST3, CLAP and LV2 in an installer. It is not code-signed, so Windows may warn before running it.
+- Linux x86_64, built on Ubuntu 22.04: VST3, CLAP and LV2 in a `.tar.gz` with `usr/lib` folders.
 - The Standalone application is built from source but not shipped in this release (it has no application icon yet).
-- No CLAP or LV2 build, and no Windows or Linux build, in this release.
 
 ## What is in this release
 
+- 1.0.3: CLAP and LV2 formats, and Windows and Linux builds.
+- 1.0.3 fix: with Output Gain away from 0 dB, the gain was also applied to the sidechain input buffer.
 - 1.0.2: the editor uses much less CPU while nothing is changing (Standalone, idle, no signal: about 35% of one core down to about 9%; with audio playing the saving is much smaller). The selected-band glow is steady.
 - 1.0.1: DRIVE now reads 0 to 100%, the top bar follows the theme and reads clearly in Graphite, Light and High contrast, and an AAX build is added.
 
@@ -36,6 +39,8 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 ## Known issues
 
+- Windows and Linux: new builds, checked with automated validators only; not tried in a host, and the regression suite does not run there.
+- CLAP: a restored session or typed value can differ from the saved one in the last digits on some frequency controls.
 - Settings and theme changes can take up to a second to show on the graph.
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the Floor control is reset.
@@ -54,4 +59,4 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 ## Installing
 
-Run `OpenEQ-1.0.2-macos.pkg` and choose the formats you want. They install to `/Library/Audio/Plug-Ins/Components`, `/Library/Audio/Plug-Ins/VST3` and `/Library/Application Support/Avid/Audio/Plug-Ins`.
+Run `OpenEQ-1.0.3-macos.pkg` and choose the formats you want. They install to `/Library/Audio/Plug-Ins/Components`, `/Library/Audio/Plug-Ins/VST3` and `/Library/Application Support/Avid/Audio/Plug-Ins`.

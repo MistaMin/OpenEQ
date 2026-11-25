@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 Beta
+
+- Adds CLAP and LV2 formats, and Windows (x64) and Linux (x86_64) builds of VST3, CLAP and LV2.
+- Fix: with Output Gain away from 0 dB, the gain was also applied to the sidechain input buffer.
+
 ## 1.0.2 Beta
 
 - The editor uses much less CPU while nothing is changing: the graph, spectrum, meters and split display repaint only when something moves (and the graph at least once a second). In the Standalone, idle with no signal, this went from about 35% of one core to about 9%. With audio playing the saving is much smaller.
