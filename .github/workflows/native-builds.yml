@@ -25,8 +25,12 @@ jobs:
           gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Windows.zip
           gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-windows.zip'
           for z in *.zip; do 7z x -y "$z" >/dev/null; done
+          for t in *.tar.gz; do if [ -e "$t" ]; then tar -xzf "$t"; fi; done
+          find . -name '*.exe'
       - name: pluginval (VST3, strictness 10)
-        run: tools/pluginval.exe --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
+        run: |
+          pv=$(find tools -name pluginval.exe -print -quit)
+          "$pv" --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
       # Excluded, both single-precision rounding on skewed frequency parameters, not wrong values:
       #   state-reproducibility-binary: a restored value can differ in the last digits, so the saved bytes differ.
       #   param-conversions: seven-decimal host text (68.0680695 Hz) does not round-trip in the last digits.
