@@ -939,8 +939,10 @@ void OpenEQAudioProcessor::applyWidthAndGain (juce::AudioBuffer<float>& buffer, 
     else
     {
         const float gain = juce::Decibels::decibelsToGain (outputGainDb.getCurrentValue());
+        // Main channels only: the channels after them are the host's sidechain input.
         if (std::abs (gain - 1.0f) > 1.0e-6f)
-            buffer.applyGain (offset, numSamples, gain);
+            for (int channel = 0; channel < channels; ++channel)
+                buffer.applyGain (channel, offset, numSamples, gain);
     }
 }
 

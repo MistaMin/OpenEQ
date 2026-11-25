@@ -5741,6 +5741,32 @@ static void captureThemes()
     std::cout << "PASS: theme pictures written\n";
 }
 
+static void checkSidechainInputUntouched()
+{
+    auto owner = std::make_unique<OpenEQAudioProcessor>();
+    auto& processor = *owner;
+    juce::AudioProcessor::BusesLayout layout;
+    layout.inputBuses.add (juce::AudioChannelSet::stereo());
+    layout.inputBuses.add (juce::AudioChannelSet::stereo());
+    layout.outputBuses.add (juce::AudioChannelSet::stereo());
+    require (processor.setBusesLayout (layout), "Processor rejected a stereo sidechain layout");
+    setRaw (processor.apvts, "outputGain", -6.0f);
+    prepareStereo (processor, 48000.0, 512);
+
+    juce::AudioBuffer<float> buffer (4, 512);
+    juce::MidiBuffer midi;
+    for (int block = 0; block < 8; ++block)
+    {
+        for (int channel = 0; channel < 4; ++channel)
+            juce::FloatVectorOperations::fill (buffer.getWritePointer (channel), 0.25f, 512);
+        processor.processBlock (buffer, midi);
+        for (int channel = 2; channel < 4; ++channel)
+            for (int i = 0; i < 512; ++i)
+                require (juce::exactlyEqual (buffer.getSample (channel, i), 0.25f), "Output gain changed the sidechain input");
+    }
+    std::cout << "PASS: the sidechain input is left untouched\n";
+}
+
 static void checkOversampleButtonFollowsParameter()
 {
     auto owner = std::make_unique<OpenEQAudioProcessor>();
@@ -6034,6 +6060,7 @@ int main (int argc, char** argv)
     run ("instance-switch", checkInstanceSwitching);
     run ("instance-menu-tick", checkInstanceMenuTick);
     run ("oversample-button", checkOversampleButtonFollowsParameter);
+    run ("sidechain-untouched", checkSidechainInputUntouched);
     run ("gui-scale", checkGuiScaleFillsWindow);
     run ("theme-shots", captureThemes);
 

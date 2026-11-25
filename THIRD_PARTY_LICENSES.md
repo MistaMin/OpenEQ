@@ -10,6 +10,9 @@ downloads. Independent builders must satisfy the JUCE licence applicable to thei
 | JUCE 8.0.6 | plugin framework, user interface, plugin formats | AGPLv3 or the commercial JUCE licence. OpenGrid builds its released binaries under its own JUCE licence. Anyone building from source needs a JUCE licence that covers their use and distribution. |
 | GoodLookinUI (`third_party/GoodLookinUI`) | knobs, keys, lamps, meters | MIT |
 | VST3 SDK (bundled with JUCE) | VST3 format | MIT |
+| clap-juce-extensions | CLAP wrapper | MIT, Copyright 2019-2020 Paul Walker |
+| CLAP and clap-helpers (with clap-juce-extensions) | CLAP format | MIT, Copyright Alexandre Bique |
+| LV2, lilv, serd, sord, sratom (bundled with JUCE) | LV2 format | ISC |
 | Audio Unit SDK (bundled with JUCE, macOS only) | Audio Unit format | Apache License 2.0 |
 | zlib, libpng, HarfBuzz, libwebp, lunasvg, SheenBidi and audio codecs (bundled with JUCE) | JUCE internals | their own licenses, included in the JUCE source |
 

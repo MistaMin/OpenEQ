@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(OpenEQ VERSION 1.0.2) # visible label: Source/Version.h (1.0.2 Beta)
+project(OpenEQ VERSION 1.0.3) # visible label: Source/Version.h (1.0.3 Beta)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,6 +14,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(JUCE)
 
+# CLAP wrapper (MIT), pinned; it brings the CLAP headers as submodules.
+FetchContent_Declare(
+    clap-juce-extensions
+    GIT_REPOSITORY https://github.com/free-audio/clap-juce-extensions.git
+    GIT_TAG 6bde108329ff9fc24404b79b8b397261a75cf6a8
+)
+FetchContent_MakeAvailable(clap-juce-extensions)
+
 # GoodLookinUI: MIT-licensed procedural hardware UI toolkit (core + JUCE adapter).
 set(GOODLOOKINUI_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/third_party/GoodLookinUI")
 add_subdirectory("${GOODLOOKINUI_ROOT}" "${CMAKE_CURRENT_BINARY_DIR}/goodlookinui")
@@ -22,7 +30,8 @@ add_subdirectory("${GOODLOOKINUI_ROOT}" "${CMAKE_CURRENT_BINARY_DIR}/goodlookinu
 # AAX bundle (the host needs it PACE-signed first); it is copied to the build tree only.
 set(OPENEQ_AAX_SDK "${CMAKE_CURRENT_SOURCE_DIR}/../aax-sdk-2-8-1" CACHE PATH "Optional AAX SDK")
 option(OPENEQ_BUILD_AAX "Build the AAX format when the SDK is available" OFF)
-set(OPENEQ_FORMATS AU VST3 Standalone)
+set(OPENEQ_FORMATS AU VST3 LV2 Standalone) # AU is skipped by JUCE outside macOS; CLAP is added below
+option(OPENEQ_COPY_PLUGINS "Copy built plug-ins into the user plug-in folders" ON)
 if(OPENEQ_BUILD_AAX AND (APPLE OR WIN32) AND EXISTS "${OPENEQ_AAX_SDK}/Interfaces/AAX.h")
     juce_set_aax_sdk_path("${OPENEQ_AAX_SDK}")
     list(APPEND OPENEQ_FORMATS AAX)
@@ -37,7 +46,8 @@ juce_add_plugin(OpenEQ
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
-    COPY_PLUGIN_AFTER_BUILD TRUE
+    COPY_PLUGIN_AFTER_BUILD ${OPENEQ_COPY_PLUGINS}
+    LV2URI "https://github.com/MistaMin/OpenEQ"
     PLUGIN_MANUFACTURER_CODE Opeq
     PLUGIN_CODE Opq1
     FORMATS ${OPENEQ_FORMATS}
@@ -46,6 +56,10 @@ juce_add_plugin(OpenEQ
     PRODUCT_NAME "OpenEQ")
 
 juce_generate_juce_header(OpenEQ)
+
+clap_juce_extensions_plugin(TARGET OpenEQ
+    CLAP_ID "com.opengrid.openeq"
+    CLAP_FEATURES audio-effect equalizer)
 
 target_sources(OpenEQ
     PRIVATE
@@ -76,7 +90,8 @@ target_link_libraries(OpenEQ
         juce::juce_recommended_warning_flags)
 
 include(CTest)
-if(BUILD_TESTING)
+# The regression suite uses macOS loader hooks and run-loop calls, so it builds on macOS only.
+if(BUILD_TESTING AND APPLE)
     # dyld only honours __interpose from a different image than the caller.
     add_library(OpenEQAllocInterpose SHARED Tests/AllocInterpose.c)
     add_executable(OpenEQRegressionTests Tests/RegressionTests.cpp Tests/FilterResponseTests.cpp)

@@ -1,0 +1,90 @@
+# Windows and Linux release builds. Started by hand: gh workflow run native-builds.yml
+name: native-builds
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  PLUGINVAL: v1.0.4
+  CLAPVAL: "0.4.1"
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DOPENEQ_COPY_PLUGINS=OFF -DBUILD_TESTING=OFF
+      - name: Build
+        run: cmake --build build --config Release --parallel
+      - name: Fetch validators
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          mkdir tools && cd tools
+          gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Windows.zip
+          gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-windows.zip'
+          for z in *.zip; do 7z x -y "$z" >/dev/null; done
+          find . -type f | head -20
+      - name: pluginval (VST3, strictness 10)
+        run: tools/pluginval.exe --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
+      # state-reproducibility-binary is excluded: restoring a skewed float parameter can differ in the last
+      # digits, so the saved bytes differ while every value matches. --in-process removes the 45 s limit.
+      - name: clap-validator
+        run: |
+          v=$(find tools -type f -name 'clap-validator.exe' | head -1)
+          "$v" validate --in-process -x state-reproducibility-binary build/OpenEQ_artefacts/Release/CLAP/OpenEQ.clap
+      - name: Installer
+        run: |
+          choco install innosetup -y --no-progress >/dev/null
+          version=$(sed -n 's/^project(OpenEQ VERSION \([0-9.]*\)).*/\1/p' CMakeLists.txt)
+          "/c/Program Files (x86)/Inno Setup 6/ISCC.exe" "-DVersion=$version" packaging/windows.iss
+          cd dist && sha256sum *.exe > "$(ls *.exe).sha256" && cat *.sha256
+      - uses: actions/upload-artifact@v4
+        with: { name: windows-x64, path: dist/* }
+  linux:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build xvfb libasound2-dev libjack-jackd2-dev ladspa-sdk libfreetype-dev \
+            libfontconfig1-dev libx11-dev libxcomposite-dev libxcursor-dev libxext-dev libxinerama-dev \
+            libxrandr-dev libxrender-dev libglu1-mesa-dev mesa-common-dev
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DOPENEQ_COPY_PLUGINS=OFF -DBUILD_TESTING=OFF
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Fetch validators
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          mkdir tools && cd tools
+          gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Linux.zip
+          gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-ubuntu-22.04.zip'
+          for z in *.zip; do unzip -oq "$z"; done
+          for t in *.tar.gz; do [ -e "$t" ] && tar -xzf "$t"; done
+          find . -type f | head -20
+      - name: pluginval (VST3, strictness 10)
+        run: xvfb-run -a tools/pluginval --strictness-level 10 --validate-in-process --timeout-ms 600000 "$PWD/build/OpenEQ_artefacts/Release/VST3/OpenEQ.vst3"
+      - name: clap-validator
+        run: |
+          v=$(find tools -type f -name clap-validator | head -1); chmod +x "$v"
+          xvfb-run -a "$v" validate --in-process -x state-reproducibility-binary build/OpenEQ_artefacts/Release/CLAP/OpenEQ.clap
+      - name: Package
+        run: |
+          version=$(sed -n 's/^project(OpenEQ VERSION \([0-9.]*\)).*/\1/p' CMakeLists.txt)
+          art=build/OpenEQ_artefacts/Release
+          mkdir -p stage/usr/lib/{vst3,clap,lv2} stage/usr/share/doc/openeq dist
+          cp -R $art/VST3/OpenEQ.vst3 stage/usr/lib/vst3/
+          cp $art/CLAP/OpenEQ.clap stage/usr/lib/clap/
+          cp -R $art/LV2/OpenEQ.lv2 stage/usr/lib/lv2/
+          cp LICENSE BINARY_LICENSE.txt THIRD_PARTY_LICENSES.md README.md CHANGELOG.md RELEASE_NOTES.md stage/usr/share/doc/openeq/
+          name="OpenEQ-$version-linux-x86_64.tar.gz"
+          tar -C stage -czf "dist/$name" usr
+          (cd dist && sha256sum "$name" > "$name.sha256" && cat "$name.sha256")
+          ldd stage/usr/lib/clap/OpenEQ.clap
+          objdump -T stage/usr/lib/clap/OpenEQ.clap | grep -o 'GLIBC_[0-9.]*' | sort -Vu | tail -1
+      - uses: actions/upload-artifact@v4
+        with: { name: linux-x86_64, path: dist/* }

@@ -2,4 +2,4 @@
 
 /** Visible release label. CMake's numeric project version stays in lockstep
     with the digits before the channel. */
-#define OPENEQ_VERSION_STRING "1.0.2 Beta"
+#define OPENEQ_VERSION_STRING "1.0.3 Beta"
