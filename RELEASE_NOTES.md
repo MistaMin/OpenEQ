@@ -28,17 +28,16 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## Checks this release passed
 
-- Regression suite: 58 of 58, three runs in Release and one in Debug.
-- Audio Unit validation (`auval`).
-- VST3 and Audio Unit validators at strictness 10, including their editor tests.
-- AAX validator: 5 of 6 tests (see the page-table item under Known issues).
-- Two hosts: load, render, state save and reopen with the Audio Unit and the VST3; editor open/close cycles in one; parameter sweeps (VST3 audio sweep in one host, parameter sweep and recall in the other).
-- Not repeated for 1.0.2: the on-screen visual sweep and the instance menu tests in a host.
+- macOS: regression suite 59 of 59 (Release); `auval`; VST3 and Audio Unit validators at strictness 10; CLAP validator (two rounding tests excluded, see Known issues); AAX validator 5 of 6.
+- macOS host: the CLAP loads, renders, keeps its values over save and reopen and survives editor open/close cycles. The LV2 loads and renders, and a session using eight bands restored with identical audio; see Known issues.
+- Windows and Linux: VST3 validator at strictness 10 and the CLAP validator, on automated build machines. No host testing.
+- Not repeated for 1.0.3: full parameter sweeps, the on-screen visual sweep and the instance menu tests in a host.
 
 See the changelog for the full list. Nobody has yet listened to the newer audio paths in a long session.
 
 ## Known issues
 
+- LV2: in a test that set every parameter to an arbitrary value, the audio after reopening the project did not match (difference about 40 dB below the signal). The cause is not known. Check LV2 sessions after reopening.
 - Windows and Linux: new builds, checked with automated validators only; not tried in a host, and the regression suite does not run there.
 - CLAP: a restored session or typed value can differ from the saved one in the last digits on some frequency controls.
 - Settings and theme changes can take up to a second to show on the graph.
