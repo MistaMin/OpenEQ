@@ -14,6 +14,7 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 ## What is in this release
 
 - 1.0.3: CLAP and LV2 formats, and Windows and Linux builds.
+- 1.0.3: the LV2 sends restored values to the host in small groups after loading, so the host shows them.
 - 1.0.3 fix: with Output Gain away from 0 dB, the gain was also applied to the sidechain input buffer.
 - 1.0.2: the editor uses much less CPU while nothing is changing (Standalone, idle, no signal: about 35% of one core down to about 9%; with audio playing the saving is much smaller). The selected-band glow is steady.
 - 1.0.1: DRIVE now reads 0 to 100%, the top bar follows the theme and reads clearly in Graphite, Light and High contrast, and an AAX build is added.
@@ -29,7 +30,7 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 ## Checks this release passed
 
 - macOS: regression suite 59 of 59 (Release); `auval`; VST3 and Audio Unit validators at strictness 10; CLAP validator (two rounding tests excluded, see Known issues); AAX validator 5 of 6.
-- macOS host: the CLAP loads, renders, keeps its values over save and reopen and survives editor open/close cycles. The LV2 loads and renders, and a session using eight bands restored with identical audio; see Known issues.
+- macOS host: the CLAP loads, renders, keeps its values over save and reopen and survives editor open/close cycles. The LV2 loads and renders, and after reopening a project that set every parameter, the audio and the saved values match and the host shows the restored values.
 - Windows and Linux: VST3 validator at strictness 10 and the CLAP validator, on automated build machines. No host testing.
 - Not repeated for 1.0.3: full parameter sweeps, the on-screen visual sweep and the instance menu tests in a host.
 
@@ -37,7 +38,6 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 ## Known issues
 
-- LV2: in a test that set every parameter to an arbitrary value, the audio after reopening the project did not match (difference about 40 dB below the signal). The cause is not known. Check LV2 sessions after reopening.
 - Windows and Linux: new builds, checked with automated validators only; not tried in a host, and the regression suite does not run there.
 - CLAP: a restored session or typed value can differ from the saved one in the last digits on some frequency controls.
 - Settings and theme changes can take up to a second to show on the graph.

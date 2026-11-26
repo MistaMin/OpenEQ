@@ -40,7 +40,20 @@ static bool stateHasDynamicsPanels (const juce::ValueTree& state)
 
 void OpenEQAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    applyState (data, sizeInBytes);
+    if (applyState (data, sizeInBytes) && wrapperType == wrapperType_LV2)
+    {
+        hostResyncNext = 0;
+        hostResync.startTimerHz (30);
+    }
+}
+
+void OpenEQAudioProcessor::resendParametersToHost()
+{
+    const auto& all = getParameters();
+    for (int sent = 0; sent < 64 && hostResyncNext < all.size(); ++sent, ++hostResyncNext)
+        all[hostResyncNext]->sendValueChangedMessageToListeners (all[hostResyncNext]->getValue());
+    if (hostResyncNext >= all.size())
+        hostResync.stopTimer();
 }
 
 bool OpenEQAudioProcessor::applyState (const void* data, int sizeInBytes)

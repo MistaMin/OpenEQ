@@ -578,6 +578,12 @@ private:
     bool prepared = false;
 
     ResponseModel::GraphSnapshot publishedGraph;
+
+    // LV2 only: the host misses some of the changes a state restore reports in one go, so they are sent
+    // again a few at a time.
+    int hostResyncNext = 0;
+    juce::TimedCallback hostResync { [this] { resendParametersToHost(); } };
+    void resendParametersToHost();
     mutable juce::CriticalSection graphLock;
     std::atomic<juce::uint32> lastAudioMs { 0 };
     std::atomic<juce::uint64> designUpdates { 0 };
