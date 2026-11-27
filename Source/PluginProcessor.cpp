@@ -415,7 +415,7 @@ void OpenEQAudioProcessor::prepareToPlay (double hostRate, int blockSize)
     // Everything inside the plugin runs at the internal rate. That is the host rate, or twice it with 2x on.
     baseSampleRate = hostRate;
     preparedBlockSize = blockSize;
-    oversampling = oversample2x != nullptr && oversample2x->load() > 0.5f;
+    oversampling = wantedOversampling();
     const double sampleRate = hostRate * (oversampling ? 2.0 : 1.0);
     currentSampleRate = sampleRate;
     prepared = false;
@@ -1217,27 +1217,34 @@ int OpenEQAudioProcessor::effectiveLinearPhaseQuality() const noexcept
     return linearPhaseQuality != nullptr ? (int) linearPhaseQuality->load() : 1;
 }
 
-void OpenEQAudioProcessor::applyRenderDsp() noexcept
+bool OpenEQAudioProcessor::wantedOversampling() const noexcept
 {
-    if (renderOversampleParam != nullptr && oversample2x != nullptr)
-    {
-        const int renderChoice = (int) renderOversampleParam->load();
-        const bool realtimeOn = oversample2x->load() > 0.5f;
-        const bool target = nonRealtime ? (renderChoice == 0 ? realtimeOn : renderChoice == 2)
-                                        : realtimeOn;
-        if (target != oversampling)
-            setOversampling2x (target);
-    }
+    const bool realtimeOn = oversample2x != nullptr && oversample2x->load() > 0.5f;
+    // The render setting applies to offline renders only: 0 follows the realtime button, 1 is off, 2 is on.
+    const int renderChoice = renderOversampleParam != nullptr ? (int) renderOversampleParam->load() : 0;
+    return nonRealtime && renderChoice != 0 ? renderChoice == 2 : realtimeOn;
 }
 
 void OpenEQAudioProcessor::setNonRealtime (bool isNonRealtime) noexcept
 {
     juce::AudioProcessor::setNonRealtime (isNonRealtime);
+    // The VST3 and LV2 wrappers call this on every block, so only a change does anything.
+    if (nonRealtime == isNonRealtime)
+        return;
     nonRealtime = isNonRealtime;
     // The effective quality is read at design time; force the kernel to rebuild with it.
     lastCurveHash = 0;
     curveSubmitPending = true;
-    applyRenderDsp();
+
+    // shortcut: re-preparing allocates, so it happens here only on the message thread; a host that switches
+    // offline on its audio thread gets the render oversampling at its next prepare.
+    auto* manager = juce::MessageManager::getInstanceWithoutCreating();
+    if (prepared && wantedOversampling() != oversampling && (manager == nullptr || manager->isThisTheMessageThread()))
+    {
+        suspendProcessing (true);
+        prepareToPlay (baseSampleRate, preparedBlockSize);
+        suspendProcessing (false);
+    }
 }
 
 void OpenEQAudioProcessor::submitLinearPhaseRequest (const std::array<BandParameterState, numBands>& params, bool anySolo)
@@ -1975,7 +1982,9 @@ void OpenEQAudioProcessor::switchAB()
     auto next = abSlots[abSlot].createCopy();
     if (next.isValid())
         apvts.replaceState (next);
+    undoManager.clearUndoHistory(); // earlier steps belong to the other slot
     refreshOtherSlotSplit();
+    startHostResync();
 }
 
 void OpenEQAudioProcessor::copyABToOther()

@@ -92,9 +92,21 @@ namespace PresetImport
         auto value = [object] (const juce::String& key, double fallback) -> double
         {
             const auto property = object->getProperty (juce::Identifier (key));
-            return property.isVoid() ? fallback : detail::parse (property);
+            if (property.isVoid())
+                return fallback;
+            const double parsedValue = detail::parse (property);
+            return std::isfinite (parsedValue) ? parsedValue : fallback; // "nan" and "inf" are not settings
         };
         auto has = [object] (const juce::String& key) { return ! object->getProperty (juce::Identifier (key)).isVoid(); };
+
+        bool hasBands = false;
+        for (int band = 0; band < OpenEQAudioProcessor::numBands; ++band)
+            hasBands = hasBands || has ("Band" + juce::String (band + 1) + " Used");
+        if (! hasBands)
+        {
+            result.notes.add ("The file has no band settings, so nothing was changed.");
+            return result;
+        }
 
         processor.beginEdit ("Import .json Preset");
 

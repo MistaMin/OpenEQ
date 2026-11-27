@@ -2,6 +2,11 @@
 
 ## 1.0.3 Beta
 
+- Fix: in VST3 and LV2, every mode with a linear-phase filter rebuilt that filter on almost every audio block.
+- Fix: the offline render oversampling setting no longer changes the realtime 2x button, and re-prepares only when the host switches on its main thread.
+- Fix: JSON import ignores "nan" and "inf" values, and refuses a file with no band settings instead of clearing the bands.
+- Fix: deleted user presets no longer return from the old preset folder; a failed preset save now says so.
+- Fix: undo history is cleared after loading a preset or session and after switching A/B; LV2 hosts also get the new values then.
 - Adds CLAP and LV2 formats, and Windows (x64) and Linux (x86_64) builds of VST3, CLAP and LV2.
 - Fix: with Output Gain away from 0 dB, the gain was also applied to the sidechain input buffer.
 

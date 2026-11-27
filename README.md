@@ -65,7 +65,7 @@ cmake --build build --config Release -j
 ctest --test-dir build --output-on-failure
 ```
 
-Build outputs are in `build/OpenEQ_artefacts/Release/{VST3,AU,CLAP,LV2,Standalone}/` (AU on macOS only). Plugin copying after build is on by default; `-DOPENEQ_COPY_PLUGINS=OFF` turns it off. The regression suite builds on macOS only. Windows and Linux release builds run from `.github/workflows/native-builds.yml`.
+Build outputs are in `build/OpenEQ_artefacts/Release/{VST3,AU,CLAP,LV2,Standalone}/` (AU on macOS only). Plugin copying after build is on by default; `-DOPENEQ_COPY_PLUGINS=OFF` turns it off. Windows and Linux release builds run from `.github/workflows/native-builds.yml`.
 
 The measurement tools `response_probe`, `response_compare` and `plugin_probe` (sources in `Tools/`) are not built by default. Configure with `-DOPENEQ_BUILD_PROBES=ON` to build them. `response_probe` requires an explicit `--plugin <VST3 path>` argument.
 

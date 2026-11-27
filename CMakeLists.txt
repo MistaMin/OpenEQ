@@ -90,17 +90,25 @@ target_link_libraries(OpenEQ
         juce::juce_recommended_warning_flags)
 
 include(CTest)
-# The regression suite uses macOS loader hooks and run-loop calls, so it builds on macOS only.
-if(BUILD_TESTING AND APPLE)
-    # dyld only honours __interpose from a different image than the caller.
-    add_library(OpenEQAllocInterpose SHARED Tests/AllocInterpose.c)
+if(BUILD_TESTING)
     add_executable(OpenEQRegressionTests Tests/RegressionTests.cpp Tests/FilterResponseTests.cpp)
     target_include_directories(OpenEQRegressionTests PRIVATE
         Source
         $<TARGET_PROPERTY:OpenEQ,INCLUDE_DIRECTORIES>)
     target_compile_definitions(OpenEQRegressionTests PRIVATE
         $<TARGET_PROPERTY:OpenEQ,COMPILE_DEFINITIONS>)
-    target_link_libraries(OpenEQRegressionTests PRIVATE OpenEQ OpenEQAllocInterpose)
+    target_link_libraries(OpenEQRegressionTests PRIVATE OpenEQ)
+    if(APPLE)
+        # Allocation counting: dyld only honours __interpose from a different image than the caller.
+        add_library(OpenEQAllocInterpose SHARED Tests/AllocInterpose.c)
+        target_link_libraries(OpenEQRegressionTests PRIVATE OpenEQAllocInterpose)
+    else()
+        # The tests run the message loop to deliver deferred callbacks.
+        target_compile_definitions(OpenEQRegressionTests PRIVATE JUCE_MODAL_LOOPS_PERMITTED=1)
+    endif()
+    if(MSVC)
+        target_link_options(OpenEQRegressionTests PRIVATE /STACK:33554432)
+    endif()
     add_test(NAME OpenEQRegressionTests COMMAND OpenEQRegressionTests)
 endif()
 

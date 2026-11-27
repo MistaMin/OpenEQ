@@ -15,9 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Configure
-        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DOPENEQ_COPY_PLUGINS=OFF -DBUILD_TESTING=OFF
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DOPENEQ_COPY_PLUGINS=OFF
       - name: Build
         run: cmake --build build --config Release --parallel
+      - name: Regression suite
+        run: ctest --test-dir build -C Release --output-on-failure --timeout 1800
       - name: Fetch validators
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
@@ -25,6 +27,9 @@ jobs:
           cd validators
           gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Windows.zip
           gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-windows.zip'
+          # The validators are checked against the fingerprints of the versions named above.
+          echo 'd935c3af0a45c3911ea2e900f4aa5d6709dac82bb485f0c4ce28648ab2cd0c10  clap-validator-0.4.1-127-g152b982-windows.zip' | sha256sum -c -
+          echo 'c08e61ce3b96db41636f8ec7e76f4c7e2c13ebdac7fa1b5a1f52b4f32ec715ab  pluginval_Windows.zip' | sha256sum -c -
           for z in *.zip; do 7z x -y "$z" >/dev/null; done
           for t in *.tar.gz; do if [ -e "$t" ]; then tar -xzf "$t"; fi; done
           find . -name '*.exe'
@@ -60,9 +65,11 @@ jobs:
             libfontconfig1-dev libx11-dev libxcomposite-dev libxcursor-dev libxext-dev libxinerama-dev \
             libxrandr-dev libxrender-dev libglu1-mesa-dev mesa-common-dev
       - name: Configure
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DOPENEQ_COPY_PLUGINS=OFF -DBUILD_TESTING=OFF
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DOPENEQ_COPY_PLUGINS=OFF
       - name: Build
         run: cmake --build build --parallel
+      - name: Regression suite
+        run: xvfb-run -a ctest --test-dir build --output-on-failure --timeout 1800
       - name: Fetch validators
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
@@ -70,6 +77,8 @@ jobs:
           cd validators
           gh release download "$PLUGINVAL" -R Tracktion/pluginval -p pluginval_Linux.zip
           gh release download "$CLAPVAL" -R free-audio/clap-validator -p '*-ubuntu-22.04.zip'
+          echo '49edadcfb407ea0dd946ce418300e853fbd2660fa4b0d00e4f19ff8eef24ad90  clap-validator-0.4.1-127-g152b982-ubuntu-22.04.zip' | sha256sum -c -
+          echo 'c01c49d8063965c4c2dea8324468336768f5c9139e0b1caebde14c2400b55352  pluginval_Linux.zip' | sha256sum -c -
           for z in *.zip; do unzip -oq "$z"; done
           for t in *.tar.gz; do [ -e "$t" ] && tar -xzf "$t"; done
       - name: pluginval (VST3, strictness 10)

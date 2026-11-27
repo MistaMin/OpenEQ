@@ -40,19 +40,27 @@ static bool stateHasDynamicsPanels (const juce::ValueTree& state)
 
 void OpenEQAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    if (applyState (data, sizeInBytes) && wrapperType == wrapperType_LV2)
-    {
-        hostResyncNext = 0;
-        hostResync.startTimerHz (30);
-    }
+    applyState (data, sizeInBytes);
+}
+
+void OpenEQAudioProcessor::startHostResync()
+{
+    if (wrapperType != wrapperType_LV2)
+        return;
+    hostResyncNext = 0;
+    hostResync.startTimerHz (30);
 }
 
 void OpenEQAudioProcessor::resendParametersToHost()
 {
     const auto& all = getParameters();
-    for (int sent = 0; sent < 64 && hostResyncNext < all.size(); ++sent, ++hostResyncNext)
-        all[hostResyncNext]->sendValueChangedMessageToListeners (all[hostResyncNext]->getValue());
-    if (hostResyncNext >= all.size())
+    const int start = hostResyncNext.load();
+    int next = start;
+    for (int sent = 0; sent < 64 && next < all.size(); ++sent, ++next)
+        all[next]->sendValueChangedMessageToListeners (all[next]->getValue());
+    // A restart from another thread while this ran wins: its zero is not overwritten.
+    int expected = start;
+    if (hostResyncNext.compare_exchange_strong (expected, next) && next >= all.size())
         hostResync.stopTimer();
 }
 
@@ -116,6 +124,8 @@ bool OpenEQAudioProcessor::applyState (const void* data, int sizeInBytes)
     monitorMode.store (0);
     auditionBandIndex.store (-1);
     detectorAuditionIndex.store (-1);
+    undoManager.clearUndoHistory(); // earlier steps belong to the replaced state
+    startHostResync();
     return true;
 }
 
@@ -168,15 +178,16 @@ juce::File OpenEQAudioProcessor::presetRootDirectory() const
 juce::File OpenEQAudioProcessor::userPresetDirectory() const
 {
     auto directory = presetRootDirectory().getChildFile ("Presets");
+    const bool firstUse = ! directory.isDirectory();
     directory.createDirectory();
     // One-time migration from the pre-rename folder (GodEQ): move presets and the saved default over.
     // Not while the storage folder is redirected: the legacy folder is the user's own.
     const auto legacy = juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)
                             .getChildFile ("GodEQ");
-    if (AppSettings::storageFolderOverride() == juce::File() && legacy.isDirectory())
+    // Copy once, when the new folder is created: presets the user deletes later stay deleted.
+    if (firstUse && AppSettings::storageFolderOverride() == juce::File() && legacy.isDirectory())
     {
-        if (directory.findChildFiles (juce::File::findFiles, false).isEmpty())
-            for (const auto& legacyPreset : juce::Array<juce::File> (legacy.getChildFile ("Presets").findChildFiles (juce::File::findFiles, false)))
+        for (const auto& legacyPreset : juce::Array<juce::File> (legacy.getChildFile ("Presets").findChildFiles (juce::File::findFiles, false)))
                 legacyPreset.copyFileTo (directory.getChildFile (legacyPreset.getFileName()).getFullPathName());
         const auto legacyDefault = legacy.getChildFile ("default.godeq");
         if (legacyDefault.existsAsFile() && ! defaultPresetFile().existsAsFile())

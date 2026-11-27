@@ -13,6 +13,8 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## What is in this release
 
+- 1.0.3 fix: VST3 and LV2 no longer rebuild the linear-phase filter on almost every audio block.
+- 1.0.3 fixes to preset import, preset saving, undo after loading, and the offline render oversampling setting.
 - 1.0.3: CLAP and LV2 formats, and Windows and Linux builds.
 - 1.0.3: the LV2 sends restored values to the host in small groups after loading, so the host shows them.
 - 1.0.3 fix: with Output Gain away from 0 dB, the gain was also applied to the sidechain input buffer.

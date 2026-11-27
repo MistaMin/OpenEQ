@@ -11,3 +11,6 @@ qa/
 # Local measurement data and notes; not part of the source distribution.
 research/
 /output
+
+# Separate local work; not part of this source tree.
+/rust/

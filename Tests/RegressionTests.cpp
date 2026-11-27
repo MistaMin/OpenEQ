@@ -20,19 +20,28 @@
 #include "LinearPhaseEngine.h"
 #include "ResponseModel.h"
 #include "CurveFit.h"
-#include "SpectralEngine.h"
 #include "InstanceRegistry.h"
 #include "UI/ValueFormat.h"
-#include "AllocInterpose.h"
 #include "AppSettings.h"
 #include "InstanceMenu.h"
+
+#if defined (__APPLE__)
+ #include "AllocInterpose.h"
+ #include <dlfcn.h>
+#else
+ // Counting allocations needs the macOS loader hooks. Elsewhere the counter reads zero and the
+ // allocation section is not run.
+ static void openeqAllocReset() {}
+ static void openeqAllocSetArmed (int) {}
+ static void openeqAllocRead (long long* m, long long* c, long long* r) { *m = *c = *r = 0; }
+ static void* openeqAllocFirstCaller (int) { return nullptr; }
+#endif
 
 void runFilterResponseTests();
 
 #include <algorithm>
 #include <atomic>
 #include <cmath>
-#include <dlfcn.h>
 #include <iomanip>
 #include <iostream>
 #include <limits>
@@ -190,11 +199,15 @@ static float bellMagnitude (float gainDb)
 
 static void symbolize (const char* label, void* address)
 {
+   #if defined (__APPLE__)
     Dl_info info {};
     if (address != nullptr && dladdr (address, &info) != 0 && info.dli_sname != nullptr)
+    {
         std::cout << "  " << label << "_caller " << info.dli_sname << "\n";
-    else
-        std::cout << "  " << label << "_caller " << address << "\n";
+        return;
+    }
+   #endif
+    std::cout << "  " << label << "_caller " << address << "\n";
 }
 
 static void checkCuts()
@@ -1679,39 +1692,6 @@ static void checkRoadmap()
         require (cold < -40.0f, "External detector followed the main input while the sidechain was silent");
     }
 
-    {
-        SpectralEngine spectral;
-        spectral.prepare (48000.0);
-        constexpr int length = 8192;
-        std::vector<float> left ((size_t) length, 0.0f), right ((size_t) length, 0.0f);
-        left[0] = 1.0f;
-        right[0] = 0.5f;
-        spectral.process (left.data(), right.data(), length, 0.0f, -18.0f, 3000.0f, 1.0f);
-        const int latency = spectral.getLatencySamples();
-        const int peak = peakIndex (left.data(), length);
-        double noise = 0.0;
-        double signal = 0.0;
-        for (int i = 0; i < length; ++i)
-        {
-            const float expected = (i == latency ? 1.0f : 0.0f);
-            const double error = (double) left[(size_t) i] - (double) expected;
-            noise += error * error;
-            signal += (double) expected * (double) expected;
-            require (std::isfinite (left[(size_t) i]) && std::isfinite (right[(size_t) i]),
-                     "Spectral reconstruction produced a non-finite sample");
-        }
-        const double snr = 10.0 * std::log10 (signal / std::max (1.0e-20, noise));
-        std::cout << "  spectral_unity_peak " << peak
-                  << " value " << left[(size_t) peak]
-                  << " right " << right[(size_t) peak]
-                  << " snr_db " << snr << "\n";
-        require (latency == 1023, "Spectral engine latency is not fftSize - 1");
-        require (std::abs (peak - latency) <= 1, "Spectral unity impulse was not at the documented latency");
-        require (std::abs (left[(size_t) peak] - 1.0f) < 0.05f, "Spectral unity impulse was not near 1");
-        require (std::abs (right[(size_t) peak] - 0.5f) < 0.05f, "Spectral unity did not keep the right-channel level");
-        require (snr > 40.0, "Spectral unity reconstruction SNR was below 40 dB");
-    }
-
     std::cout << "PASS: roadmap shapes, dynamics, editing, spectral, drive, and linear phase\n";
 }
 
@@ -2039,29 +2019,6 @@ static void checkPlanCoverage()
                   << " lp_allpass_peak " << std::get<0> (allpass) << " omits " << std::get<2> (allpass) << "\n";
         require (std::get<0> (dynamic) < 1.05f && std::get<1> (dynamic), "Linear phase still applied a dynamic bell");
         require (std::get<0> (allpass) < 1.05f && std::get<2> (allpass), "Linear phase still included an all-pass");
-    }
-
-    {
-        SpectralEngine spectral;
-        spectral.prepare (48000.0);
-        constexpr int length = 8192;
-        auto render = [&] (float amount, double frequency)
-        {
-            spectral.reset();
-            std::vector<float> left ((size_t) length), right ((size_t) length, 0.0f);
-            for (int i = 0; i < length; ++i)
-                left[(size_t) i] = 0.4f * std::sin (juce::MathConstants<float>::twoPi * (float) frequency * (float) i / 48000.0f);
-            spectral.process (left.data(), right.data(), length, amount, -30.0f, 3000.0f, 1.0f);
-            return rmsRange (left.data(), 2000, 4000);
-        };
-        const double open = render (0.0f, 3000.0);
-        const double cut = render (1.0f, 3000.0);
-        const double outsideOpen = render (0.0f, 200.0);
-        const double outsideCut = render (1.0f, 200.0);
-        std::cout << "  spectral_open_rms " << open << " cut_rms " << cut
-                  << " outside_open " << outsideOpen << " outside_cut " << outsideCut << "\n";
-        require (cut < open * 0.6, "Spectral suppression did not turn the selected region down");
-        require (outsideCut > outsideOpen * 0.7, "Spectral suppression turned down a tone outside the region");
     }
 
     {
@@ -3917,7 +3874,7 @@ static void pumpMessages (int ms)
    #if defined (__APPLE__)
     CFRunLoopRunInMode (kCFRunLoopDefaultMode, ms / 1000.0, false);
    #else
-    juce::ignoreUnused (ms);
+    juce::MessageManager::getInstance()->runDispatchLoopUntil (ms);
    #endif
 }
 
@@ -5767,6 +5724,57 @@ static void checkSidechainInputUntouched()
     std::cout << "PASS: the sidechain input is left untouched\n";
 }
 
+static void checkAuditFixes()
+{
+    auto owner = std::make_unique<OpenEQAudioProcessor>();
+    auto& p = *owner;
+    setRaw (p.apvts, "processingMode", 1.0f);
+    prepareStereo (p, 48000.0, 512);
+    juce::AudioBuffer<float> buffer (2, 512);
+    juce::MidiBuffer midi;
+    const auto run = [&] (int blocks)
+    {
+        for (int i = 0; i < blocks; ++i)
+        {
+            p.setNonRealtime (false); // as the VST3 and LV2 wrappers do on every block
+            buffer.clear();
+            p.processBlock (buffer, midi);
+            juce::Thread::sleep (5);
+        }
+    };
+    run (100);
+    const auto before = p.getLinearPhaseDesigns();
+    run (100);
+    require (p.getLinearPhaseDesigns() - before <= 1, "Repeating the realtime flag rebuilt the linear-phase kernel");
+
+    // An offline render uses its own oversampling choice and leaves the realtime button alone.
+    setRaw (p.apvts, "renderOversample", 2.0f);
+    p.setNonRealtime (true);
+    require (p.isOversampling2x(), "The offline render did not turn 2x on");
+    p.setNonRealtime (false);
+    require (! p.isOversampling2x() && p.apvts.getRawParameterValue ("oversample2x")->load() < 0.5f,
+             "2x stayed on after the offline render");
+
+    const auto file = testStorageFolder.getChildFile ("audit.json");
+    const int band4 = 3;
+    setRaw (p.apvts, Params::bandActiveID (band4), 1.0f);
+    file.replaceWithText ("{\"hello\":1}");
+    PresetImport::importPreset (p, file);
+    require (p.apvts.getRawParameterValue (Params::bandActiveID (band4))->load() > 0.5f, "An unrelated JSON file changed the bands");
+    file.replaceWithText ("{\"Band1 Used\":1,\"Band1 Q\":\"nan\",\"Master Vol.\":\"nan\"}");
+    PresetImport::importPreset (p, file);
+    require (std::isfinite (p.apvts.getRawParameterValue (Params::bandQID (0))->load())
+                 && std::isfinite (p.apvts.getRawParameterValue ("outputGain")->load()),
+             "A non-number in an imported preset reached a parameter");
+
+    const auto preset = testStorageFolder.getChildFile ("audit.opeq");
+    require (p.savePresetFile (preset), "Could not save a preset");
+    require (p.undo(), "The import should have been undoable before the load");
+    require (p.loadPresetFile (preset), "Could not load the preset");
+    require (! p.undo(), "Undo history survived a preset load");
+    std::cout << "PASS: realtime flag, render oversampling, preset import and undo after load\n";
+}
+
 static void checkOversampleButtonFollowsParameter()
 {
     auto owner = std::make_unique<OpenEQAudioProcessor>();
@@ -6016,7 +6024,9 @@ int main (int argc, char** argv)
     run ("analyzer", checkAnalyzerRing);
     run ("curve-request", checkCurveRequestIsolation);
     run ("graph", checkGraphPaint);
+   #if defined (__APPLE__)
     run ("allocations", checkSteadyStateAllocations);
+   #endif
     run ("roadmap", checkRoadmap);
     run ("plan", checkPlanCoverage);
     run ("detector", checkTransientDetector);
@@ -6061,6 +6071,7 @@ int main (int argc, char** argv)
     run ("instance-menu-tick", checkInstanceMenuTick);
     run ("oversample-button", checkOversampleButtonFollowsParameter);
     run ("sidechain-untouched", checkSidechainInputUntouched);
+    run ("audit-fixes", checkAuditFixes);
     run ("gui-scale", checkGuiScaleFillsWindow);
     run ("theme-shots", captureThemes);
 

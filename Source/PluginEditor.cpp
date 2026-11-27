@@ -381,8 +381,9 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
                                         [this] (const juce::FileChooser& chooser)
                                         {
                                             const auto file = chooser.getResult();
-                                            if (file != juce::File())
-                                                processorRef.savePresetFile (file.withFileExtension ("opeq"));
+                                            if (file != juce::File() && ! processorRef.savePresetFile (file.withFileExtension ("opeq")))
+                                                juce::AlertWindow::showMessageBoxAsync (juce::MessageBoxIconType::WarningIcon, "Save Preset",
+                                                    "The preset could not be saved. Check the folder and the free disk space.");
                                         });
                                 }
                                 else if (result == 204)
@@ -420,7 +421,9 @@ OpenEQEditorView::OpenEQEditorView (OpenEQAudioProcessor& p, OpenEQAudioProcesso
                                 }
                                 else if (result == 202)
                                 {
-                                    processorRef.saveAsDefault();
+                                    if (! processorRef.saveAsDefault())
+                                        juce::AlertWindow::showMessageBoxAsync (juce::MessageBoxIconType::WarningIcon, "Save as Default",
+                                            "The default could not be saved. Check the folder and the free disk space.");
                                 }
                                 else if (result == 203)
                                 {
