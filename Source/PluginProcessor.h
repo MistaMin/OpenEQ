@@ -583,6 +583,10 @@ private:
     // again a few at a time.
     std::atomic<int> hostResyncNext { 0 }; // a state can arrive on any thread; the timer runs on the message thread
     juce::TimedCallback hostResync { [this] { resendParametersToHost(); } };
+    // Automation can change the 2x settings on any thread. Not during an offline render: re-preparing would
+    // leave a gap in the rendered file.
+    void reprepareIfOversamplingChanged();
+    juce::TimedCallback oversamplingWatch { [this] { if (! isNonRealtime()) reprepareIfOversamplingChanged(); } };
     void startHostResync();
     void resendParametersToHost();
     mutable juce::CriticalSection graphLock;

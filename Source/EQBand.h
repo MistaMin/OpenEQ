@@ -156,7 +156,14 @@ public:
 
     bool isUltraPrecision() const noexcept { return ultra; }
     /** Digital+ steps: how many phase-compensating all-pass stages follow each section (zero-latency path). */
-    void setDigitalPlusSteps (int steps) noexcept { digitalPlusSteps = juce::jlimit (0, 4, steps); }
+    void setDigitalPlusSteps (int steps) noexcept
+    {
+        steps = juce::jlimit (0, 4, steps);
+        if (steps == digitalPlusSteps)
+            return;
+        digitalPlusSteps = steps;
+        appliedFrequency = -1.0f; // the steps are part of the design, so the next applyIfChanged redesigns
+    }
     int getDigitalPlusSteps() const noexcept { return digitalPlusSteps; }
 
     /** Processes one lane in place. Bypass mixing is the caller's responsibility. */

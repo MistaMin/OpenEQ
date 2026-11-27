@@ -453,7 +453,7 @@ Not parameters, and not saved: MONITOR, frequency audition, detector LISTEN, the
 - **Latency:** OpenEQ reports its latency to the host every time it changes (see Processing modes). Hosts that compensate plug-in delay need that to stay aligned; some hosts apply a new latency only when playback restarts.
 - **Sidechain:** route a mono or stereo signal to the "Sidechain" input to use External detection, the suppressor's SC switch and the SIDE view. With host double precision the external sidechain is not used (see Known issues).
 - **Offline rendering:** Render quality and Render oversampling apply only when the host renders offline. Leave both on Realtime to render exactly what you hear.
-- **2x OVERSAMPLE** re-prepares the plug-in; in this beta it takes effect when playback starts.
+- **2x OVERSAMPLE** re-prepares the plug-in. Switching it while playing leaves a short gap in the audio and changes the reported latency.
 - **Window size:** some hosts do not let plug-in windows resize or go full screen. Use the GUI scale setting instead.
 - **Track names:** the instance menu uses the track name and colour when the host reports them. Not every host does, and some Audio Unit hosts do not; use Rename there.
 - **Process isolation:** hosts that run each plug-in in its own process (or sandbox) cannot list other instances in the INST menu, and mirroring is then not available.
@@ -465,7 +465,8 @@ These are known in OpenEQ 1.0.3 Beta (the same list as the release notes, plus o
 
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the FLOOR control is reset.
-- Impulse Padding, Dyn Knee (with the Above/Below panels) and the 2x Oversampling control have no effect while playing; oversampling is read only when playback starts.
+- Impulse Padding and Dyn Knee (with the Above/Below panels) have no effect while playing.
+- A host that switches to offline rendering on its audio thread gets the render oversampling setting at its next restart of playback.
 - With host double precision, the external sidechain is not used.
 - Auto Gain can step by several dB within a few samples when a band gain changes.
 - The WATER and SPEC 3D views can take longer to draw than the display update interval at large window sizes.

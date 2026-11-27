@@ -2,6 +2,8 @@
 
 ## 1.0.3 Beta
 
+- Fix: changing Digital+ Steps while playing had no effect, and a reopened session could come up without them.
+- Fix: 2x Oversampling changed by automation, A/B or a session load on a running plugin now takes effect (a short gap in the audio while it switches); before, only the editor button applied it.
 - Fix: in VST3 and LV2, every mode with a linear-phase filter rebuilt that filter on almost every audio block.
 - Fix: the offline render oversampling setting no longer changes the realtime 2x button, and re-prepares only when the host switches on its main thread.
 - Fix: JSON import ignores "nan" and "inf" values, and refuses a file with no band settings instead of clearing the bands.

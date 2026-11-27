@@ -5731,6 +5731,70 @@ static void checkSidechainInputUntouched()
     std::cout << "PASS: the sidechain input is left untouched\n";
 }
 
+static void checkDigitalPlusLive()
+{
+    // The same state must sound the same whether Digital+ was changed while running or loaded with the session.
+    const auto make = [] (int steps)
+    {
+        auto p = std::make_unique<OpenEQAudioProcessor>();
+        setRaw (p->apvts, Params::bandGainID (0), 12.0f);
+        setRaw (p->apvts, "digitalPlus", (float) steps);
+        return p;
+    };
+    const auto render = [] (OpenEQAudioProcessor& p)
+    {
+        juce::AudioBuffer<float> buffer (2, 512);
+        for (int block = 0; block < 40; ++block)
+        {
+            fillTone (buffer, 48000.0, 90.0, 0.25f, block * 512, Tone::Centered);
+            process (p, buffer);
+        }
+        return buffer;
+    };
+    const auto difference = [] (const juce::AudioBuffer<float>& a, const juce::AudioBuffer<float>& b)
+    {
+        float peak = 0.0f;
+        for (int i = 0; i < a.getNumSamples(); ++i)
+            peak = juce::jmax (peak, std::abs (a.getSample (0, i) - b.getSample (0, i)));
+        return peak;
+    };
+
+    auto loaded = make (4);
+    prepareStereo (*loaded, 48000.0, 512);
+    const auto expected = render (*loaded);
+
+    auto live = make (0);
+    prepareStereo (*live, 48000.0, 512);
+    const auto off = render (*live);
+    require (difference (off, expected) > 1.0e-3f, "Digital+ had no effect after a state load");
+    setRaw (live->apvts, "digitalPlus", 4.0f);
+    render (*live); // lets the reset filters settle
+    require (difference (render (*live), expected) < 1.0e-4f, "Changing Digital+ while running did not redesign the filters");
+    std::cout << "PASS: Digital+ applies live and after a load\n";
+}
+
+static void checkOversamplingFollowsRunningSettings()
+{
+    auto source = std::make_unique<OpenEQAudioProcessor>();
+    setRaw (source->apvts, "oversample2x", 1.0f);
+    juce::MemoryBlock state;
+    source->getStateInformation (state);
+
+    auto owner = std::make_unique<OpenEQAudioProcessor>();
+    auto& p = *owner;
+    prepareStereo (p, 48000.0, 512);
+    p.setStateInformation (state.getData(), (int) state.getSize());
+    require (p.isOversampling2x(), "A session loaded into a running plugin did not turn 2x on");
+
+    setRaw (p.apvts, "oversample2x", 0.0f); // what a host does on automation
+    pumpMessages (300);
+    require (! p.isOversampling2x(), "Automating 2x off on a running plugin had no effect");
+    setRaw (p.apvts, "oversample2x", 1.0f);
+    pumpMessages (300);
+    require (p.isOversampling2x(), "Automating 2x on on a running plugin had no effect");
+    std::cout << "PASS: 2x oversampling follows automation and a session load while running\n";
+}
+
 static void checkAuditFixes()
 {
     auto owner = std::make_unique<OpenEQAudioProcessor>();
@@ -6079,6 +6143,8 @@ int main (int argc, char** argv)
     run ("oversample-button", checkOversampleButtonFollowsParameter);
     run ("sidechain-untouched", checkSidechainInputUntouched);
     run ("audit-fixes", checkAuditFixes);
+    run ("digital-plus-live", checkDigitalPlusLive);
+    run ("oversampling-live", checkOversamplingFollowsRunningSettings);
     run ("gui-scale", checkGuiScaleFillsWindow);
     run ("theme-shots", captureThemes);
 

@@ -14,6 +14,7 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 ## What is in this release
 
 - 1.0.3 fix: VST3 and LV2 no longer rebuild the linear-phase filter on almost every audio block.
+- 1.0.3 fixes: Digital+ Steps and 2x Oversampling now take effect while playing and after reopening a session. Switching 2x leaves a short gap in the audio.
 - 1.0.3 fixes to preset import, preset saving, undo after loading, and the offline render oversampling setting.
 - 1.0.3: CLAP and LV2 formats, and Windows and Linux builds.
 - 1.0.3: the LV2 sends restored values to the host in small groups after loading, so the host shows them.
@@ -42,10 +43,12 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 - Windows and Linux: new builds, checked with automated validators only; not tried in a host, and the regression suite does not run there.
 - CLAP: a restored session or typed value can differ from the saved one in the last digits on some frequency controls.
+- LV2: renders of an unchanged project can differ from each other, by up to about -44 dB in testing; the cause is not yet known. VST3 renders were identical.
 - Settings and theme changes can take up to a second to show on the graph.
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the Floor control is reset.
-- Impulse Padding, Dyn Knee (with the Above/Below panels) and the 2x Oversampling control have no effect while playing; oversampling is read only when playback starts.
+- Impulse Padding and Dyn Knee (with the Above/Below panels) have no effect while playing.
+- A host that switches to offline rendering on its audio thread gets the render oversampling setting at its next restart of playback.
 - With host double precision, the external sidechain is not used.
 - Auto Gain can step by several dB within a few samples when a band gain changes.
 - The WATER and SPEC 3D views can take longer to draw than the display update interval at large window sizes.

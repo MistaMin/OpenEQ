@@ -40,6 +40,7 @@ OpenEQAudioProcessor::OpenEQAudioProcessor()
       apvts (*this, nullptr, "PARAMETERS", Params::createParameterLayout())
 {
     cacheParameterPointers();
+    oversamplingWatch.startTimerHz (10);
     // A saved default (reference "Save as Default") becomes the starting state of new instances.
     // A damaged default file applies nothing, so the instance starts from the parameter defaults.
     if (defaultPresetFile().existsAsFile())
@@ -364,6 +365,9 @@ bool OpenEQAudioProcessor::designBandPair (int index, const BandParameterState& 
     // While the split path is in, the audio runs as two streams and every band exists once per stream. A split
     // band differs between the two by its stream gains. Any other band is the same filter on both, and its
     // stream gains arrive here as zero.
+    // Digital+ steps apply to the zero-latency biquads. Set here so that prepare and every later design use them.
+    const int digitalPlus = digitalPlusParam != nullptr ? (int) digitalPlusParam->load() : 0;
+    bands[(size_t) index].setDigitalPlusSteps (digitalPlus);
     const bool changed = bands[(size_t) index].applyIfChanged (band.type, frequency, gainDb + transDb, q, band.slopeDb);
     if (anySplitBands || splitEngaged)
     {
@@ -374,6 +378,7 @@ bool OpenEQAudioProcessor::designBandPair (int index, const BandParameterState& 
             tail.setStereoMode (band.stereoMode);
             tail.resetState();
         }
+        tail.setDigitalPlusSteps (digitalPlus);
         tail.applyIfChanged (band.type, frequency, gainDb + tailDb, q, band.slopeDb);
     }
     return changed;
@@ -1236,15 +1241,20 @@ void OpenEQAudioProcessor::setNonRealtime (bool isNonRealtime) noexcept
     lastCurveHash = 0;
     curveSubmitPending = true;
 
-    // shortcut: re-preparing allocates, so it happens here only on the message thread; a host that switches
-    // offline on its audio thread gets the render oversampling at its next prepare.
+    // shortcut: a host that switches offline on its audio thread gets the render oversampling at its next prepare.
+    reprepareIfOversamplingChanged();
+}
+
+void OpenEQAudioProcessor::reprepareIfOversamplingChanged()
+{
+    // Re-preparing allocates, so it happens only on the message thread. Other threads are picked up by the timer.
     auto* manager = juce::MessageManager::getInstanceWithoutCreating();
-    if (prepared && wantedOversampling() != oversampling && (manager == nullptr || manager->isThisTheMessageThread()))
-    {
-        suspendProcessing (true);
-        prepareToPlay (baseSampleRate, preparedBlockSize);
-        suspendProcessing (false);
-    }
+    if (! prepared || wantedOversampling() == oversampling || (manager != nullptr && ! manager->isThisTheMessageThread()))
+        return;
+    // Re-preparing changes the internal rate and the delay lines, so the host must not process meanwhile.
+    suspendProcessing (true);
+    prepareToPlay (baseSampleRate, preparedBlockSize);
+    suspendProcessing (false);
 }
 
 void OpenEQAudioProcessor::submitLinearPhaseRequest (const std::array<BandParameterState, numBands>& params, bool anySolo)
@@ -1677,13 +1687,6 @@ void OpenEQAudioProcessor::processCore (juce::AudioBuffer<float>& buffer, int nu
         }
     }
 
-    // Digital+ steps apply to the zero-latency biquads; re-design on change.
-    const int digitalPlus = digitalPlusParam != nullptr ? (int) digitalPlusParam->load() : 0;
-    for (auto& band : bands)
-        band.setDigitalPlusSteps (digitalPlus);
-    for (auto& band : splitTailBands)
-        band.setDigitalPlusSteps (digitalPlus);
-
     // Split: while the split path is in, the audio is separated into a transient stream and a tonal stream.
     // The separation needs to see ahead, so it adds latency. The linear-phase modes do not use it.
     splitDelaySamples = splitEngaged ? splitSeparator.getLatencySamples() : 0;
@@ -1778,10 +1781,7 @@ void OpenEQAudioProcessor::setOversampling2x (bool enabled)
     if (auto* parameter = apvts.getParameter ("oversample2x"))
         parameter->setValueNotifyingHost (enabled ? 1.0f : 0.0f);
 
-    // Re-preparing changes the internal rate and the delay lines, so the host must not process meanwhile.
-    suspendProcessing (true);
-    prepareToPlay (baseSampleRate, preparedBlockSize);
-    suspendProcessing (false);
+    reprepareIfOversamplingChanged();
 }
 
 void OpenEQAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midi)

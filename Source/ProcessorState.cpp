@@ -126,6 +126,7 @@ bool OpenEQAudioProcessor::applyState (const void* data, int sizeInBytes)
     detectorAuditionIndex.store (-1);
     undoManager.clearUndoHistory(); // earlier steps belong to the replaced state
     startHostResync();
+    reprepareIfOversamplingChanged();
     return true;
 }
 
