@@ -29,6 +29,8 @@
  #include "AllocInterpose.h"
  #include <dlfcn.h>
 #else
+ // JUCE's own one-message pump; runDispatchLoopUntil is only built when plug-ins permit modal loops.
+ namespace juce::detail { bool dispatchNextMessageOnSystemQueue (bool returnIfNoPendingMessages); }
  // Counting allocations needs the macOS loader hooks. Elsewhere the counter reads zero and the
  // allocation section is not run.
  static void openeqAllocReset() {}
@@ -3874,7 +3876,12 @@ static void pumpMessages (int ms)
    #if defined (__APPLE__)
     CFRunLoopRunInMode (kCFRunLoopDefaultMode, ms / 1000.0, false);
    #else
-    juce::MessageManager::getInstance()->runDispatchLoopUntil (ms);
+    const auto until = juce::Time::getMillisecondCounter() + (juce::uint32) ms;
+    do
+    {
+        if (! juce::detail::dispatchNextMessageOnSystemQueue (true))
+            juce::Thread::sleep (1);
+    } while (juce::Time::getMillisecondCounter() < until);
    #endif
 }
 

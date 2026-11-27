@@ -102,9 +102,6 @@ if(BUILD_TESTING)
         # Allocation counting: dyld only honours __interpose from a different image than the caller.
         add_library(OpenEQAllocInterpose SHARED Tests/AllocInterpose.c)
         target_link_libraries(OpenEQRegressionTests PRIVATE OpenEQAllocInterpose)
-    else()
-        # The tests run the message loop to deliver deferred callbacks.
-        target_compile_definitions(OpenEQRegressionTests PRIVATE JUCE_MODAL_LOOPS_PERMITTED=1)
     endif()
     if(MSVC)
         target_link_options(OpenEQRegressionTests PRIVATE /STACK:33554432)
