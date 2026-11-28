@@ -5795,6 +5795,60 @@ static void checkOversamplingFollowsRunningSettings()
     std::cout << "PASS: 2x oversampling follows automation and a session load while running\n";
 }
 
+static void checkOfflineRestartClearsState()
+{
+    // An offline render that starts again, with no prepare or reset from the host, must match the first one.
+    struct Head : juce::AudioPlayHead
+    {
+        juce::int64 time = 0;
+        juce::Optional<PositionInfo> getPosition() const override
+        {
+            PositionInfo info;
+            info.setIsPlaying (true);
+            info.setTimeInSamples (time);
+            return info;
+        }
+    } head;
+
+    auto owner = std::make_unique<OpenEQAudioProcessor>();
+    auto& p = *owner;
+    setRaw (p.apvts, Params::bandGainID (0), 6.0f);
+    setRaw (p.apvts, Params::bandDynOnID (0), 1.0f);
+    setRaw (p.apvts, "spectralAmount", 1.0f);
+    setRaw (p.apvts, "spectralThresh", 0.0f);
+    setRaw (p.apvts, "spectralRelease", 1.0f);
+    setRaw (p.apvts, "drive", 0.5f);
+    setRaw (p.apvts, "lookaheadOn", 1.0f);
+    setRaw (p.apvts, "lookaheadMs", 5.0f);
+    p.setNonRealtime (true);
+    p.setPlayHead (&head);
+    prepareStereo (p, 48000.0, 512);
+    const auto render = [&]
+    {
+        constexpr int blocks = 40;
+        juce::AudioBuffer<float> out (2, blocks * 512), buffer (2, 512);
+        for (int block = 0; block < blocks; ++block)
+        {
+            head.time = block * 512;
+            fillTone (buffer, 48000.0, 1000.0, 0.5f, block * 512, Tone::Centered);
+            process (p, buffer);
+            for (int channel = 0; channel < 2; ++channel)
+                out.copyFrom (channel, block * 512, buffer, channel, 0, 512);
+        }
+        return out;
+    };
+    const auto first = render();
+    const auto second = render();
+    float peak = 0.0f;
+    for (int channel = 0; channel < 2; ++channel)
+        for (int i = 0; i < first.getNumSamples(); ++i)
+            peak = juce::jmax (peak, std::abs (first.getSample (channel, i) - second.getSample (channel, i)));
+    p.setPlayHead (nullptr);
+    std::cout << "  offline_restart_peak " << peak << "\n";
+    require (peak < 1.0e-6f, "A second offline render carried state over from the first");
+    std::cout << "PASS: a restarted offline render matches the first\n";
+}
+
 static void checkAuditFixes()
 {
     auto owner = std::make_unique<OpenEQAudioProcessor>();
@@ -6145,6 +6199,7 @@ int main (int argc, char** argv)
     run ("audit-fixes", checkAuditFixes);
     run ("digital-plus-live", checkDigitalPlusLive);
     run ("oversampling-live", checkOversamplingFollowsRunningSettings);
+    run ("offline-restart", checkOfflineRestartClearsState);
     run ("gui-scale", checkGuiScaleFillsWindow);
     run ("theme-shots", captureThemes);
 

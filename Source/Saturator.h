@@ -15,6 +15,8 @@ public:
         prepared = true;
     }
 
+    void reset() noexcept { oversampling.reset(); }
+
     int getLatencySamples() const noexcept
     {
         return prepared ? (int) oversampling.getLatencyInSamples() : 0;

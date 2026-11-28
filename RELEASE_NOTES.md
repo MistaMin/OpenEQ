@@ -13,6 +13,7 @@ This is a beta. Save your sessions and report reproducible problems with the hos
 
 ## What is in this release
 
+- 1.0.3 fix: repeated LV2 offline renders of an unchanged project now match.
 - 1.0.3 fix: VST3 and LV2 no longer rebuild the linear-phase filter on almost every audio block.
 - 1.0.3 fixes: Digital+ Steps and 2x Oversampling now take effect while playing and after reopening a session. Switching 2x leaves a short gap in the audio.
 - 1.0.3 fixes to preset import, preset saving, undo after loading, and the offline render oversampling setting.
@@ -43,7 +44,7 @@ See the changelog for the full list. Nobody has yet listened to the newer audio 
 
 - Windows and Linux: new builds, checked with automated validators only; not tried in a host, and the regression suite does not run there.
 - CLAP: a restored session or typed value can differ from the saved one in the last digits on some frequency controls.
-- LV2: renders of an unchanged project can differ from each other, by up to about -44 dB in testing; the cause is not yet known. VST3 renders were identical.
+- LV2: some hosts do not reset the plugin between playbacks, so the first moments can depend on what was played before. Offline renders now start clean; realtime renders and live playback are unchanged.
 - Settings and theme changes can take up to a second to show on the graph.
 - Sessions saved by builds from before the public 0.3.0-beta source can be misread by hosts that identify parameters by position (the band parameter block grew during development). Sessions from 0.3.0-beta load unchanged.
 - A suppressor threshold saved by an older version is read as a floor and can leave the suppressor silent until the Floor control is reset.

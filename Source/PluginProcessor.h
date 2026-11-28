@@ -475,6 +475,10 @@ private:
     std::atomic<float> splitTonalMeter { 0.0f };
     std::atomic<float> splitRatioMeter { 0.5f };
     void resetSplitEngine();
+    /** Audio thread: forgets all signal heard so far, so the next block sounds like the first after prepare. */
+    void clearSignalState() noexcept;
+    bool offlineWasPlaying = false;
+    juce::int64 offlineLastTime = 0;
     int delayWrite = 0;
     const float* sidechainLeft = nullptr;
     const float* sidechainRight = nullptr;

@@ -2,6 +2,7 @@
 
 ## 1.0.3 Beta
 
+- Fix: an offline render that starts again without the host resetting the plugin (seen with LV2) no longer carries filter, dynamics or suppressor state over from the last render.
 - Fix: changing Digital+ Steps while playing had no effect, and a reopened session could come up without them.
 - Fix: 2x Oversampling changed by automation, A/B or a session load on a running plugin now takes effect (a short gap in the audio while it switches); before, only the editor button applied it.
 - Fix: in VST3 and LV2, every mode with a linear-phase filter rebuilt that filter on almost every audio block.

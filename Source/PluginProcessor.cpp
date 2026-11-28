@@ -531,6 +531,45 @@ bool OpenEQAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) c
     return true;
 }
 
+void OpenEQAudioProcessor::clearSignalState() noexcept
+{
+    for (auto& band : bands)
+        band.resetState();
+    for (auto& band : splitTailBands)
+        band.resetState();
+    auditionBand.resetState();
+    detectorMonitor.resetState();
+    for (auto& engine : dynamics)
+        engine.reset();
+    if (oversampler != nullptr)
+    {
+        oversampler->reset();
+        sidechainOversampler->reset();
+    }
+    linearPhaseEngine.reset();
+    saturator.reset();
+    spectral.reset();
+    resetSplitEngine();
+    for (auto* line : { &delayL, &delayR, &sideDelayL, &sideDelayR })
+        std::fill (line->begin(), line->end(), 0.0f);
+
+    // Dynamic gain is part of each band's design, so the bands go back to their settings, as in prepare.
+    std::array<BandParameterState, numBands> params;
+    readAllBandParameters (params);
+    bool anySolo = false;
+    for (const auto& band : params)
+        if (band.active && band.solo) { anySolo = true; break; }
+    snapSmoothers (params, anySolo);
+    float zeroOffset[(size_t) numBands] = {};
+    applyBandTargets (params, zeroOffset, true);
+
+    latencyPrimed = false;
+    latencySwitchPending = false;
+    latencyFadeGain = 1.0f;
+    latencyMuteRemaining = 0;
+    kernelWaitSamples = 0;
+}
+
 void OpenEQAudioProcessor::resetSplitEngine()
 {
     splitSeparator.reset();
@@ -1473,6 +1512,21 @@ void OpenEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     const int numSamples = buffer.getNumSamples();
     if (! prepared || numSamples <= 0 || buffer.getNumChannels() <= 0)
         return;
+
+    // Some hosts (LV2) do not reset a plug-in between offline renders, so the last render would leak into the next.
+    // shortcut: offline only, to leave live playback alone; realtime renders on such hosts still carry state over.
+    bool offlinePlaying = false;
+    if (isNonRealtime())
+        if (auto* head = getPlayHead())
+            if (const auto position = head->getPosition(); position.hasValue() && position->getIsPlaying())
+            {
+                const auto time = position->getTimeInSamples().orFallback (0);
+                if (! offlineWasPlaying || time < offlineLastTime)
+                    clearSignalState();
+                offlinePlaying = true;
+                offlineLastTime = time;
+            }
+    offlineWasPlaying = offlinePlaying;
 
     ioChannels = juce::jmax (1, juce::jmin (buffer.getNumChannels(), juce::jmax (1, getMainBusNumInputChannels())));
     sidechainLeft = nullptr;

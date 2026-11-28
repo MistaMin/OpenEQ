@@ -80,6 +80,16 @@ public:
         reference = 0.0f;
     }
 
+    /** Forgets the signal heard so far. Does not allocate. */
+    void reset() noexcept
+    {
+        for (auto& filter : filters)
+            filter.reset();
+        for (auto& filter : relativeFilters)
+            filter.reset();
+        envelope = fastEnvelope = gainLevel = reference = 0.0f;
+    }
+
     void setTriggerFilter (double freq, double q)
     {
         setBandPass (filters, lastFrequency, lastQ, triggerReady, freq, q);
